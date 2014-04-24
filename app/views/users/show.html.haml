@@ -1,0 +1,8 @@
+%h2 User
+
+%h3
+  = @user.user_name
+
+= @user.description
+
+= render partial: 'shared/likes', locals: { param_name: :user_id, object: @user }

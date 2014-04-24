@@ -1,0 +1,27 @@
+- votes = Vote.where("#{param_name} = ?", object.id)
+- votes_m = 0
+- votes_p = 0
+- votes.each do |vote|
+  - if vote.vote
+    - votes_p += 1
+  - else
+    - votes_m += 1
+
+Votes + :
+= votes_p
+<br>
+Votes - :
+= votes_m
+
+- if can? :create, Vote
+  - if vote = Vote.where("#{param_name} = ? AND user_id = ?", object.id, current_user.id).first
+    = link_to t('views.delete_vote'), vote, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  - else
+    = simple_form_for Vote.new do |f|
+      = f.input param_name, input_html: { value: object.id }, as: :hidden
+      = f.input :vote, input_html: { value: 1 }, as: :hidden
+      = f.button :submit, 'Vote +'
+    = simple_form_for Vote.new do |f|
+      = f.input param_name, input_html: { value: object.id }, as: :hidden
+      = f.input :vote, input_html: { value: 0 }, as: :hidden
+      = f.button :submit, 'Vote -'

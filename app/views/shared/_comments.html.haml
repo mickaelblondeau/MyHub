@@ -1,0 +1,16 @@
+%h3 Commentaires
+- @comments.each do |comment|
+  = comment.created_at
+  = comment.user.user_name
+  = comment.content
+  - if can? :destroy, comment
+    = link_to t('form.delete'), comment, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  <br>
+
+- if can? :create, Comment
+  %h3 Poster un commentaire
+
+  = simple_form_for Comment.new do |f|
+    = f.input param_name, input_html: { value: object.id }, as: :hidden
+    = f.input :content, label: t('from.comment_content')
+    = f.button :submit

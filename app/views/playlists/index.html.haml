@@ -1,0 +1,14 @@
+%h2 Series
+
+%h3 Your series
+- @playlists.each do |playlist|
+  = link_to playlist.title, playlist
+  - if can? :manage, playlist
+    = link_to t('form.delete'), playlist, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  %br
+
+%h3 Add a serie
+= simple_form_for @new_playlist do |f|
+  = f.input :title
+  = f.input :description
+  = f.button :submit

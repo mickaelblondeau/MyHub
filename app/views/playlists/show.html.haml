@@ -1,0 +1,40 @@
+%h2
+  = @playlist.title
+
+= @playlist.description
+
+%h3 Videos
+
+- @playlist.videos.each do |video|
+  = link_to video.name, video
+  %br
+
+%h3 Participants
+= link_to @playlist.user.email, user_path(@playlist.user)
+(Owner)<br>
+- @playlist.participations.each do |su|
+  = link_to su.user.email, user_path(su.user)
+  = su.comment
+  - if can? :manage, @playlist
+    = link_to t('form.delete'), su, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  %br
+
+- if can? :manage, @playlist
+  %h3 Ajouter un participant
+  = simple_form_for @new_participation do |f|
+    = f.input :user_id
+    = f.input :comment
+    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
+    = f.button :submit
+
+%br
+
+= render partial: 'shared/articles', locals: { param_name: :playlist_id, object: @playlist }
+
+= render partial: 'shared/likes', locals: { param_name: :playlist_id, object: @playlist }
+= render partial: 'shared/votes', locals: { param_name: :playlist_id, object: @playlist }
+
+= render partial: 'shared/comments', locals: { param_name: :playlist_id, object: @playlist }
+
+- if can? :index, Playlist
+  = link_to t('views.return_series'), playlists_path

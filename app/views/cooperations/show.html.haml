@@ -1,0 +1,16 @@
+%h2 Permissions
+
+- @cooperations.each do |coop|
+  = link_to coop.user.user_name, cooperation_permission_path(coop)
+  <br>
+  = link_to t('views.delete_coop'), coop, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  <br>
+
+%h3 Add new
+
+= simple_form_for @new_cooperation do |f|
+  = f.input :channel_id, input_html: { value: @channel.id }, as: :hidden
+  = f.input :user_id, collection: User.all, prompt: t('form.choose_user'), label: t('form.user')
+  = f.button :submit
+
+= link_to t('views.return_to_channel'), @channel

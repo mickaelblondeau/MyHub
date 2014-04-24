@@ -1,0 +1,19 @@
+%h2 Video
+
+<iframe width="640" height="360" src="//www.youtube.com/embed/#{@video.api_id}?rel=0" frameborder="0" allowfullscreen></iframe>
+
+= render partial: 'shared/likes', locals: { param_name: :video_id, object: @video }
+= render partial: 'shared/votes', locals: { param_name: :video_id, object: @video }
+
+%h3 Serie
+= link_to @video.playlist.title, @video.playlist
+
+%h3 Participants
+= link_to @video.playlist.user.email, user_path(@video.playlist.user)
+- @video.playlist.participations.each do |su|
+  = link_to su.user.email, user_path(su.user)
+  %br
+
+= render partial: 'shared/comments', locals: { param_name: :video_id, object: @video }
+
+= link_to t('views.return_channel'), @video.channel

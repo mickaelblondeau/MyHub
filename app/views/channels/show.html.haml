@@ -1,0 +1,45 @@
+%h2 Channel #{@channel.name}
+
+- if @channel.validated?
+  %h3 Videos :
+  - @videos.each do |video|
+    = image_tag video.image
+    = video.name
+    %br
+    = simple_format(video.description)
+    %br
+    = link_to t('views.view_video'), video
+    - if can? :manage, video
+      = link_to t('views.delete_video'), video, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+    %hr
+  - if can? :manage, @channel
+    %h3
+      = link_to t('views.manage_permissions'), cooperation_path(@channel)
+    %h3 Add a new video
+    = simple_form_for @new_video do |f|
+      = f.input :channel_id, input_html: { value: @channel.id }, as: :hidden
+      = f.input :playlist_id, collection: Playlist.where('user_id = ?', current_user.id), prompt: t('form.choose_serie'), label: t('form.serie')
+      = f.input :api_id, label: t('form.video_api_id')
+      = f.button :submit
+
+  = render partial: 'shared/articles', locals: { param_name: :channel_id, object: @channel }
+
+  = render partial: 'shared/likes', locals: { param_name: :channel_id, object: @channel }
+
+  = render partial: 'shared/comments', locals: { param_name: :channel_id, object: @channel }
+
+- else
+  - if can? :manage, @channel
+    Hello !
+    %br
+    You need to enter this string (case sensitive) in your YT account description :
+    %br
+    Validation string :
+    %b
+      = @channel.validation_key
+    %br
+    After having entered this string, press this button to validate your new channel !
+    %br
+    = link_to t('view.validate_channel'), channel_path, method: 'PUT'
+  - else
+    This channel is not yet activated

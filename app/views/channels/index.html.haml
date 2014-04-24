@@ -1,0 +1,15 @@
+%h2 Your channels
+
+- @channels.each do |channel|
+  = image_tag channel.image
+  = link_to channel.name, channel
+  %br
+  = simple_format(channel.description)
+  %br
+  - if can? :manage, channel
+    = link_to t('form.delete'), channel, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  %hr
+
+= simple_form_for @new_channel do |f|
+  = f.input :api_id, label: t('form.channel_api_id')
+  = f.button :submit

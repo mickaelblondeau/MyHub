@@ -1,0 +1,6 @@
+%h2 Homepage
+
+- if current_user
+  - @likes.each do |like|
+    = like.get_type_name
+    <br>
