@@ -58,7 +58,7 @@ group :development do
 	gem 'binding_of_caller'
 	gem 'rails_best_practices'
 	gem 'brakeman', :require => false
-  gem 'thin' # HTTPS Server
+	gem 'thin' # HTTPS Server
 end
 
 group :production do
