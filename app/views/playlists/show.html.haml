@@ -3,6 +3,18 @@
 
 = @playlist.description
 
+%h3 Categories
+- @playlist.playlist_categories.each do |playlist_categorie|
+  = link_to playlist_categorie.category.label, playlist_categorie.category
+  - if can? :manage, playlist_categorie
+    = link_to t('form.delete'), playlist_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+
+- if can? :manage, @playlist
+  = simple_form_for PlaylistCategory.new do |f|
+    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
+    = f.input :category_id, collection: Category.where.not(label:@playlist.categories.map(&:label)), prompt: t('form.choose_category'), label: t('form.category'), label_method: :label
+    = f.button :submit
+
 %h3 Videos
 
 - @playlist.videos.each do |video|

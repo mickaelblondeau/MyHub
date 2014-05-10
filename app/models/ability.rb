@@ -61,6 +61,14 @@ class Ability
         can :manage, CooperationPermission do |c|
           c.cooperation.channel.user.id == user.id
         end
+
+        can :manage, VideoCategory do |vc|
+          vc.video.channel.user_id == user.id
+        end
+
+        can :manage, PlaylistCategory do |pc|
+          pc.playlist.user_id == user.id
+        end
       end
     end
   end

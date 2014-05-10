@@ -1,9 +1,24 @@
 %h2 Video
 
-<iframe width="640" height="360" src="//www.youtube.com/embed/#{@video.api_id}?rel=0" frameborder="0" allowfullscreen></iframe>
+%iframe{allowfullscreen: '', frameborder: '0', height: '360', width: '640', src: '//www.youtube.com/embed/#{@video.api_id}?rel=0'}
+
+%br
 
 = render partial: 'shared/likes', locals: { param_name: :video_id, object: @video }
+%br
 = render partial: 'shared/votes', locals: { param_name: :video_id, object: @video }
+
+%h3 Categories
+- @video.video_categories.each do |video_categorie|
+  = link_to video_categorie.category.label, video_categorie.category
+  - if can? :manage, video_categorie
+    = link_to t('form.delete'), video_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+
+- if can? :manage, @video
+  = simple_form_for VideoCategory.new do |f|
+    = f.input :video_id, input_html: { value: @video.id }, as: :hidden
+    = f.input :category_id, collection: Category.where.not(label:@video.categories.map(&:label)), prompt: t('form.choose_category'), label: t('form.category'), label_method: :label
+    = f.button :submit
 
 %h3 Serie
 = link_to @video.playlist.title, @video.playlist

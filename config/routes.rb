@@ -14,6 +14,9 @@ MyHub::Application.routes.draw do
     resources :articles, :only => [:create, :destroy]
     resources :cooperation_permissions, :only => [:create, :destroy, :show]
     resources :cooperations, :only => [:create, :destroy, :show]
+    resources :video_categories, :only => [:create, :destroy]
+    resources :playlist_categories, :only => [:create, :destroy]
+    resources :categories, :only => [:index, :show]
     root 'welcome#index'
   end
 

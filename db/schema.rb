@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510135615) do
+ActiveRecord::Schema.define(version: 20140510142404) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -142,16 +142,24 @@ ActiveRecord::Schema.define(version: 20140510135615) do
     t.datetime "updated_at"
   end
 
+  create_table "playlist_categories", force: true do |t|
+    t.integer  "playlist_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "playlist_categories", ["category_id"], name: "index_playlist_categories_on_category_id"
+  add_index "playlist_categories", ["playlist_id"], name: "index_playlist_categories_on_playlist_id"
+
   create_table "playlists", force: true do |t|
     t.string   "title"
     t.string   "description"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "category_id"
   end
 
-  add_index "playlists", ["category_id"], name: "index_playlists_on_category_id"
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id"
 
   create_table "users", force: true do |t|
@@ -177,6 +185,16 @@ ActiveRecord::Schema.define(version: 20140510135615) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["slug"], name: "index_users_on_slug"
 
+  create_table "video_categories", force: true do |t|
+    t.integer  "video_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "video_categories", ["category_id"], name: "index_video_categories_on_category_id"
+  add_index "video_categories", ["video_id"], name: "index_video_categories_on_video_id"
+
   create_table "videos", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -186,11 +204,9 @@ ActiveRecord::Schema.define(version: 20140510135615) do
     t.datetime "updated_at"
     t.string   "image"
     t.integer  "playlist_id"
-    t.integer  "category_id"
   end
 
   add_index "videos", ["api_id"], name: "index_videos_on_api_id"
-  add_index "videos", ["category_id"], name: "index_videos_on_category_id"
   add_index "videos", ["channel_id"], name: "index_videos_on_channel_id"
   add_index "videos", ["playlist_id"], name: "index_videos_on_playlist_id"
 
