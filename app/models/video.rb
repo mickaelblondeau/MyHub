@@ -2,6 +2,7 @@ class Video < ActiveRecord::Base
   validates :api_id, :playlist_id, presence: true
   belongs_to :channel
   belongs_to :playlist
+  belongs_to :category
 
   before_create do
     data = Api.video_info(api_id)

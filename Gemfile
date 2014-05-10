@@ -58,9 +58,6 @@ group :development do
 	gem 'binding_of_caller'
 	gem 'rails_best_practices'
 	gem 'brakeman', :require => false
-	#gem 'thin' # HTTPS Server
-	gem 'railroady' # ULM Generator
-	gem 'therubyracer' # JS runtime
 end
 
 group :production do

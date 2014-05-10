@@ -4,6 +4,7 @@ class Playlist < ActiveRecord::Base
   has_many :users, through: :participations
   has_many :videos
   belongs_to :user
+  belongs_to :category
 
   def owned(u)
     user == u

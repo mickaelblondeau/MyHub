@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316163940) do
+ActiveRecord::Schema.define(version: 20140510135615) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -26,6 +26,21 @@ ActiveRecord::Schema.define(version: 20140316163940) do
   add_index "articles", ["channel_id"], name: "index_articles_on_channel_id"
   add_index "articles", ["playlist_id"], name: "index_articles_on_playlist_id"
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
+
+  create_table "categories", force: true do |t|
+    t.string   "label"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "category_links", force: true do |t|
+    t.integer  "category_id"
+    t.integer  "categories_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "category_links", ["category_id"], name: "index_category_links_on_category_id"
 
   create_table "channels", force: true do |t|
     t.string   "name"
@@ -133,8 +148,10 @@ ActiveRecord::Schema.define(version: 20140316163940) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id"
   end
 
+  add_index "playlists", ["category_id"], name: "index_playlists_on_category_id"
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id"
 
   create_table "users", force: true do |t|
@@ -169,9 +186,11 @@ ActiveRecord::Schema.define(version: 20140316163940) do
     t.datetime "updated_at"
     t.string   "image"
     t.integer  "playlist_id"
+    t.integer  "category_id"
   end
 
   add_index "videos", ["api_id"], name: "index_videos_on_api_id"
+  add_index "videos", ["category_id"], name: "index_videos_on_category_id"
   add_index "videos", ["channel_id"], name: "index_videos_on_channel_id"
   add_index "videos", ["playlist_id"], name: "index_videos_on_playlist_id"
 
