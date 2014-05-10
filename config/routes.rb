@@ -16,7 +16,7 @@ MyHub::Application.routes.draw do
     resources :cooperations, :only => [:create, :destroy, :show]
     resources :video_categories, :only => [:create, :destroy]
     resources :playlist_categories, :only => [:create, :destroy]
-    resources :categories, :only => [:index, :show]
+    resources :categories, :only => [:index, :show, :create, :destroy]
     root 'welcome#index'
   end
 
