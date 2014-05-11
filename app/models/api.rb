@@ -1,15 +1,14 @@
 class Api
   require 'open-uri'
-  API_ID = Rails.configuration.youtube_api_key
   URL = 'https://www.googleapis.com/youtube/v3/'
 
   def self.channel_info(id)
-    url = URL + 'channels?part=snippet&id=' + id + '&fields=items%2Fsnippet&maxResults=1&key=' + API_ID
+    url = URL + 'channels?part=snippet&id=' + id + '&fields=items%2Fsnippet&maxResults=1&key=' + Rails.configuration.youtube_api_key
     Api::parse(url)
   end
 
   def self.video_info(id)
-    url = URL + 'videos?part=snippet&id=' + id + '&fields=items%2Fsnippet&maxResults=1&key=' + API_ID
+    url = URL + 'videos?part=snippet&id=' + id + '&fields=items%2Fsnippet&maxResults=1&key=' + Rails.configuration.youtube_api_key
     Api::parse(url)
   end
 

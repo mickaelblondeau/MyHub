@@ -15,7 +15,7 @@ class ChannelsController < ApplicationController
   def update
     @channel = Channel.friendly.find(params[:id])
     authorize! :manage, @channel
-    if @channel.ownerValidated
+    if @channel.owner_validated
       flash[:notice] = 'Ok'
     else
       flash[:alert] = 'Ko'

@@ -21,15 +21,7 @@ class Channel < ActiveRecord::Base
     end
   end
 
-  def isValidated
-    if validated
-      return 'true'
-    else
-      return 'false'
-    end
-  end
-
-  def ownerValidated
+  def owner_validated
     data = Api.channel_info(api_id)
     if data['items'][0] &&
         data['items'][0]['snippet']

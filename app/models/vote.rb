@@ -6,7 +6,7 @@ class Vote < ActiveRecord::Base
   def get_type
     if video
       video
-    else playlist
+    else
       playlist
     end
   end
