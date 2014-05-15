@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 %html
   %head
-    %title MyHub
+    %title Occuli
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
   %body
-    %h1 MyHub
-    = render partial: 'shared/navigation'
-    = render partial: 'shared/flash_messages'
-    = yield
+    = render partial: 'shared/header'
+    %div.container
+      %div.wrapper
+        = render partial: 'shared/navigation'
+        = render partial: 'shared/flash_messages'
+        = yield
+  %footer
+    %div.wrapper
+      ©Chy 2001-2087

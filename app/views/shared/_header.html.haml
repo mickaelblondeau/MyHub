@@ -1,0 +1,10 @@
+%header
+  %div.wrapper
+    %div.logo
+      = link_to (image_tag 'logo.gif'), root_path
+    %div.login
+      - if user_signed_in?
+        = current_user.user_name
+        = link_to t('nav.logout'), destroy_user_session_path, method: 'delete'
+      - else
+        = link_to t('nav.login'), new_user_session_path

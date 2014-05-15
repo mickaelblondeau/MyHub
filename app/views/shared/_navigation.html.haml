@@ -1,18 +1,8 @@
-%ul
-  %li
-    = link_to t('nav.home'), root_path
-  - if user_signed_in?
-    %li
-      Hello
-      = current_user.user_name
-    %li
-      = link_to t('nav.account'), edit_user_registration_path
-    %li
-      = link_to t('nav.view_channel'), channels_path
-    %li
-      = link_to t('nav.view_series'), playlists_path
-    %li
-      = link_to t('nav.logout'), destroy_user_session_path, method: 'delete'
-  - else
-    %li
-      = link_to t('nav.login'), new_user_session_path
+%nav.header
+  %div.links
+    = link_to t('nav.home'), root_path, class: :active
+    = link_to t('nav.view_series'), playlists_path
+    = link_to t('nav.view_channel'), channels_path
+  %div.search
+    %input{type: :text, value: :search}
+  %div.clear
