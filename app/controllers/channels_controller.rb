@@ -8,7 +8,6 @@ class ChannelsController < ApplicationController
   def show
     @channel = Channel.friendly.find(params[:id])
     @videos = Video.where(:channel_id => @channel.id)
-    @new_video = Video.new
     @comments = Comment.where('channel_id = ?', @channel.id)
   end
 
@@ -44,6 +43,6 @@ class ChannelsController < ApplicationController
   end
 
   def get_params
-    params[:channel].permit(:api_id, :playlist)
+    params[:channel].permit(:api_id, :playlist, :video_type)
   end
 end

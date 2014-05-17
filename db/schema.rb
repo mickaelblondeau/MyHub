@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510142404) do
+ActiveRecord::Schema.define(version: 20140517173545) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20140510142404) do
     t.datetime "updated_at"
     t.string   "image"
     t.string   "slug"
+    t.string   "video_type"
   end
 
   add_index "channels", ["api_id"], name: "index_channels_on_api_id"
@@ -61,7 +62,6 @@ ActiveRecord::Schema.define(version: 20140510142404) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
-    t.integer  "channel_id"
     t.integer  "video_id"
     t.integer  "playlist_id"
     t.text     "content"
@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 20140510142404) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["channel_id"], name: "index_comments_on_channel_id"
   add_index "comments", ["playlist_id"], name: "index_comments_on_playlist_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
   add_index "comments", ["video_id"], name: "index_comments_on_video_id"
@@ -110,14 +109,12 @@ ActiveRecord::Schema.define(version: 20140510142404) do
   create_table "likes", force: true do |t|
     t.integer  "owner_id"
     t.integer  "user_id"
-    t.integer  "channel_id"
     t.integer  "video_id"
     t.integer  "playlist_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "likes", ["channel_id"], name: "index_likes_on_channel_id"
   add_index "likes", ["owner_id"], name: "index_likes_on_owner_id"
   add_index "likes", ["playlist_id"], name: "index_likes_on_playlist_id"
   add_index "likes", ["user_id"], name: "index_likes_on_user_id"

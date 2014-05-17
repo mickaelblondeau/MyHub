@@ -3,6 +3,7 @@
 - @channels.each do |channel|
   = image_tag channel.image
   = link_to channel.name, channel
+  = Channel::SRC_HOST[channel.video_type]
   %br
   = simple_format(channel.description)
   %br
@@ -12,4 +13,5 @@
 
 = simple_form_for @new_channel do |f|
   = f.input :api_id, label: t('form.channel_api_id')
+  = f.select :video_type, Channel::SRC_HOST.map { |host, i| [ i, host ] }, label: t('form.channel_type')
   = f.button :submit

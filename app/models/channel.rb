@@ -4,17 +4,17 @@ class Channel < ActiveRecord::Base
   belongs_to :user
   validates :api_id, presence: true
 
+  SRC_HOST = { 'yt' => :Youtube, 'dm' => :Dailymotion, 'vi' => :Vimeo }
+
   before_create do
-    data = Api.channel_info(api_id)
-    if data['items'][0] &&
-        data['items'][0]['snippet'] &&
-        data['items'][0]['snippet']['thumbnails'] &&
-        data['items'][0]['snippet']['thumbnails']['default']
+    data = Api.channel_info(api_id, video_type)
+    if data
       self.validation_key = rand(36**10).to_s(36)
-      self.name = data['items'][0]['snippet']['title']
-      self.description = data['items'][0]['snippet']['description']
-      self.image = data['items'][0]['snippet']['thumbnails']['default']['url']
-      self.slug = data['items'][0]['snippet']['title']
+      self.api_id = data[:api_id]
+      self.name = data[:name]
+      self.description = data[:description]
+      self.image = data[:image]
+      self.slug = data[:name]
       return true
     else
       return false
@@ -22,11 +22,9 @@ class Channel < ActiveRecord::Base
   end
 
   def owner_validated
-    data = Api.channel_info(api_id)
-    if data['items'][0] &&
-        data['items'][0]['snippet']
-      description = data['items'][0]['snippet']['description']
-      if description.include? validation_key
+    data = Api.channel_info(api_id, video_type)
+    if data
+      if data[:description].include? validation_key
         self.validated = true
         self.save
       end

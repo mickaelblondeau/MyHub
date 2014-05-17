@@ -6,9 +6,7 @@ class Comment < ActiveRecord::Base
   belongs_to :playlist
 
   def get_type
-    if channel
-      channel
-    elsif video
+    if video
       video
     else
       playlist
@@ -16,9 +14,7 @@ class Comment < ActiveRecord::Base
   end
 
   def get_type_owner
-    if channel
-      channel.user
-    elsif video
+    if video
       video.channel.user
     else
       playlist.user
