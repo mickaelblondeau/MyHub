@@ -10,8 +10,4 @@ class Playlist < ActiveRecord::Base
   has_many :votes, :dependent => :destroy
   has_many :likes, :dependent => :destroy
   has_many :articles, :dependent => :destroy
-
-  def owned(u)
-    user == u
-  end
 end

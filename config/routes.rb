@@ -3,6 +3,7 @@ MyHub::Application.routes.draw do
   scope '(:locale)', locale: /fr|en/ do
     devise_for :users
     resources :welcome, :only => [:index]
+    resources :search, :only => [:index]
     resources :channels, :only => [:index, :create, :destroy, :show, :update]
     resources :videos, :only => [:create, :destroy, :show]
     resources :playlists, :only => [:index, :create, :destroy, :show], :path  => 'series'
