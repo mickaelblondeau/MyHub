@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     authorize! :destroy, @article
     path = @article.get_type
-    @article.delete
+    @article.destroy
     flash[:notice] = 'Ok'
     redirect_to path
   end

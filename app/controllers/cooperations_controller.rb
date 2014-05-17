@@ -22,7 +22,7 @@ class CooperationsController < ApplicationController
     @cooperation = Cooperation.find(params[:id])
     authorize! :destroy, @cooperation
     path = @cooperation.channel
-    @cooperation.delete
+    @cooperation.destroy
     flash[:notice] = 'Ok'
     redirect_to cooperation_path(path)
   end

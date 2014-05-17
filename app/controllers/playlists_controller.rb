@@ -26,7 +26,7 @@ class PlaylistsController < ApplicationController
   def destroy
     @playlist = Playlist.find(params[:id])
     authorize! :manage, @playlist
-    @playlist.delete
+    @playlist.destroy
     flash[:notice] = 'Ok'
     redirect_to playlists_path
   end

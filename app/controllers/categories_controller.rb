@@ -21,7 +21,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category = Category.find(params[:id])
     authorize! :destroy, @category
-    @category.delete
+    @category.destroy
     flash[:notice] = 'Ok'
     redirect_to categories_path
   end

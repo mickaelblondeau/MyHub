@@ -14,7 +14,7 @@ class ParticipationsController < ApplicationController
     @participation = Participation.find(params[:id])
     authorize! :manage, @participation
     playlist = @participation.playlist
-    @participation.delete
+    @participation.destroy
     flash[:notice] = 'Ok'
     redirect_to playlist
   end

@@ -15,7 +15,7 @@ class VotesController < ApplicationController
     @vote = Vote.find(params[:id])
     authorize! :destroy, @vote
     path = @vote.get_type
-    @vote.delete
+    @vote.destroy
     flash[:notice] = 'Ok'
     redirect_to path
   end

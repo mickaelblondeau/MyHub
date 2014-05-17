@@ -15,7 +15,7 @@ class VideoCategoriesController < ApplicationController
     @video_category = VideoCategory.find(params[:id])
     authorize! :destroy, @video_category
     path = @video_category.video
-    @video_category.delete
+    @video_category.destroy
     flash[:notice] = 'Ok'
     redirect_to video_path(path)
   end

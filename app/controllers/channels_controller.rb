@@ -37,7 +37,7 @@ class ChannelsController < ApplicationController
   def destroy
     @channel = Channel.friendly.find(params[:id])
     authorize! :manage, @channel
-    @channel.delete
+    @channel.destroy
     flash[:notice] = 'Ok'
     redirect_to channels_path
   end

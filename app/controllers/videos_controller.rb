@@ -19,7 +19,7 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     authorize! :manage, @video
     channel = @video.channel
-    @video.delete
+    @video.destroy
     flash[:notice] = 'Ok'
     redirect_to channel
   end

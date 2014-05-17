@@ -15,7 +15,7 @@ class LikesController < ApplicationController
     @like = Like.find(params[:id])
     authorize! :destroy, @like
     path = @like.get_type
-    @like.delete
+    @like.destroy
     flash[:notice] = 'Ok'
     redirect_to path
   end

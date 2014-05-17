@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     authorize! :destroy, @comment
     path = @comment.get_type
-    @comment.delete
+    @comment.destroy
     flash[:notice] = 'Ok'
     redirect_to path
   end

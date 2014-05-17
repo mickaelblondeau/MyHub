@@ -15,7 +15,7 @@ class PlaylistCategoriesController < ApplicationController
     @playlist_category = PlaylistCategory.find(params[:id])
     authorize! :destroy, @playlist_category
     path = @playlist_category.playlist
-    @playlist_category.delete
+    @playlist_category.destroy
     flash[:notice] = 'Ok'
     redirect_to playlist_path(path)
   end

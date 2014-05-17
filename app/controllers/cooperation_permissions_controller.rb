@@ -22,7 +22,7 @@ class CooperationPermissionsController < ApplicationController
     @cooperation_permission = CooperationPermission.find(params[:id])
     authorize! :destroy, @cooperation_permission
     path = @cooperation_permission.cooperation
-    @cooperation_permission.delete
+    @cooperation_permission.destroy
     flash[:notice] = 'Ok'
     redirect_to cooperation_permission_path(path)
   end
