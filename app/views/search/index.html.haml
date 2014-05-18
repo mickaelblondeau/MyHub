@@ -1,6 +1,18 @@
 %h1 Search
+
+%h2 Series
 - if @series.count == 0
   = t('no_results')
 - else
   - @series.each do |serie|
-    = serie
+    = link_to serie.title, serie
+    %br
+
+%h2 Videos
+- if @videos.count == 0
+  = t('no_results')
+- else
+  - @videos.each do |video|
+    = image_tag video.image
+    = link_to video.name, video
+    %br

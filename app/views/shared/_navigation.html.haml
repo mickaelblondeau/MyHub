@@ -4,6 +4,6 @@
     = link_to t('nav.view_series'), playlists_path
     = link_to t('nav.view_channel'), channels_path
   %div.search
-    %form{action: :search, method: :GET}
+    %form{action: '/search', method: :GET}
       = text_field_tag :q, nil, placeholder: :search
   %div.clear
