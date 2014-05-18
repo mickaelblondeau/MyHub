@@ -1,10 +1,10 @@
 class SearchController < ApplicationController
   def index
-    @search = get_params[:q]
-    @series = Playlist.where('title LIKE ? OR description LIKE ?', "%#{@search}%", "%#{@search}%")
-  end
-
-  def get_params
-    params.permit(:q)
+    @search = params[:q]
+    if @search.length > 3
+      @series = Playlist.where('title LIKE ? OR description LIKE ?', "%#{@search}%", "%#{@search}%")
+    else
+      @series = []
+    end
   end
 end

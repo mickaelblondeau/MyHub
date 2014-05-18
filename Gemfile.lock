@@ -69,7 +69,11 @@ GEM
       tilt
     highline (1.6.21)
     hike (1.2.3)
+    httpclient (2.3.4.1)
     i18n (0.6.9)
+    impressionist (1.5.1)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.5)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -85,9 +89,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mini_portile (0.6.0)
     minitest (4.7.5)
     multi_json (1.10.0)
     mysql2 (0.3.16)
+    nokogiri (1.6.2.1-x86-mingw32)
+      mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
     polyamorous (1.0.0)
       activerecord (>= 3.0)
@@ -181,6 +188,7 @@ DEPENDENCIES
   devise
   friendly_id (~> 5.0.0)
   haml
+  impressionist
   jbuilder (~> 1.2)
   jquery-rails
   kaminari

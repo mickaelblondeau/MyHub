@@ -2,6 +2,9 @@
 
 = @video.get_player
 
+%h3 Views
+= @video.impressionist_count(:filter=>:ip_address)
+
 %br
 
 = render partial: 'shared/votes', locals: { param_name: :video_id, object: @video }

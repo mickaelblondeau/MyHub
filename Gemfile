@@ -42,6 +42,9 @@ gem 'cancan'
 # URL rewriting
 gem 'friendly_id', '~> 5.0.0'
 
+# View engine
+gem 'impressionist'
+
 group :doc do
   gem 'sdoc', require: false
 end

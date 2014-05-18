@@ -6,8 +6,14 @@ class Video < ActiveRecord::Base
   has_many :categories, through: :video_categories
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
+  is_impressionable
 
   before_create do
+    exist = Video.where('videos.api_id = ?', api_id).joins(:channel).where(channels: { video_type: channel.video_type })
+    if exist.count > 0
+      return false
+    end
+
     data = Api.video_info(api_id, channel.video_type)
     if data && data[:channel] == channel.api_id
       self.name = data[:name]

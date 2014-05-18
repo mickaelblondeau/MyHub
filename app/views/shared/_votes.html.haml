@@ -1,11 +1,24 @@
 - votes = Vote.where("#{param_name} = ?", object.id)
-- votes_m = 0
-- votes_p = 0
+- votes_m = votes_p = votes_m_w = votes_p_w = 0
 - votes.each do |vote|
   - if vote.vote
     - votes_p += 1
+    - if vote.weekly
+      - votes_p_w += 1
   - else
     - votes_m += 1
+    - if vote.weekly
+      - votes_m_w += 1
+
+%h4 Weekly
+
+Votes + :
+= votes_p_w
+<br>
+Votes - :
+= votes_m_w
+
+%h4 Total
 
 Votes + :
 = votes_p

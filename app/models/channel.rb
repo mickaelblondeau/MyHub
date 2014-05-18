@@ -9,6 +9,11 @@ class Channel < ActiveRecord::Base
   SRC_HOST = { 'yt' => :Youtube, 'dm' => :Dailymotion, 'vi' => :Vimeo }
 
   before_create do
+    exist = Channel.where('api_id = ? AND video_type = ?', api_id, video_type)
+    if exist.count > 0
+      return false
+    end
+
     data = Api.channel_info(api_id, video_type)
     if data
       self.validation_key = rand(36**10).to_s(36)

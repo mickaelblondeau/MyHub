@@ -1,3 +1,6 @@
 %h1 Search
-- @series.each do |serie|
-  = serie
+- if @series.count == 0
+  = t('no_results')
+- else
+  - @series.each do |serie|
+    = serie
