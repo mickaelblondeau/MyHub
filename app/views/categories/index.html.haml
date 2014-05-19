@@ -2,6 +2,7 @@
   = t('categories')
 
 - @categories.each do |category|
+  = image_tag category.icon.url
   = link_to category.label, category
   = link_to t('form.delete'), category, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
   %br
@@ -9,6 +10,7 @@
 - if can? :manage, Category
   %h3
     = t('add_category')
-  = simple_form_for Category.new do |f|
+  = simple_form_for Category.new, :html => {:multipart => true } do |f|
     = f.input :label
+    = f.file_field :icon
     = f.button :submit

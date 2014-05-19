@@ -45,6 +45,10 @@ gem 'friendly_id', '~> 5.0.0'
 # View engine
 gem 'impressionist'
 
+# upload file
+gem 'paperclip', '~> 4.1'
+gem 'paperclip-storage-ftp'
+
 group :doc do
   gem 'sdoc', require: false
 end

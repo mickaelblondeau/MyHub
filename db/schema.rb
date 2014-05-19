@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140518101813) do
+ActiveRecord::Schema.define(version: 20140519181418) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -31,6 +31,10 @@ ActiveRecord::Schema.define(version: 20140518101813) do
     t.string   "label"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   create_table "category_links", force: true do |t|
@@ -178,6 +182,10 @@ ActiveRecord::Schema.define(version: 20140518101813) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
   end
 
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id"

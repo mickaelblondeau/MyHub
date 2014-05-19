@@ -10,4 +10,25 @@ class Playlist < ActiveRecord::Base
   has_many :votes, :dependent => :destroy
   has_many :likes, :dependent => :destroy
   has_many :articles, :dependent => :destroy
+
+  has_attached_file :icon,
+                    :storage => :ftp,
+                    :path => 'occuli/public/images/series/:id/:style/:filename',
+                    :url => 'series/:id/:style/:filename',
+                    :ftp_servers => [
+                        {
+                            :host     => Rails.configuration.ftp_host1,
+                            :user     => Rails.configuration.ftp_login,
+                            :password => Rails.configuration.ftp_password,
+                            :passive  => true
+                        },
+                        {
+                            :host     => Rails.configuration.ftp_host2,
+                            :user     => Rails.configuration.ftp_login,
+                            :password => Rails.configuration.ftp_password,
+                            :passive  => true
+                        }
+                    ]
+  validates_attachment_content_type :icon, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_presence :icon
 end

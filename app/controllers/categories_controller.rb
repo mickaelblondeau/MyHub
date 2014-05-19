@@ -27,6 +27,6 @@ class CategoriesController < ApplicationController
   end
 
   def get_params
-    params[:category].permit(:label)
+    params[:category].permit(:label, :icon)
   end
 end

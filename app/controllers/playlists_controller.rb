@@ -32,6 +32,6 @@ class PlaylistsController < ApplicationController
   end
 
   def get_params
-    params[:playlist].permit(:title, :description)
+    params[:playlist].permit(:title, :description, :icon)
   end
 end
