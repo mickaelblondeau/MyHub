@@ -1,0 +1,6 @@
+- if can? :manage, @playlist
+  = simple_form_for @playlist, :html => {:multipart => true } do |f|
+    = f.input :title
+    = f.input :description
+    = f.file_field :icon
+    = f.button :submit

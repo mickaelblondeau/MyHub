@@ -5,8 +5,8 @@ MyHub::Application.routes.draw do
     resources :welcome, :only => [:index]
     resources :search, :only => [:index]
     resources :channels, :only => [:index, :create, :destroy, :show, :update]
-    resources :videos, :only => [:create, :destroy, :show]
-    resources :playlists, :only => [:index, :create, :destroy, :show], :path  => 'series'
+    resources :videos, :only => [:create, :destroy, :show, :edit, :update]
+    resources :playlists, :only => [:index, :create, :destroy, :show, :edit, :update], :path  => 'series'
     resources :participations, :only => [:create, :destroy]
     resources :users, :only => [:show]
     resources :comments, :only => [:create, :destroy]
@@ -17,7 +17,8 @@ MyHub::Application.routes.draw do
     resources :cooperations, :only => [:create, :destroy, :show]
     resources :video_categories, :only => [:create, :destroy]
     resources :playlist_categories, :only => [:create, :destroy]
-    resources :categories, :only => [:index, :show, :create, :destroy]
+    resources :categories, :only => [:index, :show, :create, :destroy, :edit, :update]
+    resources :category_links, :only => [:create, :destroy]
     root 'welcome#index'
   end
 

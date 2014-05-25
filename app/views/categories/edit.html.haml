@@ -1,0 +1,5 @@
+- if can? :manage, @category
+  = simple_form_for @category, :html => {:multipart => true } do |f|
+    = f.input :label
+    = f.file_field :icon
+    = f.button :submit

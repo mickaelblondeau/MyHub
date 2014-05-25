@@ -2,6 +2,25 @@
 
 = @category.label
 
+%h3 Categories parentes
+- @category.category_links.each do |link|
+  = link.parent.label
+  = link_to t('form.delete'), link, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  %br
+
+%h3 Categories enfant
+- @category.category_links_childs.each do |link|
+  = link.category.label
+  = link_to t('form.delete'), link, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  %br
+
+- if can? :manage, @category
+  %h3 Ajouter des categories parentes
+  = simple_form_for CategoryLink.new do |f|
+    = f.input :category_id, input_html: { value: @category.id }, as: :hidden
+    = f.input :parent_id, collection: Category.where('id IS NOT ?', @category.id).where.not(id:@category.parents.map(&:id)), prompt: t('form.choose_category'), label: t('form.parent'), label_method: :label
+    = f.button :submit
+
 %h3 Series
 
 - @category.playlists.each do |playlist|

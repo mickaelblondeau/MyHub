@@ -5,6 +5,10 @@ class Category < ActiveRecord::Base
   has_many :videos, through: :video_categories
   has_many :playlist_categories
   has_many :playlists, through: :playlist_categories
+  has_many :category_links
+  has_many :category_links_childs, foreign_key: :parent_id, class_name: :CategoryLink
+  has_many :parents, through: :category_links
+  has_many :childs, through: :category_links_childs, source: :category
 
   has_attached_file :icon,
                     :storage => :ftp,

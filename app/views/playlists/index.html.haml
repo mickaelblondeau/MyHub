@@ -6,6 +6,7 @@
   = link_to playlist.title, playlist
   - if can? :manage, playlist
     = link_to t('form.delete'), playlist, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+    = link_to t('form.edit'), edit_playlist_path(playlist)
   %br
 
 %h3 Add a serie

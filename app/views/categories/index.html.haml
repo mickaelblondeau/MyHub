@@ -5,6 +5,7 @@
   = image_tag category.icon.url
   = link_to category.label, category
   = link_to t('form.delete'), category, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  = link_to t('form.edit'), edit_category_path(category)
   %br
 
 - if can? :manage, Category

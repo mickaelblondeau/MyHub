@@ -7,6 +7,21 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
   end
 
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    authorize! :manage, @category
+    if @category.update(get_params)
+      flash[:notice] = 'Ok'
+    else
+      flash[:alert] = 'Ko'
+    end
+    redirect_to categories_path
+  end
+
   def create
     @category = Category.new(get_params)
     authorize! :create, @category

@@ -11,6 +11,21 @@ class PlaylistsController < ApplicationController
     @comments = Comment.where('playlist_id = ?', @playlist.id)
   end
 
+  def edit
+    @playlist = Playlist.find(params[:id])
+  end
+
+  def update
+    @playlist = Playlist.find(params[:id])
+    authorize! :manage, @playlist
+    if @playlist.update(get_params)
+      flash[:notice] = 'Ok'
+    else
+      flash[:alert] = 'Ko'
+    end
+    redirect_to playlists_path
+  end
+
   def create
     authorize! :create, Playlist
     @playlist = Playlist.new(get_params)

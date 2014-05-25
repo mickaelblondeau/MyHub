@@ -1,0 +1,6 @@
+- if can? :manage, @video
+  = simple_form_for @video do |f|
+    = f.input :playlist_id, collection: Playlist.where('user_id = ?', current_user.id), prompt: t('form.choose_serie'), label: t('form.serie')
+    = f.input :name
+    = f.input :description
+    = f.button :submit

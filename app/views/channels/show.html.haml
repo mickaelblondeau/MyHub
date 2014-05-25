@@ -11,6 +11,7 @@
     = link_to t('views.view_video'), video
     - if can? :manage, video
       = link_to t('views.delete_video'), video, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+      = link_to t('views.edit_video'), edit_video_path(video)
     %hr
   - if can? :manage, @channel
     %h3
