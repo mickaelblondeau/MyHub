@@ -19,7 +19,9 @@ class Api
   end
 
   def self.parseYTChannel(data)
-    if data['items'][0] &&
+    if data &&
+        data['items'] &&
+        data['items'][0] &&
         data['items'][0]['snippet'] &&
         data['items'][0]['snippet']['thumbnails'] &&
         data['items'][0]['snippet']['thumbnails']['default']
@@ -75,7 +77,7 @@ class Api
   end
 
   def self.parseYTVideo(data)
-    if data['items'][0] && data['items'][0]['snippet'] &&
+    if data && data['items'] && data['items'][0] && data['items'][0]['snippet'] &&
         data['items'][0]['snippet']['thumbnails'] &&
         data['items'][0]['snippet']['thumbnails']['default']
       return {

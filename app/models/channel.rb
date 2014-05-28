@@ -2,7 +2,7 @@ class Channel < ActiveRecord::Base
   extend FriendlyId
   friendly_id :slug
   belongs_to :user
-  validates :api_id, presence: true
+  validates :api_id, :video_type, presence: true
   has_many :videos, :dependent => :destroy
   has_many :articles, :dependent => :destroy
 
@@ -30,11 +30,9 @@ class Channel < ActiveRecord::Base
 
   def owner_validated
     data = Api.channel_info(api_id, video_type)
-    if data
-      if data[:description].include? validation_key
-        self.validated = true
-        self.save
-      end
+    if data && validation_key && data[:description].include?(validation_key)
+      self.validated = true
+      self.save
     end
   end
 

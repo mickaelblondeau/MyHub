@@ -12,8 +12,8 @@ class Category < ActiveRecord::Base
 
   has_attached_file :icon,
                     :storage => :ftp,
-                    :path => 'occuli/public/images/categories/:id/:style/:filename',
-                    :url => 'categories/:id/:style/:filename',
+                    :path => 'occuli/public/images/:class/:attachment/:id.:extension',
+                    :url => ':class/:attachment/:id.:extension',
                     :ftp_servers => [
                         {
                             :host     => Rails.configuration.ftp_host1,

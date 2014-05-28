@@ -1,5 +1,5 @@
 class Video < ActiveRecord::Base
-  validates :api_id, :playlist_id, presence: true
+  validates :api_id, :playlist_id, :channel_id, presence: true
   belongs_to :channel
   belongs_to :playlist
   has_many :video_categories, :dependent => :destroy
@@ -9,6 +9,9 @@ class Video < ActiveRecord::Base
   is_impressionable
 
   before_create do
+    if !channel
+      return false
+    end
     exist = Video.where('videos.api_id = ?', api_id).joins(:channel).where(channels: { video_type: channel.video_type })
     if exist.count > 0
       return false
