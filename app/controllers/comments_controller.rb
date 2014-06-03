@@ -21,6 +21,6 @@ class CommentsController < ApplicationController
   end
 
   def get_params
-    params[:comment].permit(:content, :channel_id, :video_id, :playlist_id)
+    params[:comment].permit(:content, :video_id, :playlist_id)
   end
 end

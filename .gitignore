@@ -21,3 +21,6 @@
 
 # Ignore IDE files
 /.idea
+
+# Ignore windows thmbs
+thumbs.db

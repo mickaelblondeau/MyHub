@@ -1,7 +1,6 @@
 class Comment < ActiveRecord::Base
   validates :content, presence: true
   belongs_to :user
-  belongs_to :channel
   belongs_to :video
   belongs_to :playlist
 

@@ -23,8 +23,6 @@
       = f.input :api_id, label: t('form.video_api_id')
       = f.button :submit
 
-  = render partial: 'shared/articles', locals: { param_name: :channel_id, object: @channel }
-
 - else
   - if can? :manage, @channel
     Hello !

@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class VoteTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'get type' do
+	assert votes(:video_vote).get_type == videos(:one)
+	assert votes(:playlist_vote).get_type == playlists(:one)
+  end
 end

@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   name: 'MyString'
   description: 'MyText'
   api_id: 'UC_ViSsVg_3JUDyLS3E2Un5g'
   validation_key: 'xgsApS4Avd2516I'
   validated: 1
   video_type: 'yt'
+  user_id: 1

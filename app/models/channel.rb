@@ -4,7 +4,6 @@ class Channel < ActiveRecord::Base
   belongs_to :user
   validates :api_id, :video_type, presence: true
   has_many :videos, :dependent => :destroy
-  has_many :articles, :dependent => :destroy
 
   SRC_HOST = { 'yt' => :Youtube, 'dm' => :Dailymotion, 'vi' => :Vimeo }
 

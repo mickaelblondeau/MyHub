@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env)
 
 module MyHub
   class Application < Rails::Application
+	config.secret_key = 'SECRET_KEY'
     config.youtube_api_key = 'API_KEY'
     config.ftp_host1 = ''
     config.ftp_host2 = ''

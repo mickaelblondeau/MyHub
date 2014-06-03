@@ -51,7 +51,7 @@ class Ability
         end
 
         can :manage, Article do |a|
-          a.get_type_owner.id == user.id
+          a.playlist.user.id == user.id
         end
 
         can :manage, Cooperation do |c|
