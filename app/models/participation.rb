@@ -13,8 +13,8 @@ class Participation < ActiveRecord::Base
   end
 
   def get_type_owner
-    if channel
-      channel.user
+    if video
+      video.channel.user
     else
       playlist.user
     end

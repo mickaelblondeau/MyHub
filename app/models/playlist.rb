@@ -1,5 +1,5 @@
 class Playlist < ActiveRecord::Base
-  validates :title, :description, presence: true
+  validates :title, :description, :icon, presence: true
   has_many :participations, :dependent => :destroy
   has_many :users, through: :participations
   has_many :videos
