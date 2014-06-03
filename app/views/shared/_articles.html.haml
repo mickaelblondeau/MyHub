@@ -1,5 +1,5 @@
 %h3 Articles
-- articles = Article.where("#{param_name} = ?", object.id)
+- articles = Article.where("? = ?", param_name, object.id)
 - articles.each do |article|
   Par :
   = article.user.user_name
