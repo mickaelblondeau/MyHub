@@ -99,7 +99,7 @@ class Api
           description: data['description'],
           image: data['thumbnail_60_url'],
           created_at: data['created_time'],
-          channel: data['user_id']
+          channel: data['owner']
       }
     else
       return false
@@ -107,14 +107,13 @@ class Api
   end
 
   def self.parseVIVideo(data)
-    data = data[0]
-    if data
+    if data && data[0]
       return {
-          name: data['title'],
-          description: data['description'],
-          image: data['thumbnail_small'],
-          created_at: data['upload_date'],
-          channel: data['user_id'].to_s
+          name: data[0]['title'],
+          description: data[0]['description'],
+          image: data[0]['thumbnail_small'],
+          created_at: data[0]['upload_date'],
+          channel: data[0]['user_id'].to_s
       }
     else
       return false
