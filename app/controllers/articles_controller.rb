@@ -21,6 +21,6 @@ class ArticlesController < ApplicationController
   end
 
   def get_params
-    params[:article].permit(:title, :content, :channel_id, :playlist_id)
+    params[:article].permit(:title, :content, :playlist_id)
   end
 end
