@@ -11,19 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525143555) do
+ActiveRecord::Schema.define(version: 20140603123735) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
     t.text     "content"
     t.integer  "user_id"
-    t.integer  "channel_id"
     t.integer  "playlist_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "articles", ["channel_id"], name: "index_articles_on_channel_id"
   add_index "articles", ["playlist_id"], name: "index_articles_on_playlist_id"
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
 
@@ -45,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140525143555) do
   end
 
   add_index "category_links", ["category_id"], name: "index_category_links_on_category_id"
+  add_index "category_links", ["parent_id"], name: "index_category_links_on_parent_id"
 
   create_table "channels", force: true do |t|
     t.string   "name"
