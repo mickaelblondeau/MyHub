@@ -13,8 +13,9 @@ class Playlist < ActiveRecord::Base
 
   has_attached_file :icon,
                     :storage => :ftp,
-                    :path => 'occuli/public/images/:class/:attachment/:id.:extension',
-                    :url => ':class/:attachment/:id.:extension',
+                    :styles => { :thumb => '150x150' },
+                    :path => 'occuli/public/images/:class/:attachment/:style/:id.:extension',
+                    :url => ':class/:attachment/:style/:id.:extension',
                     :ftp_servers => [
                         {
                             :host     => Rails.configuration.ftp_host1,
@@ -29,6 +30,7 @@ class Playlist < ActiveRecord::Base
                             :passive  => true
                         }
                     ]
-  validates_attachment_content_type :icon, :content_type => /\Aimage\/.*\Z/
-  validates_attachment_presence :icon
+  validates_attachment :icon, :presence => true,
+                       :content_type => { :content_type => ['image/jpeg', 'image/gif', 'image/png'] },
+                       :size => { :in => 0..100.kilobytes }
 end
