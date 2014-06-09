@@ -2,7 +2,7 @@
 
 %h3 Your series
 - @playlists.each do |playlist|
-  = image_tag playlist.icon.url
+  = image_tag playlist.icon.url(:thumb)
   = link_to playlist.title, playlist
   - if can? :manage, playlist
     = link_to t('form.delete'), playlist, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }

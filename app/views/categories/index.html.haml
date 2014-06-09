@@ -2,7 +2,7 @@
   = t('categories')
 
 - @categories.each do |category|
-  = image_tag category.icon.url
+  = image_tag category.icon.url(:thumb)
   = link_to category.label, category
   - if can? :manage, Category
     = link_to t('form.delete'), category, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
