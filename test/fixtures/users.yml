@@ -8,3 +8,8 @@ one:
   id: 1
   email: "test@test.com"
   user_name: "test"
+
+two:
+  id: 2
+  email: "test2@test.com"
+  user_name: "test2"

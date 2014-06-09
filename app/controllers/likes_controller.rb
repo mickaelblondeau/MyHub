@@ -21,6 +21,6 @@ class LikesController < ApplicationController
   end
 
   def get_params
-    params[:like].permit(:channel_id, :video_id, :playlist_id, :user_id)
+    params[:like].permit(:playlist_id, :user_id)
   end
 end
