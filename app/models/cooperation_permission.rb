@@ -1,5 +1,6 @@
 class CooperationPermission < ActiveRecord::Base
-  validates :cooperation_id, :permission_id, presence: true
-  belongs_to :cooperation
+  validates :user_id, :channel_id, :permission_id, presence: true
+  belongs_to :user
+  belongs_to :channel
   belongs_to :permission
 end

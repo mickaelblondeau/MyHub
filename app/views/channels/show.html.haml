@@ -15,7 +15,7 @@
     %hr
   - if can? :manage, @channel
     %h3
-      = link_to t('views.manage_permissions'), cooperation_path(@channel)
+      = link_to t('views.manage_permissions'), cooperation_permission_path(@channel)
     %h3 Add a new video
     = simple_form_for Video.new do |f|
       = f.input :channel_id, input_html: { value: @channel.id }, as: :hidden

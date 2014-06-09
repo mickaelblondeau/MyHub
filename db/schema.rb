@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603123735) do
+ActiveRecord::Schema.define(version: 20140609145802) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -81,20 +81,14 @@ ActiveRecord::Schema.define(version: 20140603123735) do
     t.integer  "cooperation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  add_index "cooperation_permissions", ["cooperation_id"], name: "index_cooperation_permissions_on_cooperation_id"
-  add_index "cooperation_permissions", ["permission_id"], name: "index_cooperation_permissions_on_permission_id"
-
-  create_table "cooperations", force: true do |t|
     t.integer  "user_id"
     t.integer  "channel_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
-  add_index "cooperations", ["channel_id"], name: "index_cooperations_on_channel_id"
-  add_index "cooperations", ["user_id"], name: "index_cooperations_on_user_id"
+  add_index "cooperation_permissions", ["channel_id"], name: "index_cooperation_permissions_on_channel_id"
+  add_index "cooperation_permissions", ["cooperation_id"], name: "index_cooperation_permissions_on_cooperation_id"
+  add_index "cooperation_permissions", ["permission_id"], name: "index_cooperation_permissions_on_permission_id"
+  add_index "cooperation_permissions", ["user_id"], name: "index_cooperation_permissions_on_user_id"
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false

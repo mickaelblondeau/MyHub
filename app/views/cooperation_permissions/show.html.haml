@@ -1,21 +1,22 @@
 %h3 Gestion des permissions
 
 Pour :
-= @cooperation.user.user_name
+= link_to @channel.name, @channel
 
-<br>
+%br
 
 - @cooperation_permissions.each do |coop|
+  = link_to coop.user.user_name, coop.user
   = coop.permission.label
-  <br>
   = link_to t('views.delete_permission'), coop, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-  <br>
+  %br
 
 %h3 Add new
 
 = simple_form_for @new_cooperation_permission do |f|
-  = f.input :cooperation_id, input_html: { value: @cooperation.id }, as: :hidden
-  = f.input :permission_id, collection: Permission.all, prompt: t('form.choose_permission'), label: t('form.permission')
+  = f.input :channel_id, input_html: { value: @channel.id }, as: :hidden
+  = f.input :user_id, collection: User.all, prompt: t('form.choose_user'), label: t('form.user'), label_method: :user_name
+  = f.input :permission_id, collection: Permission.all, prompt: t('form.choose_permission'), label: t('form.permission'), label_method: :label
   = f.button :submit
 
-= link_to t('views.return_to_coop'), cooperation_path(@cooperation.channel)
+= link_to t('views.return_to_channel'), channel_path(@channel)

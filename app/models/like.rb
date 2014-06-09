@@ -10,4 +10,12 @@ class Like < ActiveRecord::Base
       user
     end
   end
+
+  def get_type_name
+    if playlist
+      playlist.title
+    else
+      user.user_name
+    end
+  end
 end
