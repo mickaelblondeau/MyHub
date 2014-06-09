@@ -5,6 +5,7 @@ class SearchController < ApplicationController
       @series = Playlist.where('title LIKE ? OR description LIKE ?', "%#{@search}%", "%#{@search}%")
       @videos = Video.where('name LIKE ? OR description LIKE ?', "%#{@search}%", "%#{@search}%")
     else
+      flash[:alert] = 'Ko'
       @series = @videos = []
     end
   end
