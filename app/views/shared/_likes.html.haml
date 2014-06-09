@@ -1,6 +1,6 @@
 - if can? :create, Like
-  - if like = Like.where("? = ?", param_name, object.id).first
-    = link_to t('views.delete_like'), like, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  - if @like
+    = link_to t('views.delete_like'), @like, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
   - else
     = simple_form_for Like.new do |f|
       = f.input param_name, input_html: { value: object.id }, as: :hidden

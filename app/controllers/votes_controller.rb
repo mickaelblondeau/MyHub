@@ -3,6 +3,9 @@ class VotesController < ApplicationController
     authorize! :create, Vote
     @vote = Vote.new(get_params)
     @vote.user_id = current_user.id
+    if @vote.vote != 0
+      @vote.vote = 1
+    end
     @vote.weekly = true
     if @vote.save
       flash[:notice] = 'Ok'

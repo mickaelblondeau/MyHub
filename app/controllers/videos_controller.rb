@@ -3,6 +3,8 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     impressionist(@video)
     @comments = Comment.where('video_id = ?', @video.id)
+    @votes = Vote.where('video_id = ?', @video.id)
+    @vote = Vote.where('video_id = ? AND user_id = ?', @video.id, current_user.id).first
   end
 
   def edit

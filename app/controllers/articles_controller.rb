@@ -8,13 +8,13 @@ class ArticlesController < ApplicationController
     else
       flash[:alert] = 'Ko'
     end
-    redirect_to @article.get_type
+    redirect_to @article.playlist
   end
 
   def destroy
     @article = Article.find(params[:id])
     authorize! :destroy, @article
-    path = @article.get_type
+    path = @article.playlist
     @article.destroy
     flash[:notice] = 'Ok'
     redirect_to path

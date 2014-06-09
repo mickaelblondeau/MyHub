@@ -41,11 +41,30 @@
 
 %br
 
-= render partial: 'shared/articles', locals: { param_name: :playlist_id, object: @playlist }
+%h3 Articles
+- articles = Article.where('playlist_id = ?', @playlist.id)
+- articles.each do |article|
+  Par :
+  = article.user.user_name
+  <br>
+  = article.title
+  <br>
+  = article.content
+  <br>
+  - if can? :delete, article
+    = link_to t('views.delete_article'), article, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  <hr>
+
+- if can? :manage, @playlist
+  %h3 Poster un article
+  = simple_form_for Article.new do |f|
+    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
+    = f.input :title, label: t('from.article_title')
+    = f.input :content, label: t('from.article_content')
+    = f.button :submit
 
 = render partial: 'shared/likes', locals: { param_name: :playlist_id, object: @playlist }
 = render partial: 'shared/votes', locals: { param_name: :playlist_id, object: @playlist }
-
 = render partial: 'shared/comments', locals: { param_name: :playlist_id, object: @playlist }
 
 - if can? :index, Playlist

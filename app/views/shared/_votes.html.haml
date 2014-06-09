@@ -1,13 +1,12 @@
-- votes = Vote.where("? = ?", param_name, object.id)
 - votes_m = votes_p = votes_m_w = votes_p_w = 0
-- votes.each do |vote|
-  - if vote.vote
+- @votes.each do |v|
+  - if v.vote
     - votes_p += 1
-    - if vote.weekly
+    - if v.weekly
       - votes_p_w += 1
   - else
     - votes_m += 1
-    - if vote.weekly
+    - if v.weekly
       - votes_m_w += 1
 
 %h4 Weekly
@@ -27,8 +26,8 @@ Votes - :
 = votes_m
 
 - if can? :create, Vote
-  - if vote = Vote.where("? = ? AND user_id = ?", param_name, object.id, current_user.id).first
-    = link_to t('views.delete_vote'), vote, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  - if @vote
+    = link_to t('views.delete_vote'), @vote, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
   - else
     = simple_form_for Vote.new do |f|
       = f.input param_name, input_html: { value: object.id }, as: :hidden
