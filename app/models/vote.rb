@@ -6,10 +6,13 @@ class Vote < ActiveRecord::Base
   belongs_to :video
 
   before_create do
-    exist = Vote.where('user_id = ? AND weekly IS NOT NULL AND (playlist_id = ? OR video_id = ?)', user_id, playlist_id, video_id)
-    if exist.count > 0
+    if vote_exist
       return false
     end
+  end
+
+  def vote_exist
+    exist = Vote.where('user_id = ? AND weekly IS NOT NULL AND (playlist_id = ? OR video_id = ?)', user_id, playlist_id, video_id).first
   end
 
   def get_type

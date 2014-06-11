@@ -12,8 +12,8 @@ class Video < ActiveRecord::Base
     if !channel
       return false
     end
-    exist = Video.where('videos.api_id = ?', api_id).joins(:channel).where(channels: { video_type: channel.video_type })
-    if exist.count > 0
+    exist = Video.where('videos.api_id = ?', api_id).joins(:channel).where(channels: { video_type: channel.video_type }).first
+    if exist
       return false
     end
 

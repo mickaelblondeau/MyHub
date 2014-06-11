@@ -8,8 +8,8 @@ class Channel < ActiveRecord::Base
   SRC_HOST = { 'yt' => :Youtube, 'dm' => :Dailymotion, 'vi' => :Vimeo }
 
   before_create do
-    exist = Channel.where('api_id = ? AND video_type = ?', api_id, video_type)
-    if exist.count > 0
+    exist = Channel.where('api_id = ? AND video_type = ?', api_id, video_type).first
+    if exist
       return false
     end
 
