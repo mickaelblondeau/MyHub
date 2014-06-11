@@ -1,6 +1,6 @@
 %div{id: :vote_block}
   - votes_m = votes_p = votes_m_w = votes_p_w = 0
-  - @votes.each do |v|
+  - votes.each do |v|
     - if v.vote
       - votes_p += 1
       - if v.weekly
@@ -27,14 +27,14 @@
   = votes_m
 
   - if can? :create, Vote
-    - if @vote && @vote.vote
+    - if vote && vote.vote
       Voted +
     - else
       = simple_form_for Vote.new, remote: true do |f|
         = f.input param_name, input_html: { value: object.id }, as: :hidden
         = f.input :vote, input_html: { value: true }, as: :hidden
         = f.button :submit, 'Vote +'
-    - if @vote && !@vote.vote
+    - if vote && !vote.vote
       Voted -
     - else
       = simple_form_for Vote.new, remote: true do |f|

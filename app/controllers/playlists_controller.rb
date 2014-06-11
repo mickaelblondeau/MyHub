@@ -9,10 +9,8 @@ class PlaylistsController < ApplicationController
     @playlist = Playlist.find(params[:id])
     @new_participation = Participation.new
     @comments = Comment.where('playlist_id = ?', @playlist.id)
-    @like = Like.where('playlist_id = ?', @playlist.id).first
-    @votes = Vote.where('playlist_id = ?', @playlist.id)
     if current_user
-      @vote = Vote.where('playlist_id = ? AND user_id = ?', @playlist.id, current_user.id).first
+      @like = Like.where('playlist_id = ? AND user_id = ?', @playlist.id, current_user.id).first
     end
   end
 

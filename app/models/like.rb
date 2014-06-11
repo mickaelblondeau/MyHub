@@ -27,4 +27,33 @@ class Like < ActiveRecord::Base
       user.user_name
     end
   end
+
+  def self.get_params(object, current_user)
+    vote = nil
+    if object.class == User
+      if current_user
+        like = Like.where('user_id = ? AND owner_id = ?', object.id, current_user.id).first
+      end
+      { :param_name => :user_id, :id => object.id, :like => like }
+    else
+      if current_user
+        like = Like.where('playlist_id = ? AND owner_id = ?', object.id, current_user.id).first
+      end
+      { :param_name => :playlist_id, :id => object.id, :like => like }
+    end
+  end
+
+  def get_params
+    if user
+      { :param_name => :user_id, :id => video.id, :like => self }
+    else
+      { :param_name => :playlist_id, :id => playlist.id, :like => self }
+    end
+  end
+
+  def get_delete_params
+    params = get_params
+    params[:like] = nil
+    params
+  end
 end

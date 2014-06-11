@@ -63,8 +63,8 @@
     = f.input :content, label: t('from.article_content')
     = f.button :submit
 
-= render partial: 'shared/likes', locals: { param_name: :playlist_id, object: @playlist }
-= render partial: 'shared/votes', locals: { param_name: :playlist_id, object: @playlist }
+= render partial: 'shared/likes', locals: Like::get_params(@playlist, current_user)
+= render partial: 'shared/votes', locals: Vote::get_params(@playlist, current_user)
 = render partial: 'shared/comments', locals: { param_name: :playlist_id, object: @playlist }
 
 - if can? :index, Playlist

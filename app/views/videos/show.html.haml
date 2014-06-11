@@ -7,7 +7,7 @@
 
 %br
 
-= render partial: 'shared/votes', locals: { param_name: :video_id, object: @video }
+= render partial: 'shared/votes', locals: Vote::get_params(@video, current_user)
 
 %h3 Categories
 - @video.video_categories.each do |video_categorie|

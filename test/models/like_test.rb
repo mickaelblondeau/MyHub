@@ -5,7 +5,7 @@ class LikeTest < ActiveSupport::TestCase
     like = Like.new
     like.owner_id = 2
     like.playlist_id = 1
-    return like.save
+    like
   end
 
   test 'should not save without user or playlist' do
@@ -27,8 +27,8 @@ class LikeTest < ActiveSupport::TestCase
   end
 
   test 'should not save duplicate' do
-    assert createLike
-    assert_not createLike
+    assert createLike.save
+    assert_not createLike.save
   end
 
   test 'get type' do
@@ -39,5 +39,33 @@ class LikeTest < ActiveSupport::TestCase
   test 'get type name' do
     assert likes(:user_like).get_type_name == users(:one).user_name
     assert likes(:playlist_like).get_type_name == playlists(:one).title
+  end
+
+  test 'self get params' do
+    params = Like::get_params(users(:one), users(:one))
+    assert params[:param_name] == :user_id
+    assert params[:id] == users(:one).id
+    assert params[:like] == likes(:user_like)
+
+    params = Like::get_params(playlists(:one), users(:one))
+    assert params[:param_name] == :playlist_id
+    assert params[:id] == playlists(:one).id
+    assert params[:like] == likes(:playlist_like)
+  end
+
+  test 'get params' do
+    like = createLike
+    params = like.get_params
+    assert params[:param_name] == :playlist_id
+    assert params[:id] == playlists(:one).id
+    assert params[:like] == like
+  end
+
+  test 'get delete params' do
+    like = createLike
+    params = like.get_delete_params
+    assert params[:param_name] == :playlist_id
+    assert params[:id] == playlists(:one).id
+    assert params[:like] == nil
   end
 end

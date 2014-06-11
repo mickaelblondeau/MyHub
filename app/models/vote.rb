@@ -22,4 +22,33 @@ class Vote < ActiveRecord::Base
       playlist
     end
   end
+
+  def self.get_params(object, current_user)
+    vote = nil
+    if object.class == Video
+      if current_user
+        vote = Vote.where('video_id = ? AND user_id = ?', object.id, current_user.id).first
+      end
+      { :param_name => :video_id, :object => object, :votes => Vote.where('video_id = ?', object.id), :vote => vote }
+    else
+      if current_user
+        vote = Vote.where('playlist_id = ? AND user_id = ?', object.id, current_user.id).first
+      end
+      { :param_name => :playlist_id, :object => object, :votes => Vote.where('playlist_id = ?', object.id), :vote => vote }
+    end
+  end
+
+  def get_params
+    if video
+      { :param_name => :video_id, :object => video, :votes => Vote.where('video_id = ?', video.id), :vote => self }
+    else
+      { :param_name => :playlist_id, :object => playlist, :votes => Vote.where('playlist_id = ?', playlist.id), :vote => self }
+    end
+  end
+
+  def get_delete_params
+    params = get_params
+    params[:vote] = nil
+    params
+  end
 end
