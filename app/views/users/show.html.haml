@@ -5,4 +5,4 @@
 
 = @user.description
 
-= render partial: 'shared/likes', locals: { param_name: :user_id, object: @user }
+= render partial: 'shared/likes', locals: Like::get_params(@user, current_user)

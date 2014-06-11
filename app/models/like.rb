@@ -29,7 +29,7 @@ class Like < ActiveRecord::Base
   end
 
   def self.get_params(object, current_user)
-    vote = nil
+    like = nil
     if object.class == User
       if current_user
         like = Like.where('user_id = ? AND owner_id = ?', object.id, current_user.id).first
@@ -45,7 +45,7 @@ class Like < ActiveRecord::Base
 
   def get_params
     if user
-      { :param_name => :user_id, :id => video.id, :like => self }
+      { :param_name => :user_id, :id => user.id, :like => self }
     else
       { :param_name => :playlist_id, :id => playlist.id, :like => self }
     end
