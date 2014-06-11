@@ -246,3 +246,4 @@ fr:
   views:
     delete_vote: "Supprimer"
     delete_like: "Se désabonner"
+    delete_comment: "Supprimer le commentaire"

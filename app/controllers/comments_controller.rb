@@ -4,20 +4,17 @@ class CommentsController < ApplicationController
     @comment = Comment.new(get_params)
     @comment.user_id = current_user.id
     if @comment.save
-      flash[:notice] = 'Ok'
+      render partial: 'shared/comments', locals: @comment.get_params
     else
-      flash[:alert] = 'Ko'
+      render json: {error: :ko}, status: :unprocessable_entity
     end
-    redirect_to @comment.get_type
   end
 
   def destroy
     @comment = Comment.find(params[:id])
     authorize! :destroy, @comment
-    path = @comment.get_type
     @comment.destroy
-    flash[:notice] = 'Ok'
-    redirect_to path
+    render partial: 'shared/comments', locals: @comment.get_params
   end
 
   def get_params

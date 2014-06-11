@@ -30,6 +30,6 @@
   = link_to su.user.email, user_path(su.user)
   %br
 
-= render partial: 'shared/comments', locals: { param_name: :video_id, object: @video }
+= render partial: 'shared/comments', locals: Comment::get_params(@video)
 
 = link_to t('views.return_channel'), @video.channel
