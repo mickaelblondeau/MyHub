@@ -15,7 +15,7 @@ Pour :
 
 = simple_form_for @new_cooperation_permission do |f|
   = f.input :channel_id, input_html: { value: @channel.id }, as: :hidden
-  = f.input :user_id, collection: User.all, prompt: t('form.choose_user'), label: t('form.user'), label_method: :user_name
+  = f.input :user_id, collection: User.where.not(id:@cooperation_permissions.map(&:user_id)).where.not(current_user.id), prompt: t('form.choose_user'), label: t('form.user'), label_method: :user_name
   = f.input :permission_id, collection: Permission.all, prompt: t('form.choose_permission'), label: t('form.permission'), label_method: :label
   = f.button :submit
 

@@ -34,7 +34,7 @@
 - if can? :manage, @playlist
   %h3 Ajouter un participant
   = simple_form_for @new_participation do |f|
-    = f.input :user_id
+    = f.input :user_id, collection: User.where.not(id:@playlist.participations.map(&:user_id)).where.not(current_user.id), prompt: t('form.choose_user'), label: t('form.user'), label_method: :user_name
     = f.input :comment
     = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
     = f.button :submit
