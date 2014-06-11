@@ -29,20 +29,20 @@ class Vote < ActiveRecord::Base
       if current_user
         vote = Vote.where('video_id = ? AND user_id = ?', object.id, current_user.id).first
       end
-      { :param_name => :video_id, :object => object, :votes => Vote.where('video_id = ?', object.id), :vote => vote }
+      { :param_name => :video_id, :id => object.id, :votes => Vote.where('video_id = ?', object.id), :vote => vote }
     else
       if current_user
         vote = Vote.where('playlist_id = ? AND user_id = ?', object.id, current_user.id).first
       end
-      { :param_name => :playlist_id, :object => object, :votes => Vote.where('playlist_id = ?', object.id), :vote => vote }
+      { :param_name => :playlist_id, :id => object.id, :votes => Vote.where('playlist_id = ?', object.id), :vote => vote }
     end
   end
 
   def get_params
     if video
-      { :param_name => :video_id, :object => video, :votes => Vote.where('video_id = ?', video.id), :vote => self }
+      { :param_name => :video_id, :id => video.id, :votes => Vote.where('video_id = ?', video.id), :vote => self }
     else
-      { :param_name => :playlist_id, :object => playlist, :votes => Vote.where('playlist_id = ?', playlist.id), :vote => self }
+      { :param_name => :playlist_id, :id => playlist.id, :votes => Vote.where('playlist_id = ?', playlist.id), :vote => self }
     end
   end
 

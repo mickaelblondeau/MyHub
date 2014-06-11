@@ -1,5 +1,7 @@
 class Comment < ActiveRecord::Base
   validates :content, presence: true
+  validates_presence_of :playlist_id, :unless => :video_id?
+  validates_presence_of :video_id, :unless => :playlist_id?
   belongs_to :user
   belongs_to :video
   belongs_to :playlist
