@@ -31,6 +31,7 @@ fr:
     name: "Nom"
     description: "Description"
     sure: "Etes vous sur ?"
+    subscribe: "S'abonner"
   date:
     abbr_day_names:
       - dim
@@ -242,3 +243,6 @@ fr:
   activerecord:
     errors:
       <<: *errors
+  views:
+    delete_vote: "Supprimer"
+    delete_like: "Se désabonner"

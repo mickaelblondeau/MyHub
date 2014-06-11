@@ -31,3 +31,7 @@ en:
     channel_api_id: "Channel ID"
     description: "Description"
     sure: "Are you sure ?"
+    subscribe: "Subscribe"
+  views:
+    delete_vote: "Delete"
+    delete_like: "Unsubscribe"

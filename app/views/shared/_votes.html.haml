@@ -1,39 +1,40 @@
-- votes_m = votes_p = votes_m_w = votes_p_w = 0
-- @votes.each do |v|
-  - if v.vote
-    - votes_p += 1
-    - if v.weekly
-      - votes_p_w += 1
-  - else
-    - votes_m += 1
-    - if v.weekly
-      - votes_m_w += 1
+%div{id: :vote_block}
+  - votes_m = votes_p = votes_m_w = votes_p_w = 0
+  - @votes.each do |v|
+    - if v.vote
+      - votes_p += 1
+      - if v.weekly
+        - votes_p_w += 1
+    - else
+      - votes_m += 1
+      - if v.weekly
+        - votes_m_w += 1
 
-%h4 Weekly
+  %h4 Weekly
 
-Votes + :
-= votes_p_w
-<br>
-Votes - :
-= votes_m_w
+  Votes + :
+  = votes_p_w
+  <br>
+  Votes - :
+  = votes_m_w
 
-%h4 Total
+  %h4 Total
 
-Votes + :
-= votes_p
-<br>
-Votes - :
-= votes_m
+  Votes + :
+  = votes_p
+  <br>
+  Votes - :
+  = votes_m
 
-- if can? :create, Vote
-  - if @vote
-    = link_to t('views.delete_vote'), @vote, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-  - else
-    = simple_form_for Vote.new do |f|
-      = f.input param_name, input_html: { value: object.id }, as: :hidden
-      = f.input :vote, input_html: { value: 1 }, as: :hidden
-      = f.button :submit, 'Vote +'
-    = simple_form_for Vote.new do |f|
-      = f.input param_name, input_html: { value: object.id }, as: :hidden
-      = f.input :vote, input_html: { value: 0 }, as: :hidden
-      = f.button :submit, 'Vote -'
+  - if can? :create, Vote
+    - if @vote
+      = button_to t('views.delete_vote'), @vote, method: :delete, remote: true
+    - else
+      = simple_form_for Vote.new, remote: true do |f|
+        = f.input param_name, input_html: { value: object.id }, as: :hidden
+        = f.input :vote, input_html: { value: true }, as: :hidden
+        = f.button :submit, 'Vote +'
+      = simple_form_for Vote.new, remote: true do |f|
+        = f.input param_name, input_html: { value: object.id }, as: :hidden
+        = f.input :vote, input_html: { value: false }, as: :hidden
+        = f.button :submit, 'Vote -'

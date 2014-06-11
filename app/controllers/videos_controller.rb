@@ -4,7 +4,9 @@ class VideosController < ApplicationController
     impressionist(@video)
     @comments = Comment.where('video_id = ?', @video.id)
     @votes = Vote.where('video_id = ?', @video.id)
-    @vote = Vote.where('video_id = ? AND user_id = ?', @video.id, current_user.id).first
+    if current_user
+      @vote = Vote.where('video_id = ? AND user_id = ?', @video.id, current_user.id).first
+    end
   end
 
   def edit

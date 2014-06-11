@@ -11,7 +11,9 @@ class PlaylistsController < ApplicationController
     @comments = Comment.where('playlist_id = ?', @playlist.id)
     @like = Like.where('playlist_id = ?', @playlist.id).first
     @votes = Vote.where('playlist_id = ?', @playlist.id)
-    @vote = Vote.where('playlist_id = ? AND user_id = ?', @playlist.id, current_user.id).first
+    if current_user
+      @vote = Vote.where('playlist_id = ? AND user_id = ?', @playlist.id, current_user.id).first
+    end
   end
 
   def edit

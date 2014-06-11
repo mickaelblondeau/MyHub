@@ -3,28 +3,41 @@ class VotesController < ApplicationController
     authorize! :create, Vote
     @vote = Vote.new(get_params)
     @vote.user_id = current_user.id
-    if @vote.vote != 0
-      @vote.vote = 1
-    end
     @vote.weekly = true
     if @vote.save
-      flash[:notice] = 'Ok'
+      render_html
     else
-      flash[:alert] = 'Ko'
+      render json: {error: :ko}, status: :unprocessable_entity
     end
-    redirect_to @vote.get_type
   end
 
   def destroy
     @vote = Vote.find(params[:id])
     authorize! :destroy, @vote
-    path = @vote.get_type
     @vote.destroy
-    flash[:notice] = 'Ok'
-    redirect_to path
+    render_html
   end
 
   def get_params
     params[:vote].permit(:video_id, :playlist_id, :vote)
+  end
+
+  def render_html
+    if @vote.video_id
+      param_name = :video_id
+      object = @vote.video
+      @votes = Vote.where('video_id = ?', object.id)
+      if current_user
+        @vote = Vote.where('video_id = ? AND user_id = ?', object.id, current_user.id).first
+      end
+    else
+      param_name = :playlist_id
+      object = @vote.playlist
+      @votes = Vote.where('playlist_id = ?', object.id)
+      if current_user
+        @vote = Vote.where('playlist_id = ? AND user_id = ?', object.id, current_user.id).first
+      end
+    end
+    render partial: 'shared/votes', locals: { param_name: param_name, object: object }
   end
 end
