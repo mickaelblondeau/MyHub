@@ -21,14 +21,14 @@
     = f.input :category_id, collection: Category.where.not(label:@video.categories.map(&:label)), prompt: t('form.choose_category'), label: t('form.category'), label_method: :label
     = f.button :submit
 
-%h3 Serie
-= link_to @video.playlist.title, @video.playlist
-
-%h3 Participants
-= link_to @video.playlist.user.email, user_path(@video.playlist.user)
-- @video.playlist.participations.each do |su|
-  = link_to su.user.email, user_path(su.user)
-  %br
+- if @video.playlist
+  %h3 Serie
+  = link_to @video.playlist.title, @video.playlist
+  %h3 Participants
+  = link_to @video.playlist.user.email, user_path(@video.playlist.user)
+  - @video.playlist.participations.each do |su|
+    = link_to su.user.email, user_path(su.user)
+    %br
 
 = render partial: 'shared/comments', locals: Comment::get_params(@video)
 
