@@ -10,7 +10,6 @@ class Playlist < ActiveRecord::Base
   has_many :votes, :dependent => :destroy
   has_many :likes, :dependent => :destroy
   has_many :articles, :dependent => :destroy
-
   has_attached_file :icon,
                     :storage => :ftp,
                     :styles => { :thumb => '100x100' },
@@ -33,4 +32,10 @@ class Playlist < ActiveRecord::Base
   validates_attachment :icon, :presence => true,
                        :content_type => { :content_type => ['image/jpeg', 'image/gif', 'image/png', 'image/bmp'] },
                        :size => { :in => 0..100.kilobytes }
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
+  def should_generate_new_friendly_id?
+    new_record?
+  end
 end

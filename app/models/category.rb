@@ -1,6 +1,7 @@
 require 'paperclip/storage/ftp'
 
 class Category < ActiveRecord::Base
+  validates :label, presence: true
   has_many :video_categories
   has_many :videos, through: :video_categories
   has_many :playlist_categories
@@ -9,7 +10,6 @@ class Category < ActiveRecord::Base
   has_many :category_links_childs, foreign_key: :parent_id, class_name: :CategoryLink
   has_many :parents, through: :category_links
   has_many :childs, through: :category_links_childs, source: :category
-
   has_attached_file :icon,
                     :storage => :ftp,
                     :styles => { :thumb => '100x100' },
@@ -32,4 +32,10 @@ class Category < ActiveRecord::Base
   validates_attachment :icon, :presence => true,
                        :content_type => { :content_type => ['image/jpeg', 'image/gif', 'image/png', 'image/bmp'] },
                        :size => { :in => 0..100.kilobytes }
+  extend FriendlyId
+  friendly_id :label, use: :slugged
+
+  def should_generate_new_friendly_id?
+    new_record?
+  end
 end

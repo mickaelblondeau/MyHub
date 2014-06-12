@@ -7,6 +7,10 @@ class Channel < ActiveRecord::Base
 
   SRC_HOST = { 'yt' => :Youtube, 'dm' => :Dailymotion, 'vi' => :Vimeo }
 
+  def should_generate_new_friendly_id?
+    new_record?
+  end
+
   before_create do
     exist = Channel.where('api_id = ? AND video_type = ?', api_id, video_type).first
     if exist

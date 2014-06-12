@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609145802) do
+ActiveRecord::Schema.define(version: 20140612095507) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -33,7 +33,10 @@ ActiveRecord::Schema.define(version: 20140609145802) do
     t.string   "icon_content_type"
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.string   "slug"
   end
+
+  add_index "categories", ["slug"], name: "index_categories_on_slug"
 
   create_table "category_links", force: true do |t|
     t.integer  "category_id"
@@ -179,8 +182,10 @@ ActiveRecord::Schema.define(version: 20140609145802) do
     t.string   "icon_content_type"
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.string   "slug"
   end
 
+  add_index "playlists", ["slug"], name: "index_playlists_on_slug"
   add_index "playlists", ["user_id"], name: "index_playlists_on_user_id"
 
   create_table "users", force: true do |t|

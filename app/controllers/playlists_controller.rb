@@ -6,7 +6,7 @@ class PlaylistsController < ApplicationController
   end
 
   def show
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.friendly.find(params[:id])
     @new_participation = Participation.new
     @comments = Comment.where('playlist_id = ?', @playlist.id)
     if current_user
@@ -15,11 +15,11 @@ class PlaylistsController < ApplicationController
   end
 
   def edit
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.friendly.find(params[:id])
   end
 
   def update
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.friendly.find(params[:id])
     authorize! :manage, @playlist
     if @playlist.update(get_params)
       flash[:notice] = 'Ok'
@@ -42,7 +42,7 @@ class PlaylistsController < ApplicationController
   end
 
   def destroy
-    @playlist = Playlist.find(params[:id])
+    @playlist = Playlist.friendly.find(params[:id])
     authorize! :manage, @playlist
     @playlist.destroy
     flash[:notice] = 'Ok'

@@ -4,15 +4,15 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+    @category = Category.friendly.find(params[:id])
   end
 
   def edit
-    @category = Category.find(params[:id])
+    @category = Category.friendly.find(params[:id])
   end
 
   def update
-    @category = Category.find(params[:id])
+    @category = Category.friendly.find(params[:id])
     authorize! :manage, @category
     if @category.update(get_params)
       flash[:notice] = 'Ok'
@@ -34,7 +34,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:id])
+    @category = Category.friendly.find(params[:id])
     authorize! :destroy, @category
     @category.destroy
     flash[:notice] = 'Ok'
