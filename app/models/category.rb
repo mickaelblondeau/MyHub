@@ -30,6 +30,6 @@ class Category < ActiveRecord::Base
                         }
                     ]
   validates_attachment :icon, :presence => true,
-                       :content_type => { :content_type => ['image/jpeg', 'image/gif', 'image/png'] },
+                       :content_type => { :content_type => ['image/jpeg', 'image/gif', 'image/png', 'image/bmp'] },
                        :size => { :in => 0..100.kilobytes }
 end

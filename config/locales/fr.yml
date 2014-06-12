@@ -161,6 +161,7 @@ fr:
       too_short:
         one: "est trop court (au moins un caractère)"
         other: "est trop court (au moins %{count} caractères)"
+      search_too_short: "La recherche est trop court (au moins %{count} caractères)"
       wrong_length:
         one: "ne fait pas la bonne longueur (doit comporter un seul caractère)"
         other: "ne fait pas la bonne longueur (doit comporter %{count} caractères)"
@@ -247,3 +248,4 @@ fr:
     delete_vote: "Supprimer"
     delete_like: "Se désabonner"
     delete_comment: "Supprimer le commentaire"
+    search: "Recherche"

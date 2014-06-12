@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  errors:
+    messages:
+      search_too_short: "The search query is too short (at least %{count} characters)"
   nav:
     home: 'Home'
     login: 'Login'
@@ -36,3 +39,4 @@ en:
     delete_vote: "Delete"
     delete_like: "Unsubscribe"
     delete_comment: "Delete comment"
+    search: "Search"

@@ -5,5 +5,5 @@
     = link_to t('nav.view_channel'), channels_path
   %div.search
     %form{action: '/search', method: :GET}
-      = text_field_tag :q, nil, placeholder: :search
+      = text_field_tag :q, nil, placeholder: t('views.search')
   %div.clear
