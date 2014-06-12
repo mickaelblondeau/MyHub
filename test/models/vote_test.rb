@@ -41,12 +41,10 @@ class VoteTest < ActiveSupport::TestCase
     params = Vote::get_params(videos(:one), users(:one))
     assert params[:param_name] == :video_id
     assert params[:id] == videos(:one).id
-    assert params[:vote] == votes(:video_vote)
 
     params = Vote::get_params(playlists(:one), users(:one))
     assert params[:param_name] == :playlist_id
     assert params[:id] == playlists(:one).id
-    assert params[:vote] == votes(:playlist_vote)
   end
 
   test 'get params' do
@@ -54,7 +52,6 @@ class VoteTest < ActiveSupport::TestCase
     params = vote.get_params
     assert params[:param_name] == :video_id
     assert params[:id] == videos(:one).id
-    assert params[:vote] == vote
   end
 
   test 'get delete params' do
@@ -62,6 +59,5 @@ class VoteTest < ActiveSupport::TestCase
     params = vote.get_delete_params
     assert params[:param_name] == :video_id
     assert params[:id] == videos(:one).id
-    assert params[:vote] == nil
   end
 end

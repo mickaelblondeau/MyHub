@@ -27,17 +27,11 @@
   = votes_m
 
   - if can? :create, Vote
-    - if vote && vote.vote
-      Voted +
-    - else
-      = simple_form_for Vote.new, remote: true do |f|
-        = f.input param_name, input_html: { value: id }, as: :hidden
-        = f.input :vote, input_html: { value: true }, as: :hidden
-        = f.button :submit, 'Vote +'
-    - if vote && !vote.vote
-      Voted -
-    - else
-      = simple_form_for Vote.new, remote: true do |f|
-        = f.input param_name, input_html: { value: id }, as: :hidden
-        = f.input :vote, input_html: { value: false }, as: :hidden
-        = f.button :submit, 'Vote -'
+    = simple_form_for Vote.new, remote: true do |f|
+      = f.input param_name, input_html: { value: id }, as: :hidden
+      = f.input :vote, input_html: { value: true }, as: :hidden
+      = f.button :submit, 'Vote +'
+    = simple_form_for Vote.new, remote: true do |f|
+      = f.input param_name, input_html: { value: id }, as: :hidden
+      = f.input :vote, input_html: { value: false }, as: :hidden
+      = f.button :submit, 'Vote -'

@@ -12,7 +12,23 @@ class Vote < ActiveRecord::Base
   end
 
   def vote_exist
-    exist = Vote.where('user_id = ? AND weekly IS NOT NULL AND (playlist_id = ? OR video_id = ?)', user_id, playlist_id, video_id).first
+    Vote.where('user_id = ? AND weekly IS NOT NULL AND (playlist_id = ? OR video_id = ?)', user_id, playlist_id, video_id).first
+  end
+
+  def change_vote
+    v = vote_exist
+    if v
+      if vote == v.vote
+        v.destroy
+        v.get_params
+      else
+        v.vote = vote
+        v.save
+        v.get_params
+      end
+    else
+      false
+    end
   end
 
   def get_type
@@ -26,29 +42,17 @@ class Vote < ActiveRecord::Base
   def self.get_params(object, current_user)
     vote = nil
     if object.class == Video
-      if current_user
-        vote = Vote.where('video_id = ? AND user_id = ?', object.id, current_user.id).first
-      end
-      { :param_name => :video_id, :id => object.id, :votes => Vote.where('video_id = ?', object.id), :vote => vote }
+      { :param_name => :video_id, :id => object.id, :votes => Vote.where('video_id = ?', object.id) }
     else
-      if current_user
-        vote = Vote.where('playlist_id = ? AND user_id = ?', object.id, current_user.id).first
-      end
-      { :param_name => :playlist_id, :id => object.id, :votes => Vote.where('playlist_id = ?', object.id), :vote => vote }
+      { :param_name => :playlist_id, :id => object.id, :votes => Vote.where('playlist_id = ?', object.id) }
     end
   end
 
   def get_params
     if video
-      { :param_name => :video_id, :id => video.id, :votes => Vote.where('video_id = ?', video.id), :vote => self }
+      { :param_name => :video_id, :id => video.id, :votes => Vote.where('video_id = ?', video.id) }
     else
-      { :param_name => :playlist_id, :id => playlist.id, :votes => Vote.where('playlist_id = ?', playlist.id), :vote => self }
+      { :param_name => :playlist_id, :id => playlist.id, :votes => Vote.where('playlist_id = ?', playlist.id) }
     end
-  end
-
-  def get_delete_params
-    params = get_params
-    params[:vote] = nil
-    params
   end
 end
