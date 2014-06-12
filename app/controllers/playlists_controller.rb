@@ -33,7 +33,7 @@ class PlaylistsController < ApplicationController
     authorize! :create, Playlist
     @playlist = Playlist.new(get_params)
     @playlist.user_id = current_user.id
-    if @playlist.save
+    if @playlist.save_with_slug
       flash[:notice] = 'Ok'
     else
       flash[:alert] = 'Ko'

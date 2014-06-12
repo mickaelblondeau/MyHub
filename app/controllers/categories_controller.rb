@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(get_params)
     authorize! :create, @category
-    if @category.save
+    if @category.save_with_slug
       flash[:notice] = 'Ok'
     else
       flash[:alert] = 'Ko'

@@ -33,9 +33,22 @@ class Category < ActiveRecord::Base
                        :content_type => { :content_type => ['image/jpeg', 'image/gif', 'image/png', 'image/bmp'] },
                        :size => { :in => 0..100.kilobytes }
   extend FriendlyId
-  friendly_id :label, use: :slugged
+  friendly_id :slug_candidates, :use => :slugged
 
-  def should_generate_new_friendly_id?
-    new_record?
+  def slug_candidates
+    [
+        :label,
+        [:label, :id]
+    ]
+  end
+
+
+  def save_with_slug
+    if save
+      self.slug = nil
+      save
+    else
+      false
+    end
   end
 end
