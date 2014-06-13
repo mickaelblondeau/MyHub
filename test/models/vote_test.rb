@@ -53,11 +53,4 @@ class VoteTest < ActiveSupport::TestCase
     assert params[:param_name] == :video_id
     assert params[:id] == videos(:one).id
   end
-
-  test 'get delete params' do
-    vote = createVote
-    params = vote.get_delete_params
-    assert params[:param_name] == :video_id
-    assert params[:id] == videos(:one).id
-  end
 end

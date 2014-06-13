@@ -54,10 +54,6 @@ class Ability
           a.playlist.user.id == user.id
         end
 
-        can :manage, Cooperation do |c|
-          c.channel.user.id == user.id
-        end
-
         can :manage, CooperationPermission do |c|
           c.cooperation.channel.user.id == user.id
         end

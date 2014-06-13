@@ -6,4 +6,11 @@ namespace :occuli do
       vote.save
     end
   end
+
+  task :update_videos => :environment do
+    videos = Video.all
+    videos.each do |v|
+      v.update_meta
+    end
+  end
 end

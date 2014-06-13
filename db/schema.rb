@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612095507) do
+ActiveRecord::Schema.define(version: 20140613095112) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -222,19 +222,16 @@ ActiveRecord::Schema.define(version: 20140612095507) do
   add_index "video_categories", ["video_id"], name: "index_video_categories_on_video_id"
 
   create_table "videos", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "api_id"
-    t.integer  "channel_id"
+    t.string "name"
+    t.text "description"
+    t.string "api_id"
+    t.integer "channel_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "image"
-    t.integer  "playlist_id"
+    t.string "image"
+    t.integer "playlist_id"
+    t.boolean "status"
   end
-
-  add_index "videos", ["api_id"], name: "index_videos_on_api_id"
-  add_index "videos", ["channel_id"], name: "index_videos_on_channel_id"
-  add_index "videos", ["playlist_id"], name: "index_videos_on_playlist_id"
 
   create_table "votes", force: true do |t|
     t.boolean  "vote"

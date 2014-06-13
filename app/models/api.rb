@@ -65,7 +65,7 @@ class Api
   def self.video_info(id, video_type)
     id.strip!
     if video_type == 'yt'
-      url = YOUTUBE_API + 'videos?part=snippet&id=' + id + '&fields=items%2Fsnippet&maxResults=1&key=' + Rails.configuration.youtube_api_key
+      url = YOUTUBE_API + 'videos?part=snippet%2Cstatus&id=' + id + '&fields=items(snippet%2Cstatus)&maxResults=1&key=' + Rails.configuration.youtube_api_key
       return Api::parseYTVideo(Api::parse(url))
     elsif video_type == 'dm'
       url = DAILYMOTION_API + 'video/' + id + '&fields=owner,description,created_time,thumbnail_60_url,title'
@@ -77,7 +77,9 @@ class Api
   end
 
   def self.parseYTVideo(data)
-    if data && data['items'] && data['items'][0] && data['items'][0]['snippet'] &&
+    if data && data['items'] && data['items'][0] &&
+        data['items'][0]['snippet'] &&
+        data['items'][0]['status'] &&
         data['items'][0]['snippet']['thumbnails'] &&
         data['items'][0]['snippet']['thumbnails']['default']
       return {
@@ -85,7 +87,8 @@ class Api
           description: data['items'][0]['snippet']['description'],
           image: data['items'][0]['snippet']['thumbnails']['default']['url'],
           created_at: data['items'][0]['snippet']['publishedAt'],
-          channel: data['items'][0]['snippet']['channelId']
+          channel: data['items'][0]['snippet']['channelId'],
+          status: data['items'][0]['status']['privacyStatus'] != :private
       }
     else
       return false
@@ -99,7 +102,8 @@ class Api
           description: data['description'],
           image: data['thumbnail_60_url'],
           created_at: data['created_time'],
-          channel: data['owner']
+          channel: data['owner'],
+          status: data['status'] == :published
       }
     else
       return false
@@ -113,7 +117,8 @@ class Api
           description: data[0]['description'],
           image: data[0]['thumbnail_small'],
           created_at: data[0]['upload_date'],
-          channel: data[0]['user_id'].to_s
+          channel: data[0]['user_id'].to_s,
+          status: true
       }
     else
       return false

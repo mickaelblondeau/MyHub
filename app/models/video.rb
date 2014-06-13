@@ -12,8 +12,7 @@ class Video < ActiveRecord::Base
     if !channel
       return false
     end
-    exist = Video.where('videos.api_id = ?', api_id).joins(:channel).where(channels: { video_type: channel.video_type }).first
-    if exist
+    if Video.where('videos.api_id = ?', api_id).joins(:channel).where(channels: { video_type: channel.video_type }).first
       return false
     end
 
@@ -23,9 +22,18 @@ class Video < ActiveRecord::Base
       self.description = data[:description]
       self.image = data[:image]
       self.created_at = data[:created_at]
+      self.status = data[:status]
       return true
     else
       return false
+    end
+  end
+
+  def update_meta
+    data = Api.video_info(api_id, channel.video_type)
+    if data && data[:channel] == channel.api_id && status != data[:status]
+      self.status = data[:status]
+      save
     end
   end
 
