@@ -24,3 +24,6 @@
 
 # Ignore windows thmbs
 thumbs.db
+
+# Ignore robots.txt
+/public/robots.txt
