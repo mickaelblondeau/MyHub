@@ -21,7 +21,7 @@
       = f.input :channel_id, input_html: { value: @channel.id }, as: :hidden
       = f.input :playlist_id, collection: Playlist.where('user_id = ?', current_user.id), prompt: t('form.choose_serie'), label: t('form.serie')
       = f.input :api_id, label: t('form.video_api_id')
-      = f.button :submit
+      = f.button :submit, class: 'btn-info'
 
 - else
   - if can? :manage, @channel

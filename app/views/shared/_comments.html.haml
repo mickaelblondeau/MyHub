@@ -13,4 +13,4 @@
     = simple_form_for Comment.new, remote: true do |f|
       = f.input param_name, input_html: { value: id }, as: :hidden
       = f.input :content, label: t('from.comment_content')
-      = f.button :submit
+      = f.button :submit, class: 'btn-info'

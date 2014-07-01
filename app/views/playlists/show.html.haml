@@ -13,7 +13,7 @@
   = simple_form_for PlaylistCategory.new do |f|
     = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
     = f.input :category_id, collection: Category.where.not(id:@playlist.categories.map(&:id)), prompt: t('form.choose_category'), label: t('form.category'), label_method: :label
-    = f.button :submit
+    = f.button :submit, class: 'btn-info'
 
 %h3 Videos
 
@@ -37,7 +37,7 @@
     = f.input :user_id, collection: User.where.not(id:@playlist.participations.map(&:user_id)).where.not(current_user.id), prompt: t('form.choose_user'), label: t('form.user'), label_method: :user_name
     = f.input :comment
     = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
-    = f.button :submit
+    = f.button :submit, class: 'btn-info'
 
 %br
 
@@ -61,7 +61,7 @@
     = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
     = f.input :title, label: t('from.article_title')
     = f.input :content, label: t('from.article_content')
-    = f.button :submit
+    = f.button :submit, class: 'btn-info'
 
 = render partial: 'shared/likes', locals: Like::get_params(@playlist, current_user)
 = render partial: 'shared/votes', locals: Vote::get_params(@playlist, current_user)

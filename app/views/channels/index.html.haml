@@ -13,5 +13,5 @@
 
 = simple_form_for @new_channel do |f|
   = f.input :api_id, label: t('form.channel_api_id')
-  = f.select :video_type, Channel::SRC_HOST.map { |host, i| [ i, host ] }, label: t('form.channel_type')
-  = f.button :submit
+  = f.input :video_type, collection: Channel::SRC_HOST.map { |host, i| [ i, host ] }, label: t('form.channel_type'), prompt: t('form.choose_channel_type')
+  = f.button :submit, class: 'btn-info'

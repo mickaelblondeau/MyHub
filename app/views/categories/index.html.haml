@@ -14,5 +14,5 @@
     = t('add_category')
   = simple_form_for Category.new, :html => {:multipart => true } do |f|
     = f.input :label
-    = f.file_field :icon
-    = f.button :submit
+    = f.input :icon, as: :file
+    = f.button :submit, class: 'btn-info'

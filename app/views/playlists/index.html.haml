@@ -12,6 +12,6 @@
 %h3 Add a serie
 = simple_form_for @new_playlist, :html => {:multipart => true } do |f|
   = f.input :title
-  = f.input :description
-  = f.file_field :icon
-  = f.button :submit
+  = f.input :description, as: :text
+  = f.input :icon, as: :file
+  = f.button :submit, class: 'btn-info'
