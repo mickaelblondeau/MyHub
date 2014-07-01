@@ -1,6 +1,56 @@
-%h2 Homepage
-
 - if current_user
   - @likes.each do |like|
     = like.get_type_name
     %br
+
+.row.category-name
+  .col-md-8
+    &nbsp;
+    %script{async: '', src: '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'}
+    %ins.adsbygoogle{'data-ad-client' => 'ca-pub-8157097276090339', 'data-ad-format' => 'auto', 'data-ad-slot' => '3099569987', style: 'display:block'}
+    :javascript
+      (adsbygoogle = window.adsbygoogle || []).push({});
+
+  .col-md-4
+    Featured maker
+    %img.img-responsive{alt: '', src: 'http://lorempixel.com/400/210/'}
+
+%br
+
+.row
+  - @categories.each do |category|
+    .col-md-4
+      = image_tag category.icon.url(:rect_thumb), class: 'img-responsive', alt: category.label
+      .row
+        .col-md-12.category-name
+          = category.label
+          %span.glyphicon.glyphicon-chevron-down.pull-right
+
+  .col-md-12
+    .panel.panel-default
+      .panel-body
+        .col-md-12
+          %p
+            %button.btn.btn-success{type: "button"} Most viewed
+            %button.btn.btn-success{type: "button"} Most recent
+            %button.btn.btn-success{type: "button"} Blabla
+        .col-md-4.video-list
+          %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
+          %span.serie-name My epic serie :
+          %span.video-name My epic video
+          %span.view-counter 1337 views
+        .col-md-4.video-list
+          %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
+          %span.serie-name My epic serie :
+          %span.video-name My epic video
+          %span.view-counter 1337 views
+        .col-md-4.video-list
+          %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
+          %span.serie-name My epic serie :
+          %span.video-name My epic video
+          %span.view-counter 1337 views
+        .col-md-4.video-list
+          %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
+          %span.serie-name My epic serie :
+          %span.video-name My epic video
+          %span.view-counter 1337 views

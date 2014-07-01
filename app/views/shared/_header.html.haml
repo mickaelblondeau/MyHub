@@ -1,10 +1,25 @@
-%header
-  %div.wrapper
-    %div.logo
-      = link_to (image_tag 'logo.gif'), root_path
-    %div.login
-      - if user_signed_in?
-        = current_user.user_name
-        = link_to t('nav.logout'), destroy_user_session_path, method: 'delete'
-      - else
-        = link_to t('nav.login'), new_user_session_path
+%nav.navbar.navbar-default{role: 'navigation'}
+  .navbar-header
+    %button.navbar-toggle{'data-target' => '#navbar-collapse-01', 'data-toggle' => 'collapse', type: 'button'}
+      %span.sr-only Toggle navigation
+    = link_to 'Occuli', root_path, class: 'active navbar-brand'
+  #navbar-collapse-01.collapse.navbar-collapse
+    %ul.nav.navbar-nav
+      %li.active
+        = link_to t('nav.home'), root_path, class: :active
+      %li
+        = link_to t('nav.view_series'), playlists_path
+      %li
+        = link_to t('nav.view_channel'), channels_path
+      %p.navbar-text
+        - if user_signed_in?
+          = current_user.user_name
+          = link_to t('nav.logout'), destroy_user_session_path, method: 'delete'
+        - else
+          = link_to t('nav.login'), new_user_session_path
+    %form.navbar-form.navbar-right{action: '/search', method: :GET, role: 'search'}
+      .form-group
+        .input-group
+          = text_field_tag :q, nil, placeholder: t('views.search'), class: 'form-control'
+        %button.btn.btn-default{type: 'submit'}
+          = t('views.search')

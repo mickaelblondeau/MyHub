@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 %html
   %head
+    %meta{'charset' => 'utf-8'}
+    %meta{'name' => 'viewport', 'content' => 'width=device-width, initial-scale=1.0'}
     %title Occuli
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
   %body
     = render partial: 'shared/header'
     %div.container
-      %div.wrapper
-        = render partial: 'shared/navigation'
-        = render partial: 'shared/flash_messages'
-        = yield
-  %footer
-    %div.wrapper
-      ©Chy 2001-2087
+      = render partial: 'shared/flash_messages'
+      = yield
+    = render partial: 'shared/footer'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true

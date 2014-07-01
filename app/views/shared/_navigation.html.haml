@@ -1,9 +1,0 @@
-%nav.header
-  %div.links
-    = link_to t('nav.home'), root_path, class: :active
-    = link_to t('nav.view_series'), playlists_path
-    = link_to t('nav.view_channel'), channels_path
-  %div.search
-    %form{action: '/search', method: :GET}
-      = text_field_tag :q, nil, placeholder: t('views.search')
-  %div.clear

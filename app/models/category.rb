@@ -12,7 +12,7 @@ class Category < ActiveRecord::Base
   has_many :childs, through: :category_links_childs, source: :category
   has_attached_file :icon,
                     :storage => :ftp,
-                    :styles => { :thumb => '100x100' },
+                    :styles => { :thumb => '100x100', :rect_thumb => '200x100' },
                     :path => 'occuli/public/images/:class/:attachment/:style/:id.:extension',
                     :url => ':class/:attachment/:style/:id.:extension',
                     :ftp_servers => [
