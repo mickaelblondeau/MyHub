@@ -3,6 +3,32 @@
     = like.get_type_name
     %br
 
+.col-md-8
+  #home-slider.carousel.slide{"data-ride" => "carousel"}
+    %ol.carousel-indicators
+      %li.active{"data-slide-to" => "0", "data-target" => "#home-slider"}
+      %li{"data-slide-to" => "1", "data-target" => "#home-slider"}
+      %li{"data-slide-to" => "2", "data-target" => "#home-slider"}
+    .carousel-inner
+      .item.active
+        %img.img-responsive{alt: '', src: 'http://lorempixel.com/400/100/'}
+        .carousel-caption
+          Item1
+      .item
+        %img.img-responsive{alt: '', src: 'http://lorempixel.com/400/100/'}
+        .carousel-caption
+          Item2
+      .item
+        %img.img-responsive{alt: '', src: 'http://lorempixel.com/400/100/'}
+        .carousel-caption
+          Item3
+    %a.left.carousel-control{"data-slide" => "prev", href: "#home-slider", role: "button"}
+      %span.glyphicon.glyphicon-chevron-left
+    %a.right.carousel-control{"data-slide" => "next", href: "#home-slider", role: "button"}
+      %span.glyphicon.glyphicon-chevron-right
+.col-md-4
+  Menu
+
 .row.category-name
   .col-md-8
     &nbsp;
@@ -34,22 +60,22 @@
             %button.btn.btn-success{type: "button"} Most viewed
             %button.btn.btn-success{type: "button"} Most recent
             %button.btn.btn-success{type: "button"} Blabla
-        .col-md-4.video-list
+        .col-md-3.video-list
           %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
           %span.serie-name My epic serie :
           %span.video-name My epic video
           %span.view-counter 1337 views
-        .col-md-4.video-list
+        .col-md-3.video-list
           %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
           %span.serie-name My epic serie :
           %span.video-name My epic video
           %span.view-counter 1337 views
-        .col-md-4.video-list
+        .col-md-3.video-list
           %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
           %span.serie-name My epic serie :
           %span.video-name My epic video
           %span.view-counter 1337 views
-        .col-md-4.video-list
+        .col-md-3.video-list
           %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
           %span.serie-name My epic serie :
           %span.video-name My epic video
