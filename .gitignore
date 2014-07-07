@@ -27,3 +27,7 @@ thumbs.db
 
 # Ignore robots.txt
 /public/robots.txt
+
+# Ignore images
+/public/images/*
+/public/test.html
