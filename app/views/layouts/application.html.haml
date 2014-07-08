@@ -11,6 +11,10 @@
     = render partial: 'shared/header'
     %div.container
       = render partial: 'shared/flash_messages'
-      = yield
+      = yield :top
+      .col-md-12
+        = render partial: 'shared/side_menu'
+        .col-md-10.content
+          = yield
     = render partial: 'shared/footer'
     = javascript_include_tag 'application'

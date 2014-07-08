@@ -1,0 +1,26 @@
+.col-md-2.side-menu
+  %nav
+    = link_to 'Home', root_path, class: (current_page?(root_path) ? 'active' : '')
+    = link_to 'Series', root_path, class: (current_page?(root_path) ? 'active' : '')
+    = link_to 'Users', root_path, class: (current_page?(root_path) ? 'active' : '')
+    = link_to 'Top', root_path
+    .separator
+    - if user_signed_in?
+      = link_to 'Profile', edit_user_registration_path, class: (current_page?(edit_user_registration_path) ? 'active' : '')
+      = link_to 'My channel', channels_path, class: (current_page?(channels_path) ? 'active' : '')
+      = link_to 'My series', playlists_path, class: (current_page?(playlists_path) ? 'active' : '')
+      = link_to 'Subscriptions', root_path, class: (current_page?(root_path) ? 'active' : '')
+      = link_to 'Disconnect', destroy_user_session_path, method: 'delete'
+    - else
+      = link_to 'Subscribe', new_user_registration_path, class: (current_page?(new_user_registration_path) ? 'active' : '')
+      = link_to 'Login', new_user_session_path, class: (current_page?(new_user_session_path) ? 'active' : '')
+    .separator
+    .text-center
+      %p
+        %span.badge
+          16
+        new messages
+      %p
+        %span.badge
+          64
+        new comments

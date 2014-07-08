@@ -1,26 +1,18 @@
-%nav.navbar.navbar-default{role: 'navigation'}
-  .navbar-header
-    %button.navbar-toggle{'data-target' => '#navbar-collapse-01', 'data-toggle' => 'collapse', type: 'button'}
-      %span.sr-only Toggle navigation
-    = link_to 'Occuli', root_path, class: 'active navbar-brand'
-  #navbar-collapse-01.collapse.navbar-collapse
-    %ul.nav.navbar-nav
-      %li.active
-        = link_to t('nav.home'), root_path, class: :active
-      %li
-        = link_to t('nav.view_series'), playlists_path
-      %li
-        = link_to t('nav.view_channel'), channels_path
-      %li
-        = link_to t('nav.view_categories'), categories_path
-      %p.navbar-text
-        - if user_signed_in?
-          Welcome #{link_to current_user.user_name, edit_user_registration_path} (#{link_to t('nav.logout'), destroy_user_session_path, method: 'delete'})
+%header
+  %nav{role: 'navigation'}
+    .col-md-2
+      = link_to (image_tag 'logov3.png'), root_path
+    .col-md-10
+      .col-md-12
+        &nbsp;
+      .col-md-7
+      .col-md-4
+        %form.form-inline{action: '/search', method: :GET, role: 'search'}
+          .form-group
+            = text_field_tag :q, nil, placeholder: t('views.search'), class: 'form-control'
+      .col-md-1
+        - if !user_signed_in?
+          = link_to 'Subscribe', new_user_registration_path
+          = link_to 'Login', new_user_session_path
         - else
-          = link_to t('nav.login'), new_user_session_path
-    %form.navbar-form.navbar-right{action: '/search', method: :GET, role: 'search'}
-      .form-group
-        .input-group
-          = text_field_tag :q, nil, placeholder: t('views.search'), class: 'form-control'
-        %button.btn.btn-default{type: 'submit'}
-          = t('views.search')
+          = link_to 'Disconnect', destroy_user_session_path, method: 'delete'

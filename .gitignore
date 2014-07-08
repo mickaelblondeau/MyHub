@@ -31,3 +31,9 @@ thumbs.db
 # Ignore images
 /public/images/*
 /public/test.html
+
+# Vagrant
+Vagrantfile
+.vagrant
+
+.DS_Store

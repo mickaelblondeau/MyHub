@@ -1,82 +1,73 @@
-- if current_user
-  - @likes.each do |like|
-    = like.get_type_name
-    %br
-
-.col-md-8
-  #home-slider.carousel.slide{"data-ride" => "carousel"}
-    %ol.carousel-indicators
-      %li.active{"data-slide-to" => "0", "data-target" => "#home-slider"}
-      %li{"data-slide-to" => "1", "data-target" => "#home-slider"}
-      %li{"data-slide-to" => "2", "data-target" => "#home-slider"}
-    .carousel-inner
-      .item.active
-        %img.img-responsive{alt: '', src: 'http://lorempixel.com/400/100/'}
-        .carousel-caption
-          Item1
-      .item
-        %img.img-responsive{alt: '', src: 'http://lorempixel.com/400/100/'}
-        .carousel-caption
-          Item2
-      .item
-        %img.img-responsive{alt: '', src: 'http://lorempixel.com/400/100/'}
-        .carousel-caption
-          Item3
-    %a.left.carousel-control{"data-slide" => "prev", href: "#home-slider", role: "button"}
-      %span.glyphicon.glyphicon-chevron-left
-    %a.right.carousel-control{"data-slide" => "next", href: "#home-slider", role: "button"}
-      %span.glyphicon.glyphicon-chevron-right
-.col-md-4
-  Menu
-
-.row.category-name
-  .col-md-8
-    &nbsp;
-    %script{async: "", src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}
-    %ins.adsbygoogle{"data-ad-client" => "ca-pub-8157097276090339", "data-ad-format" => "auto", "data-ad-slot" => "3099569987", style: "display:block"}
-    :javascript
-      (adsbygoogle = window.adsbygoogle || []).push({});
-
-  .col-md-4
-    Featured maker
-    %img.img-responsive{alt: '', src: 'http://lorempixel.com/400/210/'}
-
-%br
-
-.row
-  - @categories.each do |category|
-    .col-md-4
-      = image_tag category.icon.url(:rect_thumb), class: 'img-responsive', alt: category.label
-      .row
-        .col-md-12.category-name
-          = category.label
-          %span.glyphicon.glyphicon-chevron-down.pull-right
-
+- content_for :top do
   .col-md-12
-    .panel.panel-default
-      .panel-body
-        .col-md-12
-          %p
-            %button.btn.btn-success{type: "button"} Most viewed
-            %button.btn.btn-success{type: "button"} Most recent
-            %button.btn.btn-success{type: "button"} Blabla
-        .col-md-3.video-list
-          %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
-          %span.serie-name My epic serie :
-          %span.video-name My epic video
-          %span.view-counter 1337 views
-        .col-md-3.video-list
-          %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
-          %span.serie-name My epic serie :
-          %span.video-name My epic video
-          %span.view-counter 1337 views
-        .col-md-3.video-list
-          %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
-          %span.serie-name My epic serie :
-          %span.video-name My epic video
-          %span.view-counter 1337 views
-        .col-md-3.video-list
-          %img.img-responsive{alt: "", src: "http://lorempixel.com/200/100/", width: "100%"}/
-          %span.serie-name My epic serie :
-          %span.video-name My epic video
-          %span.view-counter 1337 views
+    .col-md-8.header-slider
+      #home-slider.carousel.slide{"data-ride" => "carousel"}
+        %ol.carousel-indicators
+          %li.active{"data-slide-to" => "0", "data-target" => "#home-slider"}
+          %li{"data-slide-to" => "1", "data-target" => "#home-slider"}
+          %li{"data-slide-to" => "2", "data-target" => "#home-slider"}
+        .carousel-inner
+          .item.active
+            = image_tag 'http://lorempixel.com/400/100/', class: 'img-responsive', alt: ''
+            .carousel-caption
+              Item1
+          .item
+            = image_tag 'http://lorempixel.com/400/100/', class: 'img-responsive', alt: ''
+            .carousel-caption
+              Item2
+          .item
+            = image_tag 'http://lorempixel.com/400/100/', class: 'img-responsive', alt: ''
+            .carousel-caption
+              Item3
+        %a.left.carousel-control{"data-slide" => "prev", href: "#home-slider", role: "button"}
+          %span.glyphicon.glyphicon-chevron-left
+        %a.right.carousel-control{"data-slide" => "next", href: "#home-slider", role: "button"}
+          %span.glyphicon.glyphicon-chevron-right
+    .col-md-4.header-ads
+      = image_tag 'http://lorempixel.com/400/201/', class: 'img-responsive', alt: ''
+
+- (1..6).each do |i|
+  %article.category.col-md-2
+    = image_tag 'http://lorempixel.com/400/202/', class: 'img-responsive', alt: ''
+    .row
+      .col-md-12.category-name
+        Category
+        = image_tag 'checked.png', class: 'pull-right', alt: '', width: '20px'
+.col-md-12.separator
+  .col-md-12
+    %p
+      %button.btn.btn-success.btn-xs{type: "button"} Most viewed
+      %button.btn.btn-success.btn-xs{type: "button"} Most recent
+      %button.btn.btn-success.btn-xs{type: "button"} Blabla
+  - (1..12).each do |i|
+    %article.serie.col-md-2.video-list
+      %img.img-responsive{alt: '', src: 'http://lorempixel.com/200/100/'}
+      %span.serie-name My epic serie :
+      %span.video-name My epic video
+      %span.view-counter 1337 views
+      %span.posted_date.pull-right 9 years ago
+      .clear
+  .text-center
+    %ul.pagination
+      %li
+        %a{href: "#"} «
+      %li.active
+        %a{href: "#"} 1
+      %li
+        %a{href: "#"} 2
+      %li
+        %a{href: "#"} 3
+      %li
+        %a{href: "#"} 4
+      %li
+        %a{href: "#"} 5
+      %li
+        %a{href: "#"} »
+.col-md-12.separator
+- (1..6).each do |i|
+  %article.category.col-md-2
+    = image_tag 'http://lorempixel.com/400/202/', class: 'img-responsive', alt: ''
+    .row
+      .col-md-12.category-name
+        Category
+        = image_tag 'unchecked.png', class: 'pull-right', alt: '', width: '20px'
