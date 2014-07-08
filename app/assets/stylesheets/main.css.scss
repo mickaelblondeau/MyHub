@@ -30,7 +30,7 @@ header .form-control, header .form-group { width: 100% !important; }
 	.side-menu, .content { float: none; }	
 }
 
-.side-menu { padding: 0; margin-bottom: 30px; }
+.side-menu { padding: 0; margin-bottom: 30px; padding-right: 15px; }
 .side-menu a { width: 100%; display: block; text-align: center; padding-top: 5px; padding-bottom: 5px; color: #000000; }
 .side-menu a.active { background: #000000; color: #FFFFFF; }
 .side-menu a:hover { background: #000000; color: #FFFFFF; text-decoration: none; }

@@ -24,7 +24,10 @@
         %a.right.carousel-control{"data-slide" => "next", href: "#home-slider", role: "button"}
           %span.glyphicon.glyphicon-chevron-right
     .col-md-4.header-ads
-      = image_tag 'http://lorempixel.com/400/201/', class: 'img-responsive', alt: ''
+      %script{async: "", src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}
+      %ins.adsbygoogle{"data-ad-client" => "ca-pub-8157097276090339", "data-ad-format" => "auto", "data-ad-slot" => "3099569987", style: "display:block"}
+      :javascript
+        (adsbygoogle = window.adsbygoogle || []).push({});
 
 - (1..6).each do |i|
   %article.category.col-md-2
