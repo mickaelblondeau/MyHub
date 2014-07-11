@@ -13,6 +13,7 @@ header .form-control, header .form-group { width: 100% !important; }
 
 .content { float: left; }
 .content .separator { border-top: 2px solid black; margin-top: 20px; padding-top: 20px; }
+.content h2 { display: inline; font-size: 14px; }
 .center { text-align: center; }
 .category-name { font-weight: bold; text-align: center; }
 .serie-name { font-weight: bold; color: #FF0000; }
@@ -20,6 +21,7 @@ header .form-control, header .form-group { width: 100% !important; }
 .view-counter { color: #037DB6; }
 .posted_date { font-weight: bold; }
 .video-list { margin-bottom: 10px; font-size: 10px; }
+span.blue { background: #037DB6; }
 
 @media (min-width: 768px) {
 	.side-menu { float: right; }

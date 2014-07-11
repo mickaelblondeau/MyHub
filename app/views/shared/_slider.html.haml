@@ -1,0 +1,29 @@
+.col-md-12
+  .col-md-8.header-slider
+    #home-slider.carousel.slide{"data-ride" => "carousel"}
+      %ol.carousel-indicators
+        %li.active{"data-slide-to" => "0", "data-target" => "#home-slider"}
+        %li{"data-slide-to" => "1", "data-target" => "#home-slider"}
+        %li{"data-slide-to" => "2", "data-target" => "#home-slider"}
+      .carousel-inner
+        .item.active
+          = image_tag 'http://lorempixel.com/400/100/', class: 'img-responsive', alt: ''
+          .carousel-caption
+            Item1
+        .item
+          = image_tag 'http://lorempixel.com/400/100/', class: 'img-responsive', alt: ''
+          .carousel-caption
+            Item2
+        .item
+          = image_tag 'http://lorempixel.com/400/100/', class: 'img-responsive', alt: ''
+          .carousel-caption
+            Item3
+      %a.left.carousel-control{"data-slide" => "prev", href: "#home-slider", role: "button"}
+        %span.glyphicon.glyphicon-chevron-left
+      %a.right.carousel-control{"data-slide" => "next", href: "#home-slider", role: "button"}
+        %span.glyphicon.glyphicon-chevron-right
+  .col-md-4.header-ads
+    %script{async: "", src: "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}
+    %ins.adsbygoogle{"data-ad-client" => "ca-pub-8157097276090339", "data-ad-slot" => "1124492386", style: "display:inline-block;width:320px;height:100px"}
+    :javascript
+      (adsbygoogle = window.adsbygoogle || []).push({});

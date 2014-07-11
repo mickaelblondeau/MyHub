@@ -1,0 +1,52 @@
+- content_for :top do
+  = render partial: 'shared/slider'
+
+%span.glyphicon.glyphicon-th.pull-right
+%span.glyphicon.glyphicon-th-list.pull-right
+
+- (1..2).each do |i|
+  %article.col-md-12
+    .col-md-12
+      %p
+        %button.btn.btn-danger.btn-xs{type: "button"} Most viewed
+        %button.btn.btn-danger.btn-xs{type: "button"} Most recent
+        %button.btn.btn-danger.btn-xs{type: "button"} Blabla
+    .col-md-4
+      = image_tag 'http://lorempixel.com/400/200/', class: 'img-responsive', alt: ''
+    .col-md-8
+      .col-md-1
+        %span.badge.blue
+          16
+      .col-md-11
+        %h2
+          My epic serie's title
+        %p
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        %p
+          200 Videos
+          %span.view-counter 15432 Views
+    .col-md-12
+      .col-md-3
+      .col-md-9
+        %p
+          With :
+          %button.btn.btn-info.btn-xs{type: "button"} Troll
+          %button.btn.btn-info.btn-xs{type: "button"} ACDCU
+          %button.btn.btn-info.btn-xs{type: "button"} Blabla
+    .col-md-12.separator
+
+- (1..4).each do |i|
+  %article.col-md-4
+    = image_tag 'http://lorempixel.com/400/200/', class: 'img-responsive', alt: ''
+    %span.badge.blue
+      16
+    %h2
+      My epic serie's title
+    %p
+      200 Videos
+      %span.view-counter 15432 Views
+    %p
+      With :
+      %button.btn.btn-info.btn-xs{type: "button"} Troll
+      %button.btn.btn-info.btn-xs{type: "button"} ACDCU
+      %button.btn.btn-info.btn-xs{type: "button"} Blabla

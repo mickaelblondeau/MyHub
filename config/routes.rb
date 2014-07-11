@@ -18,6 +18,7 @@ MyHub::Application.routes.draw do
     resources :playlist_categories, :only => [:create, :destroy]
     resources :categories, :only => [:index, :show, :create, :destroy, :edit, :update]
     resources :category_links, :only => [:create, :destroy]
+    resources :subscription, :only => [:index]
     root 'welcome#index'
   end
 
