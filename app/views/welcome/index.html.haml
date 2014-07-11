@@ -1,48 +1,42 @@
 - content_for :top do
   = render partial: 'shared/slider'
 
-- (1..6).each do |i|
+- @categories.each do |category|
   %article.category.col-md-2
-    = image_tag 'http://lorempixel.com/400/202/', class: 'img-responsive', alt: ''
+    = image_tag category.icon.url(:thumb), class: 'img-responsive'
     .row
       .col-md-12.category-name
-        Category
-        = image_tag 'checked.png', class: 'pull-right', alt: '', width: '20px'
-.col-md-12.separator
-  .col-md-12
-    %p
-      %button.btn.btn-success.btn-xs{type: "button"} Most viewed
-      %button.btn.btn-success.btn-xs{type: "button"} Most recent
-      %button.btn.btn-success.btn-xs{type: "button"} Blabla
-  - (1..18).each do |i|
-    %article.serie.col-md-2.video-list
-      %img.img-responsive{alt: '', src: 'http://lorempixel.com/200/100/'}
-      %span.serie-name My epic serie :
-      %span.video-name My epic video
-      %span.view-counter 1337 views
-      %span.posted_date.pull-right 9 years ago
-      .clear
-  .text-center
-    %ul.pagination
-      %li
-        %a{href: "#"} «
-      %li.active
-        %a{href: "#"} 1
-      %li
-        %a{href: "#"} 2
-      %li
-        %a{href: "#"} 3
-      %li
-        %a{href: "#"} 4
-      %li
-        %a{href: "#"} 5
-      %li
-        %a{href: "#"} »
-.col-md-12.separator
-- (1..6).each do |i|
-  %article.category.col-md-2
-    = image_tag 'http://lorempixel.com/400/202/', class: 'img-responsive', alt: ''
-    .row
-      .col-md-12.category-name
-        Category
+        = category.label
         = image_tag 'unchecked.png', class: 'pull-right', alt: '', width: '20px'
+  .category-articles
+    .col-md-12.separator
+      .col-md-12
+        %p
+          %button.btn.btn-success.btn-xs{type: "button"} Most viewed
+          %button.btn.btn-success.btn-xs{type: "button"} Most recent
+          %button.btn.btn-success.btn-xs{type: "button"} Blabla
+      - category.playlists.each do |playlist|
+        %article.serie.col-md-2.video-list
+          %img.img-responsive{alt: '', src: 'http://lorempixel.com/200/100/'}
+          %span.serie-name #{playlist.title} :
+          %span.video-name My epic video
+          %span.view-counter 1337 views
+          %span.posted_date.pull-right 9 years ago
+          .clear
+      .col-md-12.text-center
+        %ul.pagination
+          %li
+            %a{href: "#"} «
+          %li.active
+            %a{href: "#"} 1
+          %li
+            %a{href: "#"} 2
+          %li
+            %a{href: "#"} 3
+          %li
+            %a{href: "#"} 4
+          %li
+            %a{href: "#"} 5
+          %li
+            %a{href: "#"} »
+    .col-md-12.separator

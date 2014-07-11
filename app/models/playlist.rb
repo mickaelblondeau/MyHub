@@ -12,7 +12,7 @@ class Playlist < ActiveRecord::Base
   has_many :articles, :dependent => :destroy
   has_attached_file :icon,
                     :storage => :ftp,
-                    :styles => { :thumb => '100x100', :rect_thumb => '200x100' },
+                    :styles => { :thumb => '138:69' },
                     :path => 'occuli/public/images/:class/:attachment/:style/:id.:extension',
                     :url => ':class/:attachment/:style/:id.:extension',
                     :ftp_servers => [
@@ -49,5 +49,13 @@ class Playlist < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def get_views
+    count = 0
+    videos.each do |video|
+      count += video.impressionist_count
+    end
+    return count
   end
 end

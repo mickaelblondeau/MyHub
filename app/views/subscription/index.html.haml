@@ -1,52 +1,54 @@
 - content_for :top do
   = render partial: 'shared/slider'
 
-%span.glyphicon.glyphicon-th.pull-right
-%span.glyphicon.glyphicon-th-list.pull-right
+.col-md-12
+  %p
+    %button.btn.btn-danger.btn-xs{type: "button"} Most viewed
+    %button.btn.btn-danger.btn-xs{type: "button"} Most recent
+    %button.btn.btn-danger.btn-xs{type: "button"} Blabla
+    %a.glyphicon.glyphicon-th.pull-right.column-list-button
+    %a.glyphicon.glyphicon-th-list.pull-right.line-list-button
 
-- (1..2).each do |i|
-  %article.col-md-12
-    .col-md-12
-      %p
-        %button.btn.btn-danger.btn-xs{type: "button"} Most viewed
-        %button.btn.btn-danger.btn-xs{type: "button"} Most recent
-        %button.btn.btn-danger.btn-xs{type: "button"} Blabla
-    .col-md-4
-      = image_tag 'http://lorempixel.com/400/200/', class: 'img-responsive', alt: ''
-    .col-md-8
-      .col-md-1
+- @likes.each do |like|
+  - if like.playlist
+    .line-list
+      %article.col-md-12
+        .col-md-4
+          = image_tag like.playlist.icon.url(:thumb), class: 'img-responsive'
+        .col-md-8
+          .col-md-1
+            %span.badge.blue
+              16
+          .col-md-11
+            %h2
+              = like.playlist.title
+            %p
+              = like.playlist.description
+            %p
+              #{like.playlist.videos.length} Video(s)
+              %span.view-counter #{like.playlist.get_views} Views
+        .col-md-12
+          .col-md-3
+          .col-md-9
+            %p
+              With :
+              %button.btn.btn-info.btn-xs{type: "button"} #{like.playlist.user.user_name}
+              - like.playlist.participations.each do |participation|
+                %button.btn.btn-info.btn-xs{type: "button"} #{participation.user.user_name}
+        .col-md-12.separator
+
+    .column-list
+      %article.col-md-4
+        = image_tag like.playlist.icon.url(:thumb), class: 'img-responsive'
         %span.badge.blue
           16
-      .col-md-11
         %h2
-          My epic serie's title
+          = like.playlist.title
         %p
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        %p
-          200 Videos
-          %span.view-counter 15432 Views
-    .col-md-12
-      .col-md-3
-      .col-md-9
+          #{like.playlist.videos.length} Video(s)
+          %span.view-counter #{like.playlist.get_views} Views
         %p
           With :
-          %button.btn.btn-info.btn-xs{type: "button"} Troll
-          %button.btn.btn-info.btn-xs{type: "button"} ACDCU
-          %button.btn.btn-info.btn-xs{type: "button"} Blabla
-    .col-md-12.separator
-
-- (1..4).each do |i|
-  %article.col-md-4
-    = image_tag 'http://lorempixel.com/400/200/', class: 'img-responsive', alt: ''
-    %span.badge.blue
-      16
-    %h2
-      My epic serie's title
-    %p
-      200 Videos
-      %span.view-counter 15432 Views
-    %p
-      With :
-      %button.btn.btn-info.btn-xs{type: "button"} Troll
-      %button.btn.btn-info.btn-xs{type: "button"} ACDCU
-      %button.btn.btn-info.btn-xs{type: "button"} Blabla
+          %button.btn.btn-info.btn-xs{type: "button"} #{like.playlist.user.user_name}
+          - like.playlist.participations.each do |participation|
+            %button.btn.btn-info.btn-xs{type: "button"} #{participation.user.user_name}
