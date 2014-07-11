@@ -7,8 +7,8 @@
     .row
       .col-md-12.category-name
         = category.label
-        = image_tag 'unchecked.png', class: 'pull-right', alt: '', width: '20px'
-  .category-articles
+        %a.open-category.unchecked.pull-right{'data-id' => category.id.to_s, 'href' => '#'}
+  .category-articles{id: 'videos_' + category.id.to_s}
     .col-md-12.separator
       .col-md-12
         %p

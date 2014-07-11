@@ -50,3 +50,7 @@ a.glyphicon { cursor: pointer; }
 .line-list-button { display: none; }
 .column-list { display: none; }
 .line-list-button, .column-list-button { font-size: 24px; }
+.category-articles { display: none; }
+
+.unchecked { background: image-url('unchecked.png'); width: 20px; height: 20px; }
+.checked { background: image-url('checked.png'); width: 20px; height: 20px; }
