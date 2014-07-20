@@ -1,42 +1,22 @@
 - content_for :top do
   = render partial: 'shared/slider'
 
-- @categories.each do |category|
-  %article.category.col-md-2
-    = image_tag category.icon.url(:thumb), class: 'img-responsive'
-    .row
-      .col-md-12.category-name
-        = category.label
-        %a.open-category.unchecked.pull-right{'data-id' => category.id.to_s, 'href' => '#'}
-  .category-articles{id: 'videos_' + category.id.to_s}
-    .col-md-12.separator
-      .col-md-12
-        %p
-          %button.btn.btn-success.btn-xs{type: "button"} Most viewed
-          %button.btn.btn-success.btn-xs{type: "button"} Most recent
-          %button.btn.btn-success.btn-xs{type: "button"} Blabla
-      - category.playlists.each do |playlist|
-        %article.serie.col-md-2.video-list
-          %img.img-responsive{alt: '', src: 'http://lorempixel.com/200/100/'}
-          %span.serie-name #{playlist.title} :
-          %span.video-name My epic video
-          %span.view-counter 1337 views
-          %span.posted_date.pull-right 9 years ago
-          .clear
-      .col-md-12.text-center
-        %ul.pagination
-          %li
-            %a{href: "#"} «
-          %li.active
-            %a{href: "#"} 1
-          %li
-            %a{href: "#"} 2
-          %li
-            %a{href: "#"} 3
-          %li
-            %a{href: "#"} 4
-          %li
-            %a{href: "#"} 5
-          %li
-            %a{href: "#"} »
-    .col-md-12.separator
+- @categories.each_with_index do |category, i|
+  .col-md-12{class: (i != 0) ? 'separator' : ''}
+    %article.category.col-md-2
+      = image_tag category.icon.url(:thumb), class: 'img-responsive'
+      .row
+        .col-md-12.category-name
+          = category.label
+    .col-md-10.category-articles{id: 'videos_' + category.id.to_s}
+      .videos-block.col-md-12
+        - category.get_featured_videos.each do |video|
+          %article.serie.col-md-2.video-list
+            %a{href: video_path(video), title: video.name}
+              %img.img-responsive{alt: '', src: video.image}
+            %a.serie-name{href: playlist_path(video.playlist), title: video.playlist.title} #{video.playlist.title} :
+            %a.video-name{href: video_path(video), title: video.name} #{video.name}
+            %br
+            %span.view-counter #{video.impressionist_count(:filter=>:ip_address)} #{t('video_views')}
+            %span.posted_date.pull-right #{video.diff_time}
+            .clear

@@ -12,7 +12,7 @@ class Playlist < ActiveRecord::Base
   has_many :articles, :dependent => :destroy
   has_attached_file :icon,
                     :storage => :ftp,
-                    :styles => { :thumb => '138:69' },
+                    :styles => { :thumb => '138x69#', :banner => '710x280#' },
                     :path => 'occuli/public/images/:class/:attachment/:style/:id.:extension',
                     :url => ':class/:attachment/:style/:id.:extension',
                     :ftp_servers => [

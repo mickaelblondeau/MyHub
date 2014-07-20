@@ -2,17 +2,9 @@
   %nav{role: 'navigation'}
     .col-md-2
       = link_to (image_tag 'logov3.png'), root_path
-    .col-md-10
-      .col-md-12
-        &nbsp;
+    .col-md-10.search-bar
       .col-md-7
-      .col-md-4
+      .col-md-5
         %form.form-inline{action: '/search', method: :GET, role: 'search'}
           .form-group
             = text_field_tag :q, nil, placeholder: t('views.search'), class: 'form-control'
-      .col-md-1
-        - if !user_signed_in?
-          = link_to 'Subscribe', new_user_registration_path
-          = link_to 'Login', new_user_session_path
-        - else
-          = link_to 'Disconnect', destroy_user_session_path, method: 'delete'

@@ -12,7 +12,7 @@ class Category < ActiveRecord::Base
   has_many :childs, through: :category_links_childs, source: :category
   has_attached_file :icon,
                     :storage => :ftp,
-                    :styles => { :thumb => '143x72' },
+                    :styles => { :thumb => '143x72#' },
                     :path => 'occuli/public/images/:class/:attachment/:style/:id.:extension',
                     :url => ':class/:attachment/:style/:id.:extension',
                     :ftp_servers => [
@@ -50,5 +50,9 @@ class Category < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def get_featured_videos
+    Video.joins(:playlist => :categories).where(categories: { id: id }).limit(Rails.configuration.videos_per_page)
   end
 end

@@ -49,8 +49,6 @@ gem 'impressionist'
 gem 'paperclip', '~> 4.1'
 gem 'paperclip-storage-ftp'
 
-gem 'therubyracer'
-
 group :doc do
   gem 'sdoc', require: false
 end
@@ -64,4 +62,5 @@ end
 
 group :production do
 	gem 'mysql2'
+  gem 'therubyracer'
 end

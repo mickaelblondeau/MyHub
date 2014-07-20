@@ -6,10 +6,11 @@
 
 footer p { text-align: center; }
 .img-responsive { width: 100%; }
-.panel-body { padding-top: 30px; padding-left: 15px; padding-right: 15px; padding-bottom: 5px; }
+.panel-body { padding: 30px 15px 5px; }
 
-header nav { min-height: 80px; background: #000000; padding: 10px; margin-bottom: 20px; }
+header nav { min-height: 57px; background: #000000; padding: 0; margin-bottom: 20px; }
 header .form-control, header .form-group { width: 100% !important; }
+header .search-bar { margin-top: 10px; }
 
 .content { float: left; }
 .content .separator { border-top: 2px solid black; margin-top: 20px; padding-top: 20px; }
@@ -24,19 +25,20 @@ header .form-control, header .form-group { width: 100% !important; }
 span.blue { background: #037DB6; }
 
 @media (min-width: 768px) {
-	.side-menu { float: right; }
-	.content { float: left; }
+  .side-menu { float: right; }
+  .content { float: left; }
+  .slider-block { margin-bottom: 30px; }
 }
 
 @media (max-width: 767px) {
-	.side-menu, .content { float: none; }	
+  .side-menu, .content { float: none; }
+  .slider-block { margin-bottom: 0; }
 }
 
-.side-menu { padding: 0; margin-bottom: 30px; padding-right: 15px; }
-.side-menu a { width: 100%; display: block; text-align: center; padding-top: 5px; padding-bottom: 5px; color: #000000; }
-.side-menu a.active { background: #000000; color: #FFFFFF; }
-.side-menu a:hover { background: #000000; color: #FFFFFF; text-decoration: none; }
-.side-menu .separator { border-top: 1px solid #000000; width: 80%; margin: auto; margin-bottom: 10px; margin-top: 10px; }
+.side-menu { margin-bottom: 30px; padding: 0 15px 0 0; }
+.side-menu a { width: 100%; display: block; text-align: center; padding-top: 5px; padding-bottom: 5px; color: #000000; border-bottom: 2px solid #ffffff; }
+.side-menu a.active, .side-menu a:hover { border-bottom: 2px solid #037DB6; text-decoration: none; color: #037DB6; font-weight: bold; }
+.side-menu .separator { border-top: 1px solid #000000; width: 80%; margin: 10px auto; }
 .side-menu p { color: #037DB6; font-size: 12px; }
 .side-menu p span.badge { font-size: 10px; }
 
@@ -44,13 +46,12 @@ article.category { padding-left: 3px; padding-right: 3px; }
 article.category img { margin-bottom: 10px; }
 article.serie { padding-left: 3px; padding-right: 3px; }
 article.serie img { margin-bottom: 5px; }
-.header-slider, .header-ads { margin-bottom: 30px; }
+.header-slider { margin-bottom: 30px; }
 
 a.glyphicon { cursor: pointer; }
 .line-list-button { display: none; }
 .column-list { display: none; }
 .line-list-button, .column-list-button { font-size: 24px; }
-.category-articles { display: none; }
 
 .unchecked { background: image-url('unchecked.png'); width: 20px; height: 20px; }
 .checked { background: image-url('checked.png'); width: 20px; height: 20px; }
