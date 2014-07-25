@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :series, through: :playlist_users, source: :serie, :dependent => :destroy
   has_many :likes, :dependent => :destroy
   has_many :channels, :dependent => :destroy
+  has_many :videos, through: :channels
 
   validates :user_name, presence: true
 
@@ -12,5 +13,13 @@ class User < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     new_record?
+  end
+
+  def get_views
+    count = 0
+    videos.each do |video|
+      count += video.impressionist_count(:filter=>:ip_address)
+    end
+    return count
   end
 end

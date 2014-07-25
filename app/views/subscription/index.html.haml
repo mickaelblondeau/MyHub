@@ -1,54 +1,48 @@
 - content_for :top do
   = render partial: 'shared/slider'
 
-.col-md-12
-  %p
-    %button.btn.btn-danger.btn-xs{type: "button"} Most viewed
-    %button.btn.btn-danger.btn-xs{type: "button"} Most recent
-    %button.btn.btn-danger.btn-xs{type: "button"} Blabla
-    %a.glyphicon.glyphicon-th.pull-right.column-list-button
-    %a.glyphicon.glyphicon-th-list.pull-right.line-list-button
+- @likes.each_with_index do |like, i|
+  - if i != 0
+    .col-md-12.separator
 
-- @likes.each do |like|
+  - if like.user
+    %article.col-md-12
+      .col-md-4
+        = image_tag 'http://www.cakesandbakes.com/beta/teamimages/avatar_profile.png', width: 258, height: 129
+      .col-md-8
+        .col-md-1
+          %span.badge.blue
+            16
+        .col-md-11
+          %h2
+            = like.user.user_name
+          %p
+            = like.user.description
+          %p
+            #{like.user.videos.length} #{t('videos')}
+            %span.view-counter #{like.user.get_views} #{t('video_views')}
+
   - if like.playlist
-    .line-list
-      %article.col-md-12
-        .col-md-4
-          = image_tag like.playlist.icon.url(:thumb), class: 'img-responsive'
-        .col-md-8
-          .col-md-1
-            %span.badge.blue
-              16
-          .col-md-11
-            %h2
-              = like.playlist.title
-            %p
-              = like.playlist.description
-            %p
-              #{like.playlist.videos.length} Video(s)
-              %span.view-counter #{like.playlist.get_views} Views
-        .col-md-12
-          .col-md-3
-          .col-md-9
-            %p
-              With :
-              %button.btn.btn-info.btn-xs{type: "button"} #{like.playlist.user.user_name}
-              - like.playlist.participations.each do |participation|
-                %button.btn.btn-info.btn-xs{type: "button"} #{participation.user.user_name}
-        .col-md-12.separator
-
-    .column-list
-      %article.col-md-4
+    %article.col-md-12
+      .col-md-4
         = image_tag like.playlist.icon.url(:thumb), class: 'img-responsive'
-        %span.badge.blue
-          16
-        %h2
-          = like.playlist.title
+      .col-md-8
+        .col-md-1
+          %span.badge.blue
+            16
+        .col-md-11
+          %h2
+            = like.playlist.title
+          %p
+            = like.playlist.description
+          %p
+            #{like.playlist.videos.length} #{t('videos')}
+            %span.view-counter #{like.playlist.get_views} #{t('video_views')}
+      .col-md-12
+        &nbsp;
         %p
-          #{like.playlist.videos.length} Video(s)
-          %span.view-counter #{like.playlist.get_views} Views
-        %p
-          With :
-          %button.btn.btn-info.btn-xs{type: "button"} #{like.playlist.user.user_name}
+          &nbsp;
+          #{t('featuring')} :
+          %button.btn.btn-info.btn-xs{type: 'button'} #{like.playlist.user.user_name}
           - like.playlist.participations.each do |participation|
-            %button.btn.btn-info.btn-xs{type: "button"} #{participation.user.user_name}
+            %button.btn.btn-info.btn-xs{type: 'button'} #{participation.user.user_name}
