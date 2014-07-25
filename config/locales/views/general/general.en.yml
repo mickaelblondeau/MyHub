@@ -1,0 +1,13 @@
+en:
+  general:
+    delete_vote: "Delete"
+    delete_like: "Unsubscribe"
+    delete_comment: "Delete comment"
+    years: "%{value} years ago"
+    month: "%{value} month  ago"
+    days: "%{value} jours  ago"
+    hours: "%{value} hours  ago"
+    minutes: "%{value} minutes  ago"
+    video_views: "views"
+    videos: "videos"
+    featuring: "With"

@@ -1,0 +1,20 @@
+fr:
+  nav:
+    home: "Acceuil"
+    series: "Series"
+    users: "Utilisateurs"
+    top: "Top"
+    profile: "Mon profile"
+    my_channel: "Mes chaines"
+    my_series: "Mes séries"
+    subscriptions: "Mes abonnements"
+    disconnect: "Se déconnecter"
+    subscribe: "S'inscrire"
+    login: "Le connecter"
+    search: "Recherche"
+    new_messages_html:
+      one: "<span class='badge'>1</span> nouveau message"
+      other: "<span class='badge'>%{count}</span>nouveaux messages"
+    new_comments_html:
+      one: "<span class='badge'>1</span> nouveau commentaire"
+      other: "<span class='badge'>%{count}</span> nouveaux commentaires"

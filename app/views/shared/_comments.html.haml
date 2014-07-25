@@ -5,7 +5,7 @@
     %br
     #{comment.user.user_name}: #{comment.content}
     - if can? :destroy, comment
-      = button_to t('views.delete_comment'), comment, method: :delete, remote: true
+      = button_to t('general.delete_comment'), comment, method: :delete, remote: true
     %br
 
   - if can? :create, Comment

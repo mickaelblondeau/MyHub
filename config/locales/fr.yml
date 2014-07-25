@@ -1,37 +1,4 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 fr:
-  nav:
-    home: 'Accueil'
-    login: 'Se connecter'
-    account: 'Mon compte'
-    add_channel: "Ajouter une chaine"
-    view_channel: "Vos chaines"
-  form:
-    channel_api_id: "ID Chaine"
-    name: "Nom"
-    description: "Description"
-    sure: "Etes vous sur ?"
-    subscribe: "S'abonner"
   date:
     abbr_day_names:
       - dim
@@ -161,7 +128,6 @@ fr:
       too_short:
         one: "est trop court (au moins un caractère)"
         other: "est trop court (au moins %{count} caractères)"
-      search_too_short: "La recherche est trop court (au moins %{count} caractères)"
       wrong_length:
         one: "ne fait pas la bonne longueur (doit comporter un seul caractère)"
         other: "ne fait pas la bonne longueur (doit comporter %{count} caractères)"
@@ -244,29 +210,3 @@ fr:
   activerecord:
     errors:
       <<: *errors
-  views:
-    delete_vote: "Supprimer"
-    delete_like: "Se désabonner"
-    delete_comment: "Supprimer le commentaire"
-    search: "Recherche"
-  years: "il y a %{value} ans"
-  month: "il y a %{value} mois"
-  days: "il y a %{value} jours"
-  hours: "il y a %{value} heures"
-  minutes: "il y a %{value} minutes"
-  video_views: "vues"
-  Home: "Accueil"
-  Series: "Series"
-  Users: "Utilisateurs"
-  Top: "Top"
-  Profile: "Mon Profil"
-  my_channel: "Mes chaines"
-  my_series: "Mes series"
-  subscriptions: "Mes abonnements"
-  disconnect: "Se déconnecter"
-  subscribe: "S'inscrire"
-  login: "Se connecter"
-  new_messages: "Nouveaux messages"
-  new_comments: "Nouveaux commentaires"
-  videos: "videos"
-  featuring: "Avec"

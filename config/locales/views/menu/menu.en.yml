@@ -1,0 +1,20 @@
+en:
+  nav:
+    home: "Home"
+    series: "Series"
+    users: "Users"
+    top: "Top"
+    profile: "My profile"
+    my_channel: "My channels"
+    my_series: "My series"
+    subscriptions: "My subscriptions"
+    disconnect: "Log out"
+    subscribe: "Sign up"
+    login: "Log in"
+    search: "Search"
+    new_messages_html:
+      one: "<span class='badge'>1</span> new message"
+      other: "<span class='badge'>%{count}</span> new messages"
+    new_comments_html:
+      one: "<span class='badge'>1</span> new comment"
+      other: "<span class='badge'>%{count}</span> new comments"

@@ -1,0 +1,13 @@
+fr:
+  general:
+    delete_vote: "Supprimer"
+    delete_like: "Se désabonner"
+    delete_comment: "Supprimer le commentaire"
+    years: "il y a %{value} ans"
+    month: "il y a %{value} mois"
+    days: "il y a %{value} jours"
+    hours: "il y a %{value} heures"
+    minutes: "il y a %{value} minutes"
+    video_views: "vues"
+    videos: "videos"
+    featuring: "Avec"

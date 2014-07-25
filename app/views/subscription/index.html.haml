@@ -19,8 +19,8 @@
           %p
             = like.user.description
           %p
-            #{like.user.videos.length} #{t('videos')}
-            %span.view-counter #{like.user.get_views} #{t('video_views')}
+            #{like.user.videos.length} #{t('general.videos')}
+            %span.view-counter #{like.user.get_views} #{t('general.video_views')}
 
   - if like.playlist
     %article.col-md-12
@@ -36,13 +36,13 @@
           %p
             = like.playlist.description
           %p
-            #{like.playlist.videos.length} #{t('videos')}
-            %span.view-counter #{like.playlist.get_views} #{t('video_views')}
+            #{like.playlist.videos.length} #{t('general.videos')}
+            %span.view-counter #{like.playlist.get_views} #{t('general.video_views')}
       .col-md-12
         &nbsp;
         %p
           &nbsp;
-          #{t('featuring')} :
+          #{t('general.featuring')} :
           %button.btn.btn-info.btn-xs{type: 'button'} #{like.playlist.user.user_name}
           - like.playlist.participations.each do |participation|
             %button.btn.btn-info.btn-xs{type: 'button'} #{participation.user.user_name}

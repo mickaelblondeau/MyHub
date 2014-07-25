@@ -1,0 +1,4 @@
+fr:
+  errors:
+    messages:
+      search_too_short: "La recherche est trop court (au moins %{count} caractères)"

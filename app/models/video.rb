@@ -50,15 +50,15 @@ class Video < ActiveRecord::Base
   def diff_time
     diff_in_sec = ((DateTime.now - DateTime.parse(created_at.to_s)) * 1.days).to_i
     if diff_in_sec < 3600
-      I18n.t('minutes', value: (diff_in_sec/60).to_s)
+      I18n.t('general.minutes', value: (diff_in_sec/60).to_s)
     elsif diff_in_sec < 86400
-      I18n.t('hours', value: (diff_in_sec/60/60).to_s)
+      I18n.t('general.hours', value: (diff_in_sec/60/60).to_s)
     elsif diff_in_sec < 2592000
-      I18n.t('days', value: (diff_in_sec/60/60/24).to_s)
+      I18n.t('general.days', value: (diff_in_sec/60/60/24).to_s)
     elsif diff_in_sec < 31104000
-      I18n.t('month', value: (diff_in_sec/60/60/24/30).to_s)
+      I18n.t('general.month', value: (diff_in_sec/60/60/24/30).to_s)
     else
-      I18n.t('years', value: (diff_in_sec/60/60/24/30/12).to_s)
+      I18n.t('general.years', value: (diff_in_sec/60/60/24/30/12).to_s)
     end
   end
 
