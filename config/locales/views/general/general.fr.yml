@@ -8,6 +8,10 @@ fr:
     days: "il y a %{value} jours"
     hours: "il y a %{value} heures"
     minutes: "il y a %{value} minutes"
-    video_views: "vues"
-    videos: "videos"
+    video_views:
+      one: "1 vue"
+      other: "%{count} vues"
+    videos:
+      one: "1 video"
+      other: "%{count} videos"
     featuring: "Avec"

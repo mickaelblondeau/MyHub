@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613095112) do
+ActiveRecord::Schema.define(version: 20140725153545) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 20140613095112) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
   add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
+  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
 
   create_table "likes", force: true do |t|
@@ -221,15 +222,16 @@ ActiveRecord::Schema.define(version: 20140613095112) do
   add_index "video_categories", ["video_id"], name: "index_video_categories_on_video_id"
 
   create_table "videos", force: true do |t|
-    t.string "name"
-    t.text "description"
-    t.string "api_id"
-    t.integer "channel_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "api_id"
+    t.integer  "channel_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "image"
-    t.integer "playlist_id"
-    t.boolean "status"
+    t.string   "image"
+    t.integer  "playlist_id"
+    t.boolean  "status"
+    t.integer  "impressions_count"
   end
 
   create_table "votes", force: true do |t|

@@ -54,7 +54,7 @@ class Playlist < ActiveRecord::Base
   def get_views
     count = 0
     videos.each do |video|
-      count += video.impressionist_count(:filter=>:ip_address)
+      count += video.impressionist_count
     end
     return count
   end

@@ -8,6 +8,10 @@ en:
     days: "%{value} jours  ago"
     hours: "%{value} hours  ago"
     minutes: "%{value} minutes  ago"
-    video_views: "views"
-    videos: "videos"
+    video_views:
+      one: "1 view"
+      other: "%{count} view"
+    videos:
+      one: "1 video"
+      other: "%{count} videos"
     featuring: "With"

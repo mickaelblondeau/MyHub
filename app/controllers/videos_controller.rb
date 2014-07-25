@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
-    impressionist(@video)
+    impressionist(@video, nil, :unique => [:session_hash])
     @comments = Comment.where('video_id = ?', @video.id)
   end
 

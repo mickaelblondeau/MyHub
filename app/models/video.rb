@@ -6,7 +6,7 @@ class Video < ActiveRecord::Base
   has_many :categories, through: :video_categories
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
-  is_impressionable
+  is_impressionable :counter_cache => true, :unique => true
 
   before_create do
     if !channel

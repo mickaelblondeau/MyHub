@@ -19,8 +19,9 @@
           %p
             = like.user.description
           %p
-            #{like.user.videos.length} #{t('general.videos')}
-            %span.view-counter #{like.user.get_views} #{t('general.video_views')}
+            = t('general.videos', count: like.user.videos.length)
+            %span.view-counter
+              = t('general.video_views', count: like.user.get_views)
 
   - if like.playlist
     %article.col-md-12
@@ -36,8 +37,9 @@
           %p
             = like.playlist.description
           %p
-            #{like.playlist.videos.length} #{t('general.videos')}
-            %span.view-counter #{like.playlist.get_views} #{t('general.video_views')}
+            = t('general.videos', count: like.playlist.videos.length)
+            %span.view-counter
+              = t('general.video_views', count: like.playlist.get_views)
       .col-md-12
         &nbsp;
         %p
