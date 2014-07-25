@@ -1,0 +1,18 @@
+- content_for :top do
+  = render partial: 'shared/slider'
+
+- if @like.get_unseen_videos(current_user.id).count == 0
+  = t('general.no_videos')
+- else
+  - @like.get_unseen_videos(current_user.id).each_with_index do |video, i|
+    - if i != 0
+      .col-md-12.separator
+    %article.col-md-12
+      %a{href: video_path(video)}
+        .col-md-4
+          = image_tag video.image, class: 'img-responsive'
+      .col-md-8
+        %h2
+          = video.name
+        %p
+          = video.description

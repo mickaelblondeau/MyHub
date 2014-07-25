@@ -15,3 +15,4 @@ fr:
       one: "1 video"
       other: "%{count} videos"
     featuring: "Avec"
+    no_videos: "Aucune vidéo"

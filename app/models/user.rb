@@ -22,4 +22,24 @@ class User < ActiveRecord::Base
     end
     return count
   end
+
+  def get_unseen_videos_count
+    count = 0
+    videos.each do |video|
+      if !video.seen_by(id)
+        count = count + 1
+      end
+    end
+    return count
+  end
+
+  def get_unseen_videos
+    vids = []
+    videos.each do |video|
+      if !video.seen_by(id)
+        vids.push(video)
+      end
+    end
+    return vids
+  end
 end

@@ -62,4 +62,8 @@ class Video < ActiveRecord::Base
     end
   end
 
+  def seen_by(user_id)
+    UserView.where('user_id = ? AND video_id = ?', user_id, id).first
+  end
+
 end

@@ -2,6 +2,12 @@ class VideosController < ApplicationController
   def show
     @video = Video.find(params[:id])
     impressionist(@video, nil, :unique => [:session_hash])
+    if current_user
+      user_view = UserView.new
+      user_view.user = current_user
+      user_view.video = @video
+      user_view.save
+    end
     @comments = Comment.where('video_id = ?', @video.id)
   end
 

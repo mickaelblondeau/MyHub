@@ -7,15 +7,16 @@
 
   - if like.user
     %article.col-md-12
-      .col-md-4
-        = image_tag 'http://www.cakesandbakes.com/beta/teamimages/avatar_profile.png', width: 258, height: 129
+      %a{href: subscription_path(like)}
+        .col-md-4
+          = image_tag 'http://www.cakesandbakes.com/beta/teamimages/avatar_profile.png', width: 258, height: 129
       .col-md-8
         .col-md-1
           %span.badge.blue
-            16
+            = like.get_unseen_videos_count
         .col-md-11
           %h2
-            = like.user.user_name
+            = like.get_type_name
           %p
             = like.user.description
           %p
@@ -25,15 +26,16 @@
 
   - if like.playlist
     %article.col-md-12
-      .col-md-4
-        = image_tag like.playlist.icon.url(:thumb), class: 'img-responsive'
+      %a{href: subscription_path(like)}
+        .col-md-4
+          = image_tag like.playlist.icon.url(:thumb), class: 'img-responsive'
       .col-md-8
         .col-md-1
           %span.badge.blue
-            16
+            = like.get_unseen_videos_count(current_user.id)
         .col-md-11
           %h2
-            = like.playlist.title
+            = like.get_type_name
           %p
             = like.playlist.description
           %p
@@ -45,6 +47,6 @@
         %p
           &nbsp;
           #{t('general.featuring')} :
-          %button.btn.btn-info.btn-xs{type: 'button'} #{like.playlist.user.user_name}
+          = link_to like.playlist.user.user_name, like.playlist.user, class: 'btn btn-info btn-xs'
           - like.playlist.participations.each do |participation|
-            %button.btn.btn-info.btn-xs{type: 'button'} #{participation.user.user_name}
+            = link_to participation.user.user_name, participation.user, class: 'btn btn-info btn-xs'

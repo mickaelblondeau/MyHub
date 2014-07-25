@@ -28,6 +28,22 @@ class Like < ActiveRecord::Base
     end
   end
 
+  def get_unseen_videos_count(user_id = nil)
+    if playlist
+      playlist.get_unseen_videos_count(user_id)
+    else
+      user.get_unseen_videos_count
+    end
+  end
+
+  def get_unseen_videos(user_id = nil)
+    if playlist
+      playlist.get_unseen_videos(user_id)
+    else
+      user.get_unseen_videos
+    end
+  end
+
   def self.get_params(object, current_user)
     like = nil
     if object.class == User
