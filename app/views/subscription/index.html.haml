@@ -16,9 +16,9 @@
             = like.unseen_videos
         .col-md-11
           %h2
-            = like.get_type_name
+            = link_to like.get_type_name, subscription_path(like)
           %p
-            = like.user.description
+            = truncate(like.user.description, length: 400)
           %p
             %time{pubdate: '', datetime: l(like.last_video, format: :short)}
               = Video.diff_time(like.last_video)
@@ -38,9 +38,9 @@
             = like.unseen_videos
         .col-md-11
           %h2
-            = like.get_type_name
+            = link_to like.get_type_name, subscription_path(like)
           %p
-            = like.playlist.description
+            = truncate(like.playlist.description, length: 400)
           %p
             %time{pubdate: '', datetime: l(like.last_video, format: :short)}
               = Video.diff_time(like.last_video)

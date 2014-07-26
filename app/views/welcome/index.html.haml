@@ -14,8 +14,8 @@
           %article.serie.col-md-2.video-list
             %a{href: video_path(video), title: video.name}
               = image_tag video.image, class: 'img-responsive'
-            %a.serie-name{href: playlist_path(video.playlist), title: video.playlist.title} #{video.playlist.title} :
-            %a.video-name{href: video_path(video), title: video.name} #{video.name}
+            %a.serie-name{href: playlist_path(video.playlist), title: video.playlist.title} #{truncate(video.playlist.title, length: 100)} :
+            %a.video-name{href: video_path(video), title: video.name} #{truncate(video.name, length: 100)}
             %br
             %span.view-counter
               = t('general.video_views', count: video.impressionist_count)

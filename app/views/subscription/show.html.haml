@@ -16,9 +16,9 @@
           %span.badge.blue
             = t('general.new_video')
         %h2
-          = video.name
+          = link_to video.name, video_path(video)
         %p
-          = video.description
+          = truncate(video.description, length: 400)
           %p
             %time{pubdate: '', datetime: l(video.created_at, format: :short)}
               = video.diff_time
