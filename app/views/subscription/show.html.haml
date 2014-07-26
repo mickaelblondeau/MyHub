@@ -12,7 +12,7 @@
         .col-md-4
           = image_tag video.image, class: 'img-responsive'
       .col-md-8
-        - if video.seen == 0
+        - if video.seen == nil
           %span.badge.blue
             = t('general.new_video')
         %h2

@@ -19,7 +19,7 @@
             %p
               = t('nav.new_videos_html', count: get_new_videos(current_user.id))
         - if get_new_messages(current_user.id) > 0
-          %a{href: messages_path}
+          %a{href: recents_messages_path}
             %p
               = t('nav.new_messages_html', count: get_new_messages(current_user.id))
         - if 0 > 0
