@@ -12,6 +12,7 @@ fr:
     subscribe: "S'inscrire"
     login: "Se connecter"
     search: "Recherche"
+    my_messages: "Ma messagerie"
     new_messages_html:
       one: "<span class='badge'>1</span> nouveau message"
       other: "<span class='badge'>%{count}</span>nouveaux messages"

@@ -12,6 +12,7 @@ en:
     subscribe: "Sign up"
     login: "Log in"
     search: "Search"
+    my_messages: "My messages"
     new_messages_html:
       one: "<span class='badge'>1</span> new message"
       other: "<span class='badge'>%{count}</span> new messages"
