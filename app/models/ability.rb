@@ -65,6 +65,14 @@ class Ability
         can :manage, PlaylistCategory do |pc|
           pc.playlist.user_id == user.id
         end
+
+        can :show, Message do |m|
+          m.user_id == user.id || m.owner_id == user.id
+        end
+
+        can :manage, Message do |m|
+          m.user_id == user.id
+        end
       end
     end
   end

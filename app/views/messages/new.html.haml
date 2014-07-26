@@ -1,0 +1,8 @@
+= simple_form_for Message.new do |f|
+  - if @user_id
+    = f.input :user_id, as: :hidden, input_html: { value: @user_id }
+  - else
+    = f.input :user_id
+  = f.input :title
+  = f.input :message
+  = f.button :submit, class: 'btn-info'

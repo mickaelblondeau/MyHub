@@ -19,6 +19,8 @@ MyHub::Application.routes.draw do
     resources :categories, :only => [:index, :show, :create, :destroy, :edit, :update]
     resources :category_links, :only => [:create, :destroy]
     resources :subscription, :only => [:index, :show]
+    resources :messages, :only => [:index, :show, :new, :create, :destroy]
+    get '/messages/new/:id', to: 'messages#new'
     root 'welcome#index'
   end
 

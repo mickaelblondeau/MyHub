@@ -1,0 +1,12 @@
+= link_to t('general.write_message'), new_message_path
+- @messages.each do |message|
+  %article
+    - if message.seen == nil
+      = t('general.new_video')
+    = message.owner.user_name
+    = l(message.created_at)
+    %br
+    = link_to message.title, message
+    %br
+    = link_to t('form.delete'), message, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+  %hr

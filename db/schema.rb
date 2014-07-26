@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726120828) do
+ActiveRecord::Schema.define(version: 20140726145146) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -142,6 +142,19 @@ ActiveRecord::Schema.define(version: 20140726120828) do
   add_index "likes", ["owner_id"], name: "index_likes_on_owner_id"
   add_index "likes", ["playlist_id"], name: "index_likes_on_playlist_id"
   add_index "likes", ["user_id"], name: "index_likes_on_user_id"
+
+  create_table "messages", force: true do |t|
+    t.integer  "owner_id"
+    t.integer  "user_id"
+    t.text     "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "seen"
+    t.string   "title"
+  end
+
+  add_index "messages", ["owner_id"], name: "index_messages_on_owner_id"
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
 
   create_table "participations", force: true do |t|
     t.integer  "user_id"

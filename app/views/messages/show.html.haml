@@ -1,0 +1,10 @@
+= @message.owner.user_name
+= l(@message.created_at)
+%br
+= @message.title
+%br
+= @message.message
+%br
+= link_to t('form.delete'), @message, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+%br
+= link_to t('general.your_messages'), messages_path
