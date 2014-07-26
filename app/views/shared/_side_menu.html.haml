@@ -6,10 +6,10 @@
     = link_to t('nav.top'), root_path
     .separator
     - if user_signed_in?
+      = link_to t('nav.subscriptions'), subscription_index_path, class: (controller.controller_name == 'subscription' ? 'active' : '')
       = link_to t('nav.profile'), edit_user_registration_path, class: (current_page?(edit_user_registration_path) ? 'active' : '')
       = link_to t('nav.my_channel'), channels_path, class: (current_page?(channels_path) ? 'active' : '')
       = link_to t('nav.my_series'), playlists_path, class: (current_page?(playlists_path) ? 'active' : '')
-      = link_to t('nav.subscriptions'), subscription_index_path, class: (controller.controller_name == 'subscription' ? 'active' : '')
       = link_to t('nav.my_messages'), messages_path, class: (controller.controller_name == 'messages' ? 'active' : '')
       = link_to t('nav.disconnect'), destroy_user_session_path, method: 'delete'
       .separator
