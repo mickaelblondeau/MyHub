@@ -62,7 +62,7 @@ class Like < ActiveRecord::Base
 
   def get_unseen_videos(user_id = (user || user.id) ? user.id : nil)
     vids = get_videos
-    vids.map do |video|
+    vids.each do |video|
       if video.not_seen_by(user_id)
         video.seen = 0
       else
@@ -77,6 +77,20 @@ class Like < ActiveRecord::Base
       like.generate_unseen_count(user_id)
     end
     likes.sort_by {|l| [-l.unseen_videos, -l.last_video.to_i]}
+  end
+
+  def self.get_unseen_count(user_id)
+    unseen_vids = []
+    count = 0
+    Like.where('owner_id = ?', user_id).includes(:user_videos, :playlist_videos).each do |like|
+      like.get_videos.each do |video|
+        if video.not_seen_by(user_id) && !unseen_vids.include?(video.id)
+          unseen_vids.push(video.id)
+          count = count + 1
+        end
+      end
+    end
+    count
   end
 
   def self.get_params(object, current_user)

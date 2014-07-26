@@ -11,12 +11,17 @@
       = link_to t('nav.my_series'), playlists_path, class: (current_page?(playlists_path) ? 'active' : '')
       = link_to t('nav.subscriptions'), subscription_index_path, class: (controller.controller_name == 'subscription' ? 'active' : '')
       = link_to t('nav.disconnect'), destroy_user_session_path, method: 'delete'
+      .separator
+      .text-center
+        %a{href: subscription_index_path}
+          %p
+            = t('nav.new_videos_html', count: get_new_videos(current_user.id))
+        %a{href: ''}
+          %p
+            = t('nav.new_messages_html', count: 1)
+        %a{href: ''}
+          %p
+            = t('nav.new_comments_html', count: 16)
     - else
       = link_to t('nav.login'), new_user_session_path, class: (current_page?(new_user_session_path) ? 'active' : '')
       = link_to t('nav.subscribe'), new_user_registration_path, class: (current_page?(new_user_registration_path) ? 'active' : '')
-    .separator
-    .text-center
-      %p
-        = t('nav.new_messages_html', count: 1)
-      %p
-        = t('nav.new_comments_html', count: 16)
