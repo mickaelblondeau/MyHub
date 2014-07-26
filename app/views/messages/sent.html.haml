@@ -1,14 +1,21 @@
-%h2 Messages envoyés
-%br
-= link_to 'Messages reçus', messages_path
-%br
-= link_to t('general.write_message'), new_message_path
-- @messages.each do |message|
-  %article
-    = message.user.user_name
-    = l(message.created_at)
-    %br
-    = link_to message.title, message
-    %br
-    = link_to t('form.delete'), message, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-  %hr
+= render partial: 'messages/menu'
+
+- @messages.each_with_index do |message, i|
+  - if i != 0
+    .col-md-12.separator
+  %article.col-md-12
+    %a{href: messages_path(message)}
+      .col-md-4
+        = image_tag message.owner.avatar.url('thumb'), class: 'img-responsive'
+    .col-md-8
+      %h2
+        = link_to truncate(message.title, length: 100), message
+      %h3
+        By
+        = message.owner.user_name
+      %p
+        = truncate(message.message, length: 400)
+        %p
+          %time{pubdate: '', datetime: l(message.created_at, format: :short)}
+          = Video.diff_time(message.created_at)
+        = link_to t('form.delete'), message, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }

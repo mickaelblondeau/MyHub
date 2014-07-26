@@ -9,6 +9,11 @@ class MessagesController < ApplicationController
     @messages = Message.where('owner_id = ? AND user_deleted IS NOT ?', current_user.id, true)
   end
 
+  def recents
+    authorize! :index, Channel
+    @messages = Message.where('owner_id = ? AND user_deleted IS NOT ? AND seen IS NOT ?', current_user.id, true, true)
+  end
+
   def show
     @message = Message.find(params[:id])
     authorize! :show, @message
@@ -32,7 +37,7 @@ class MessagesController < ApplicationController
     else
       flash[:alert] = 'Ko'
     end
-    redirect_to messages_path
+    redirect_to sent_messages_path
   end
 
   def destroy
@@ -49,6 +54,6 @@ class MessagesController < ApplicationController
     else
       flash[:alert] = 'Ko'
     end
-    redirect_to messages_path
+    redirect_to request.referer || messages_path
   end
 end

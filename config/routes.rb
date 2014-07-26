@@ -3,7 +3,8 @@ MyHub::Application.routes.draw do
   scope '(:locale)', locale: /fr|en/ do
     devise_for :users
     get '/messages/new/:id', to: 'messages#new'
-    get '/messages/sent', to: 'messages#sent', as: :sent_message
+    get '/messages/sent', to: 'messages#sent', as: :sent_messages
+    get '/messages/recents', to: 'messages#recents', as: :recents_messages
     get 'search/(:q)' => 'search#index'
     resources :welcome, :only => [:index]
     resources :search, :only => [:new, :index]
