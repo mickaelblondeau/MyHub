@@ -1,18 +1,42 @@
-%h1 Search
+- content_for :top do
+  = render partial: 'shared/slider'
 
-%h2 Series
-- if @series.count == 0
+- if @series.count == 0 && @videos.count == 0
   = t('no_results')
 - else
-  - @series.each do |serie|
-    = link_to serie.title, serie
-    %br
+  - if @series.count > 0
+    - @series.each_with_index do |serie, i|
+      - if i != 0
+        .col-md-12.separator
+      %article.col-md-12
+        %a{href: playlist_path(serie)}
+          .col-md-4
+            = image_tag serie.icon.url('thumb'), class: 'img-responsive'
+        .col-md-8
+          %h2
+            = link_to serie.title, serie
+          %p
+            = truncate(serie.description, length: 400)
+            %p
+              %time{pubdate: '', datetime: l(serie.created_at, format: :short)}
+                = Video.diff_time(serie.created_at)
 
-%h2 Videos
-- if @videos.count == 0
-  = t('no_results')
-- else
-  - @videos.each do |video|
-    = image_tag video.image
-    = link_to video.name, video
-    %br
+  - if @series.count > 0 && @videos.count > 0
+    .col-md-12.separator
+
+  - if @videos.count > 0
+    - @videos.each_with_index do |video, i|
+      - if i != 0
+        .col-md-12.separator
+      %article.col-md-12
+        %a{href: video_path(video)}
+          .col-md-4
+            = image_tag video.image, class: 'img-responsive'
+        .col-md-8
+          %h2
+            = link_to video.name, video
+          %p
+            = truncate(video.description, length: 400)
+            %p
+              %time{pubdate: '', datetime: l(video.created_at, format: :short)}
+                = video.diff_time

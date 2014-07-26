@@ -5,6 +5,6 @@
     .col-md-10.search-bar
       .col-md-7
       .col-md-5
-        %form.form-inline{action: '/search', method: :GET, role: 'search'}
+        = form_tag new_search_path, :method => 'get', :role => 'search' do |f|
           .form-group
-            = text_field_tag :q, nil, placeholder: t('nav.search'), class: 'form-control'
+            = text_field_tag :search, params[:search], placeholder: t('nav.search'), class: 'form-control'
