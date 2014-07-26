@@ -18,3 +18,7 @@ en:
     no_videos: "No videos"
     new_video: "New"
     no_messages: "No messages"
+    recent_messages: "New messages"
+    inbox_message: "Inbox messages"
+    outbox_message: "Outbox messages"
+    write_message: "Write a message"

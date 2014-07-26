@@ -18,3 +18,7 @@ fr:
     no_videos: "Aucune vidéo"
     new_video: "Nouv"
     no_messages: "Aucun message"
+    recent_messages: "Nouveaux messages"
+    inbox_message: "Messages reçus"
+    outbox_message: "Messages envoyés"
+    write_message: "Ecrire un message"
