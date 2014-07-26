@@ -7,11 +7,13 @@ class MessagesController < ApplicationController
   def sent
     authorize! :index, Channel
     @messages = Message.where('owner_id = ? AND user_deleted IS NOT ?', current_user.id, true)
+    render :index
   end
 
   def recents
     authorize! :index, Channel
     @messages = Message.where('owner_id = ? AND user_deleted IS NOT ? AND seen IS NOT ?', current_user.id, true, true)
+    render :index
   end
 
   def show

@@ -2,7 +2,7 @@
   = render partial: 'shared/slider'
 
 - if @series.count == 0 && @videos.count == 0
-  = t('no_results')
+  = t('general.no_videos')
 - else
   - if @series.count > 0
     - @series.each_with_index do |serie, i|
