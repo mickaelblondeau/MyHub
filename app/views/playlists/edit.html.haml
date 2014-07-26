@@ -2,5 +2,5 @@
   = simple_form_for @playlist, :html => {:multipart => true } do |f|
     = f.input :title
     = f.input :description
-    = f.input :icon, as: :file
+    = f.input :icon, as: :file, required: (@playlist.icon)?false:true
     = f.button :submit, class: 'btn-info'
