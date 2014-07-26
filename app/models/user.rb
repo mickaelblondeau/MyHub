@@ -14,32 +14,4 @@ class User < ActiveRecord::Base
   def should_generate_new_friendly_id?
     new_record?
   end
-
-  def get_views
-    count = 0
-    videos.each do |video|
-      count += video.impressionist_count
-    end
-    return count
-  end
-
-  def get_unseen_videos_count
-    count = 0
-    videos.each do |video|
-      if !video.seen_by(id)
-        count = count + 1
-      end
-    end
-    return count
-  end
-
-  def get_unseen_videos
-    vids = []
-    videos.each do |video|
-      if !video.seen_by(id)
-        vids.push(video)
-      end
-    end
-    return vids
-  end
 end

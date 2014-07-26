@@ -7,25 +7,23 @@ class Video < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
   is_impressionable :counter_cache => true, :unique => true
+  attr_accessor :seen
 
   before_create do
-    if !channel
-      return false
-    end
-    if Video.where('videos.api_id = ?', api_id).joins(:channel).where(channels: { video_type: channel.video_type }).first
-      return false
-    end
-
-    data = Api.video_info(api_id, channel.video_type)
-    if data && data[:channel] == channel.api_id
-      self.name = data[:name]
-      self.description = data[:description]
-      self.image = data[:image]
-      self.created_at = data[:created_at]
-      self.status = data[:status]
-      return true
+    if !channel || Video.where('videos.api_id = ?', api_id).joins(:channel).where(channels: { video_type: channel.video_type }).first
+      false
     else
-      return false
+      data = Api.video_info(api_id, channel.video_type)
+      if data && data[:channel] == channel.api_id
+        self.name = data[:name]
+        self.description = data[:description]
+        self.image = data[:image]
+        self.created_at = data[:created_at]
+        self.status = data[:status]
+        true
+      else
+        false
+      end
     end
   end
 
@@ -39,16 +37,20 @@ class Video < ActiveRecord::Base
 
   def get_player
     if channel.video_type == 'yt'
-      return ('<iframe src="//www.youtube.com/embed/' + api_id + '?rel=0" allowfullscreen height="360" width="640" frameborder="0"></iframe>').html_safe
+      ('<iframe src="//www.youtube.com/embed/' + api_id + '?rel=0" allowfullscreen height="360" width="640" frameborder="0"></iframe>').html_safe
     elsif channel.video_type == 'dm'
-      return ('<iframe src="//www.dailymotion.com/embed/video/' + api_id + '" allowfullscreen height="360" width="640" frameborder="0"></iframe>').html_safe
+      ('<iframe src="//www.dailymotion.com/embed/video/' + api_id + '" allowfullscreen height="360" width="640" frameborder="0"></iframe>').html_safe
     elsif channel.video_type == 'vi'
-      return ('<iframe src="//player.vimeo.com/video/' + api_id + '" allowfullscreen height="360" width="640" frameborder="0"></iframe>').html_safe
+      ('<iframe src="//player.vimeo.com/video/' + api_id + '" allowfullscreen height="360" width="640" frameborder="0"></iframe>').html_safe
     end
   end
 
   def diff_time
-    diff_in_sec = ((DateTime.now - DateTime.parse(created_at.to_s)) * 1.days).to_i
+    Video.diff_time(created_at)
+  end
+
+  def self.diff_time(date)
+    diff_in_sec = ((DateTime.now - DateTime.parse(date.to_s)) * 1.days).to_i
     if diff_in_sec < 3600
       I18n.t('general.minutes', value: (diff_in_sec/60).to_s)
     elsif diff_in_sec < 86400
@@ -62,8 +64,7 @@ class Video < ActiveRecord::Base
     end
   end
 
-  def seen_by(user_id)
-    UserView.where('user_id = ? AND video_id = ?', user_id, id).first
+  def not_seen_by(user_id)
+    !UserView.where('user_id = ? AND video_id = ?', user_id, id).first
   end
-
 end

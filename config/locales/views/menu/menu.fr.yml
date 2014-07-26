@@ -10,7 +10,7 @@ fr:
     subscriptions: "Mes abonnements"
     disconnect: "Se déconnecter"
     subscribe: "S'inscrire"
-    login: "Le connecter"
+    login: "Se connecter"
     search: "Recherche"
     new_messages_html:
       one: "<span class='badge'>1</span> nouveau message"

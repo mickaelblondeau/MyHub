@@ -16,3 +16,4 @@ en:
       other: "%{count} videos"
     featuring: "With"
     no_videos: "No videos"
+    new_video: "New"

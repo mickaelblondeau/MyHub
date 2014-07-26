@@ -13,16 +13,19 @@
       .col-md-8
         .col-md-1
           %span.badge.blue
-            = like.get_unseen_videos_count
+            = like.unseen_videos
         .col-md-11
           %h2
             = like.get_type_name
           %p
             = like.user.description
           %p
+            %time{pubdate: '', datetime: l(like.last_video, format: :short)}
+              = Video.diff_time(like.last_video)
+          %p
             = t('general.videos', count: like.user.videos.length)
             %span.view-counter
-              = t('general.video_views', count: like.user.get_views)
+              = t('general.video_views', count: like.get_views)
 
   - if like.playlist
     %article.col-md-12
@@ -32,16 +35,19 @@
       .col-md-8
         .col-md-1
           %span.badge.blue
-            = like.get_unseen_videos_count(current_user.id)
+            = like.unseen_videos
         .col-md-11
           %h2
             = like.get_type_name
           %p
             = like.playlist.description
           %p
+            %time{pubdate: '', datetime: l(like.last_video, format: :short)}
+              = Video.diff_time(like.last_video)
+          %p
             = t('general.videos', count: like.playlist.videos.length)
             %span.view-counter
-              = t('general.video_views', count: like.playlist.get_views)
+              = t('general.video_views', count: like.get_views)
       .col-md-12
         &nbsp;
         %p

@@ -12,7 +12,13 @@
         .col-md-4
           = image_tag video.image, class: 'img-responsive'
       .col-md-8
+        - if video.seen == 0
+          %span.badge.blue
+            = t('general.new_video')
         %h2
           = video.name
         %p
           = video.description
+          %p
+            %time{pubdate: '', datetime: l(video.created_at, format: :short)}
+              = video.diff_time

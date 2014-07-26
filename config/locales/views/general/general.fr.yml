@@ -16,3 +16,4 @@ fr:
       other: "%{count} videos"
     featuring: "Avec"
     no_videos: "Aucune vidéo"
+    new_video: "Nouv"

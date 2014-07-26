@@ -19,5 +19,7 @@
             %br
             %span.view-counter
               = t('general.video_views', count: video.impressionist_count)
-            %span.posted_date.pull-right #{video.diff_time}
+            %span.posted_date.pull-right
+              %time{pubdate: '', datetime: l(video.created_at, format: :short)}
+                = video.diff_time
             .clear

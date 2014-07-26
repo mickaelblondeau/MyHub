@@ -50,32 +50,4 @@ class Playlist < ActiveRecord::Base
       false
     end
   end
-
-  def get_views
-    count = 0
-    videos.each do |video|
-      count += video.impressionist_count
-    end
-    return count
-  end
-
-  def get_unseen_videos_count(user_id)
-    count = 0
-    videos.each do |video|
-      if !video.seen_by(user_id)
-        count = count + 1
-      end
-    end
-    return count
-  end
-
-  def get_unseen_videos(user_id)
-    vids = []
-    videos.each do |video|
-      if !video.seen_by(user_id)
-        vids.push(video)
-      end
-    end
-    return vids
-  end
 end
