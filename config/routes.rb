@@ -21,9 +21,10 @@ MyHub::Application.routes.draw do
     resources :playlist_categories, :only => [:create, :destroy]
     resources :categories, :only => [:index, :show, :create, :destroy, :edit, :update]
     resources :category_links, :only => [:create, :destroy]
-    resources :subscription, :only => [:index, :show]
+    resources :subscription, :only => [:index, :show], :path  => 'subscriptions'
     resources :messages, :only => [:index, :show, :new, :create, :destroy]
     get '/search/(:q)' => 'search#index', as: :query_search
+    get '/subscriptions/(:type)/(:slug)' => 'subscription#show', as: :subscription_slug
     root 'welcome#index'
   end
 

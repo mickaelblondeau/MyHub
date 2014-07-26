@@ -7,7 +7,7 @@
 
   - if like.user
     %article.col-md-12
-      %a{href: subscription_path(like)}
+      %a{href: subscription_slug_path('u/' + like.user.slug)}
         .col-md-4
           = image_tag like.user.avatar.url(:thumb), class: 'img-responsive'
       .col-md-8
@@ -16,7 +16,7 @@
             = like.unseen_videos
         .col-md-11
           %h2
-            = link_to like.get_type_name, subscription_path(like)
+            = link_to like.get_type_name, subscription_slug_path('u/' + like.user.slug)
           %p
             = truncate(like.user.description, length: 400)
           %p
@@ -29,7 +29,7 @@
 
   - if like.playlist
     %article.col-md-12
-      %a{href: subscription_path(like)}
+      %a{href: subscription_slug_path('s/' + like.playlist.slug)}
         .col-md-4
           = image_tag like.playlist.icon.url(:thumb), class: 'img-responsive'
       .col-md-8
@@ -38,7 +38,7 @@
             = like.unseen_videos
         .col-md-11
           %h2
-            = link_to like.get_type_name, subscription_path(like)
+            = link_to like.get_type_name, subscription_slug_path('s/' + like.playlist.slug)
           %p
             = truncate(like.playlist.description, length: 400)
           %p
