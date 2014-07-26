@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
   end
 
   def show
-    @message = Message.find(params[:id])
+    @message = Message.find(Encoder::decode_id(params[:id]))
     authorize! :show, @message
     @message.seen = true
     @message.save
@@ -43,7 +43,7 @@ class MessagesController < ApplicationController
   end
 
   def destroy
-    message = Message.find(params[:id])
+    message = Message.find(Encoder::decode_id(params[:id]))
     authorize! :manage, message
     if message.owner_id == current_user.id
       message.owner_deleted = true

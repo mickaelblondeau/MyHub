@@ -9,6 +9,10 @@ class Video < ActiveRecord::Base
   is_impressionable :counter_cache => true, :unique => true
   attr_accessor :seen
 
+  def to_param
+    Encoder::encode_id(id)
+  end
+
   before_create do
     if !channel || Video.where('videos.api_id = ?', api_id).joins(:channel).where(channels: { video_type: channel.video_type }).first
       false

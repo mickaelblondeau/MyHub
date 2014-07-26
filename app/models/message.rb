@@ -5,6 +5,10 @@ class Message < ActiveRecord::Base
   belongs_to :owner, foreign_key: :owner_id, class_name: :User
   belongs_to :user
 
+  def to_param
+    Encoder::encode_id(id)
+  end
+
   before_create do
     if user == nil
       false

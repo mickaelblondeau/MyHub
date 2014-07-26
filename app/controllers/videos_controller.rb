@@ -1,6 +1,6 @@
 class VideosController < ApplicationController
   def show
-    @video = Video.find(params[:id])
+    @video = Video.find(Encoder::decode_id(params[:id]))
     impressionist(@video, nil, :unique => [:session_hash])
     if current_user
       user_view = UserView.new
@@ -12,11 +12,11 @@ class VideosController < ApplicationController
   end
 
   def edit
-    @video = Video.find(params[:id])
+    @video = Video.find(Encoder::decode_id(params[:id]))
   end
 
   def update
-    @video = Video.find(params[:id])
+    @video = Video.find(Encoder::decode_id(params[:id]))
     authorize! :manage, @video
     if @video.update(params[:video].permit(:playlist_id, :name, :description))
       flash[:notice] = 'Ok'
@@ -38,7 +38,7 @@ class VideosController < ApplicationController
   end
 
   def destroy
-    @video = Video.find(params[:id])
+    @video = Video.find(Encoder::decode_id(params[:id]))
     authorize! :manage, @video
     channel = @video.channel
     @video.destroy
