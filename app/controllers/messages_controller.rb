@@ -1,7 +1,12 @@
 class MessagesController < ApplicationController
   def index
     authorize! :index, Channel
-    @messages = Message.where('user_id = ?', current_user.id)
+    @messages = Message.where('user_id = ? AND user_deleted IS NOT ?', current_user.id, true)
+  end
+
+  def sent
+    authorize! :index, Channel
+    @messages = Message.where('owner_id = ? AND user_deleted IS NOT ?', current_user.id, true)
   end
 
   def show
@@ -33,8 +38,17 @@ class MessagesController < ApplicationController
   def destroy
     message = Message.find(params[:id])
     authorize! :manage, message
-    message.destroy
-    flash[:notice] = 'Ok'
+    if message.owner_id == current_user.id
+      message.owner_deleted = true
+    end
+    if message.user_id == current_user.id
+      message.user_deleted = true
+    end
+    if message.save
+      flash[:notice] = 'Ok'
+    else
+      flash[:alert] = 'Ko'
+    end
     redirect_to messages_path
   end
 end

@@ -30,6 +30,15 @@ class MessageTest < ActiveSupport::TestCase
     assert_not message.save
   end
 
+  test 'should not save with unvalid user' do
+    message = Message.new
+    message.owner_id = 1
+    message.user_id = 9
+    message.message = 'test'
+    assert_not message.save
+  end
+
+
   test 'should save' do
     message = create_message
     assert message.save

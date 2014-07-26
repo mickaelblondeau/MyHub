@@ -7,7 +7,7 @@ class Vote < ActiveRecord::Base
 
   before_create do
     if vote_exist
-      return false
+      false
     end
   end
 
@@ -39,8 +39,7 @@ class Vote < ActiveRecord::Base
     end
   end
 
-  def self.get_params(object, current_user)
-    vote = nil
+  def self.get_params(object)
     if object.class == Video
       { :param_name => :video_id, :id => object.id, :votes => Vote.where('video_id = ?', object.id) }
     else

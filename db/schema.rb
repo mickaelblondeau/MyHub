@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726145146) do
+ActiveRecord::Schema.define(version: 20140726164457) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -151,6 +151,8 @@ ActiveRecord::Schema.define(version: 20140726145146) do
     t.datetime "updated_at"
     t.boolean  "seen"
     t.string   "title"
+    t.boolean  "owner_deleted"
+    t.boolean  "user_deleted"
   end
 
   add_index "messages", ["owner_id"], name: "index_messages_on_owner_id"

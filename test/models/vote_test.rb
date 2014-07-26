@@ -38,11 +38,11 @@ class VoteTest < ActiveSupport::TestCase
   end
 
   test 'self get params' do
-    params = Vote::get_params(videos(:one), users(:one))
+    params = Vote::get_params(videos(:one))
     assert params[:param_name] == :video_id
     assert params[:id] == videos(:one).id
 
-    params = Vote::get_params(playlists(:one), users(:one))
+    params = Vote::get_params(playlists(:one))
     assert params[:param_name] == :playlist_id
     assert params[:id] == playlists(:one).id
   end
