@@ -2,10 +2,9 @@ MyHub::Application.routes.draw do
 
   scope '(:locale)', locale: /fr|en/ do
     devise_for :users
-    get '/messages/new/:id', to: 'messages#new'
+    get '/messages/new/:id', to: 'messages#new', as: :new_message_id
     get '/messages/sent', to: 'messages#sent', as: :sent_messages
     get '/messages/recents', to: 'messages#recents', as: :recents_messages
-    get 'search/(:q)' => 'search#index'
     resources :welcome, :only => [:index]
     resources :search, :only => [:new, :index]
     resources :channels, :only => [:index, :create, :destroy, :show, :update]
@@ -24,6 +23,7 @@ MyHub::Application.routes.draw do
     resources :category_links, :only => [:create, :destroy]
     resources :subscription, :only => [:index, :show]
     resources :messages, :only => [:index, :show, :new, :create, :destroy]
+    get '/search/(:q)' => 'search#index', as: :query_search
     root 'welcome#index'
   end
 

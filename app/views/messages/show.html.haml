@@ -1,6 +1,8 @@
 %article.col-md-12
+  %h3
+    By #{link_to @message.owner.user_name, @message.owner} -
   %h2
-    = link_to @message.title, @message
+    = @message.title
   %p
     = @message.message
     %p
