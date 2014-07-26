@@ -9,7 +9,7 @@
     %article.col-md-12
       %a{href: subscription_path(like)}
         .col-md-4
-          = image_tag 'http://www.cakesandbakes.com/beta/teamimages/avatar_profile.png', width: 258, height: 129
+          = image_tag like.user.avatar.url(:thumb), class: 'img-responsive'
       .col-md-8
         .col-md-1
           %span.badge.blue
