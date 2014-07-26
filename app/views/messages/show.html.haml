@@ -1,10 +1,11 @@
-= @message.owner.user_name
-= l(@message.created_at)
-%br
-= @message.title
-%br
-= @message.message
-%br
-= link_to t('form.delete'), @message, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-%br
-= link_to t('general.your_messages'), messages_path
+%article.col-md-12
+  %h2
+    = link_to @message.title, @message
+  %p
+    = @message.message
+    %p
+      %time{pubdate: '', datetime: l(@message.created_at, format: :short)}
+      = Video.diff_time(@message.created_at)
+    = link_to t('form.delete'), @message, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+    %br
+    = link_to t('nav.my_messages'), messages_path
