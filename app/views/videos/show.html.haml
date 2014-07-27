@@ -1,35 +1,15 @@
-%h2 Video
-
-= @video.get_player
-
-%h3 Views
-= @video.impressionist_count
-
+.col-md-12.profile_buttons
+  %h2
+    #{link_to @video.playlist.title, playlist_path(@video.playlist)} - #{@video.name}
+  .pull-right
+    %span.glyphicon.glyphicon-eye-open
+    = @video.impressionist_count
+    = render partial: 'shared/votes', locals: Vote::get_params(@video)
+.clear
 %br
-
-= render partial: 'shared/votes', locals: Vote::get_params(@video)
-
-%h3 Categories
-- @video.video_categories.each do |video_categorie|
-  = link_to video_categorie.category.label, video_categorie.category
-  - if can? :manage, video_categorie
-    = link_to t('form.delete'), video_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-
-- if can? :manage, @video
-  = simple_form_for VideoCategory.new do |f|
-    = f.input :video_id, input_html: { value: @video.id }, as: :hidden
-    = f.input :category_id, collection: Category.where.not(label:@video.categories.map(&:label)), prompt: t('form.choose_category'), label: t('form.category'), label_method: :label
-    = f.button :submit, class: 'btn-info'
-
-- if @video.playlist
-  %h3 Serie
-  = link_to @video.playlist.title, @video.playlist
-  %h3 Participants
-  = link_to @video.playlist.user.email, user_path(@video.playlist.user)
-  - @video.playlist.participations.each do |su|
-    = link_to su.user.email, user_path(su.user)
-    %br
-
-= render partial: 'shared/comments', locals: Comment::get_params(@video)
-
-= link_to t('views.return_channel'), @video.channel
+.col-md-12
+  = @video.get_player
+.col-md-12
+  - if @video.comments.count > 0
+    .col-md-12.separator
+  = render partial: 'shared/comments', locals: Comment::get_params(@video)

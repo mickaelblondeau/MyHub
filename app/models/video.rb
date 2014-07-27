@@ -41,11 +41,11 @@ class Video < ActiveRecord::Base
 
   def get_player
     if channel.video_type == 'yt'
-      ('<iframe src="//www.youtube.com/embed/' + api_id + '?rel=0" allowfullscreen height="360" width="640" frameborder="0"></iframe>').html_safe
+      ('<iframe src="//www.youtube.com/embed/' + api_id + '?rel=0" allowfullscreen height="480" width="100%" frameborder="0"></iframe>').html_safe
     elsif channel.video_type == 'dm'
-      ('<iframe src="//www.dailymotion.com/embed/video/' + api_id + '" allowfullscreen height="360" width="640" frameborder="0"></iframe>').html_safe
+      ('<iframe src="//www.dailymotion.com/embed/video/' + api_id + '" allowfullscreen height="480" width="100%" frameborder="0"></iframe>').html_safe
     elsif channel.video_type == 'vi'
-      ('<iframe src="//player.vimeo.com/video/' + api_id + '" allowfullscreen height="360" width="640" frameborder="0"></iframe>').html_safe
+      ('<iframe src="//player.vimeo.com/video/' + api_id + '" allowfullscreen height="480" width="100%" frameborder="0"></iframe>').html_safe
     end
   end
 
