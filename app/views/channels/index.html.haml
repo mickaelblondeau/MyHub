@@ -1,17 +1,28 @@
-%h2 Your channels
+- @channels.each_with_index do |channel, i|
+  - if i != 0
+    .col-md-12.separator
+  %article.col-md-12
+    %a{href: channel_path(channel)}
+      .col-md-2
+        = image_tag channel.image, class: 'img-responsive'
+    .col-md-10
+      %h2
+        = Channel::SRC_HOST[channel.video_type]
+        = link_to channel.name, channel_path(channel)
+      %p
+        %time{pubdate: '', datetime: l(channel.created_at, format: :short)}
+          = Video.diff_time(channel.created_at)
+      %p
+        = t('general.videos', count: channel.videos.length)
+      - if can? :manage, channel
+        %p
+          = link_to t('form.delete'), channel, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
 
-- @channels.each do |channel|
-  = image_tag channel.image
-  = link_to channel.name, channel
-  = Channel::SRC_HOST[channel.video_type]
-  %br
-  = simple_format(channel.description)
-  %br
-  - if can? :manage, channel
-    = link_to t('form.delete'), channel, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-  %hr
+- if @channels.count > 0
+  .col-md-12.separator
 
-= simple_form_for @new_channel do |f|
-  = f.input :api_id, label: t('form.channel_api_id')
-  = f.input :video_type, collection: Channel::SRC_HOST.map { |host, i| [ i, host ] }, label: t('form.channel_type'), prompt: t('form.choose_channel_type')
-  = f.button :submit, class: 'btn-info'
+= simple_form_for Channel.new do |f|
+  = f.input :api_id
+  = f.input :video_type, collection: Channel::SRC_HOST.map { |host, i| [ i, host ] }, prompt: t('channel.choose_channel_type')
+  %label.col-lg-2
+  = f.button :submit, class: 'btn-info', value: t('general.send')

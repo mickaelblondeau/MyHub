@@ -1,17 +1,33 @@
-%h2 Series
+- @playlists.each_with_index do |playlist, i|
+  - if i != 0
+    .col-md-12.separator
+  %article.col-md-12
+    %a{href: playlist_path(playlist)}
+      .col-md-4
+        = image_tag playlist.icon.url(:thumb), class: 'img-responsive'
+    .col-md-8
+      %h2
+        = link_to playlist.title, playlist_path(playlist)
+      %p
+        = truncate(playlist.description, length: 400)
+      %p
+        %time{pubdate: '', datetime: l(playlist.created_at, format: :short)}
+          = Video.diff_time(playlist.created_at)
+      %p
+        = t('general.videos', count: playlist.videos.length)
+        %span.view-counter
+          = t('general.video_views', count: 0)
+      - if can? :manage, playlist
+        %p
+          = link_to t('form.delete'), playlist, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+          = link_to t('form.edit'), edit_playlist_path(playlist)
 
-%h3 Your series
-- @playlists.each do |playlist|
-  = image_tag playlist.icon.url(:thumb)
-  = link_to playlist.title, playlist
-  - if can? :manage, playlist
-    = link_to t('form.delete'), playlist, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-    = link_to t('form.edit'), edit_playlist_path(playlist)
-  %br
+- if @playlists.count > 0
+  .col-md-12.separator
 
-%h3 Add a serie
 = simple_form_for @new_playlist, :html => {:multipart => true } do |f|
   = f.input :title
   = f.input :description, as: :text
   = f.input :icon, as: :file
-  = f.button :submit, class: 'btn-info'
+  %label.col-lg-2
+  = f.button :submit, class: 'btn-info', value: t('general.send')

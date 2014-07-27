@@ -1,40 +1,32 @@
-%h2 Channel #{@channel.name}
-
 - if @channel.validated?
-  %h3 Videos :
-  - @videos.each do |video|
-    = image_tag video.image
-    = video.name
-    %br
-    = simple_format(video.description)
-    %br
-    = link_to t('views.view_video'), video
-    - if can? :manage, video
-      = link_to t('views.delete_video'), video, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-      = link_to t('views.edit_video'), edit_video_path(video)
-    %hr
+  - @channel.videos.each_with_index do |video, i|
+    - if i != 0
+      .col-md-12.separator
+    %article.col-md-12
+      %a{href: video_path(video)}
+        .col-md-2
+          = image_tag video.image, class: 'img-responsive'
+      .col-md-10
+        %h2
+          = link_to video.name, video_path(video)
+        %p
+          %time{pubdate: '', datetime: l(video.created_at, format: :short)}
+            = video.diff_time
+        - if can? :manage, video
+          %p
+            = link_to t('form.edit'), edit_video_path(video)
+            = link_to t('form.delete'), video, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+
+  - if @channel.videos.count > 0
+    .col-md-12.separator
+
   - if can? :manage, @channel
-    %h3
-      = link_to t('views.manage_permissions'), cooperation_permission_path(@channel)
-    %h3 Add a new video
     = simple_form_for Video.new do |f|
       = f.input :channel_id, input_html: { value: @channel.id }, as: :hidden
-      = f.input :playlist_id, collection: Playlist.where('user_id = ?', current_user.id), prompt: t('form.choose_serie'), label: t('form.serie')
-      = f.input :api_id, label: t('form.video_api_id')
-      = f.button :submit, class: 'btn-info'
-
+      = f.input :playlist_id, collection: Playlist.where('user_id = ?', current_user.id), prompt: t('channel.choose_serie')
+      = f.input :api_id
+      %label.col-lg-2
+      = f.button :submit, class: 'btn-info', value: t('general.send')
+      = link_to t('general.back'), channels_path, class: 'btn btn-default'
 - else
-  - if can? :manage, @channel
-    Hello !
-    %br
-    You need to enter this string (case sensitive) in your YT account description :
-    %br
-    Validation string :
-    %b
-      = @channel.validation_key
-    %br
-    After having entered this string, press this button to validate your new channel !
-    %br
-    = link_to t('view.validate_channel'), channel_path, method: 'PUT'
-  - else
-    This channel is not yet activated
+  = t('channel.validation_text_html', key: @channel.validation_key, link: (link_to t('channel.validate_channel'), channel_path, method: 'PUT'))

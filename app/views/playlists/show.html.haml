@@ -5,13 +5,13 @@
     %h3
       = @playlist.title
     .pull-right
-      = render partial: 'shared/likes', locals: Like::get_params(@playlist, current_user)
+      %span.glyphicon.glyphicon-user
+      = @playlist.likes.count
+      - if current_user
+        = render partial: 'shared/likes', locals: Like::get_params(@playlist, current_user)
+      = render partial: 'shared/votes', locals: Vote::get_params(@playlist)
       - if current_user && current_user.id == @playlist.user.id
         = link_to t('serie.edit_serie'), edit_playlist_path(@playlist), class: 'btn btn-warning'
-  .col-md-12.profile_buttons
-    .pull-right
-      %p
-        = render partial: 'shared/votes', locals: Vote::get_params(@playlist)
   .col-md-12
     = @playlist.description
   .col-md-12

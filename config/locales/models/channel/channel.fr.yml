@@ -1,0 +1,6 @@
+fr:
+  activerecord:
+    attributes:
+      channel:
+        api_id: "ID Chaine"
+        video_type: "Type de chaine"

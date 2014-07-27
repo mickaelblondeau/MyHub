@@ -38,3 +38,11 @@ en:
     categories: "Categories :"
     owner: "Owner :"
     participants: "Participants :"
+  channel:
+    choose_channel_type: "Choose the channel type"
+    choose_serie: "Choose your serie"
+    validation_text_html: "<p>hello!<br />
+    Your channel is not yet activated.<br />
+    To activate your channel, you have to put this code in your channel's description <b>%{key}</b><br />
+    After having this code in your description field, just click there to activate your channel : %{link}</p>"
+    validate_channel: "Validate your channel"

@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    attributes:
+      video:
+        api_id: "Video ID"
+        playlist_id: "Serie"
+        name: "Name"
+        description: "Description"

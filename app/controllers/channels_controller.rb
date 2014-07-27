@@ -2,13 +2,11 @@ class ChannelsController < ApplicationController
   def index
     authorize! :index, Channel
     @channels = Channel.where(:user_id => current_user.id)
-    @new_channel = Channel.new
   end
 
   def show
     @channel = Channel.friendly.find(params[:id])
-    @videos = Video.where(:channel_id => @channel.id)
-    @comments = Comment.where('channel_id = ?', @channel.id)
+    authorize! :manage, @channel
   end
 
   def update

@@ -38,3 +38,11 @@ fr:
     categories: "Catégories :"
     owner: "Propriétaire :"
     participants: "Participants :"
+  channel:
+    choose_channel_type: "Choisir le type de chaine"
+    choose_serie: "Choisir une série"
+    validation_text_html: "<p>Bonjour!<br />
+    Votre chaine n'est pas encore activée.<br />
+    Afin de pouvoir ajouter de nouvelles vidéos, vous devez placer ce code dans la description de votre chaine <b>%{key}</b><br />
+    Une fois ce code présent, vous pouvez cliquer sur ce bouton afin d'activer votre chaine : %{link}</p>"
+    validate_channel: "Valider la chaine"

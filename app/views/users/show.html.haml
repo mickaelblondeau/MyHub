@@ -5,10 +5,13 @@
     %h3
       = @user.user_name
     .pull-right
-      = render partial: 'shared/likes', locals: Like::get_params(@user, current_user)
-      = link_to t('general.write_message'), new_message_id_path(@user.id), class: 'btn btn-info'
-      - if current_user && current_user.id == @user.id
-        = link_to t('user.edit_profile'), edit_user_registration_path, class: 'btn btn-warning'
+      %span.glyphicon.glyphicon-user
+      = @user.likes.count
+      - if current_user
+        = render partial: 'shared/likes', locals: Like::get_params(@user, current_user)
+        = link_to t('general.write_message'), new_message_id_path(@user.id), class: 'btn btn-info'
+        - if current_user.id == @user.id
+          = link_to t('user.edit_profile'), edit_user_registration_path, class: 'btn btn-warning'
   .col-md-12
     = @user.description
   .col-md-12
