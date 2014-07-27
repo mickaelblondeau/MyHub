@@ -33,3 +33,8 @@ en:
     edit_profile: "Edit my profile"
   serie:
     edit_serie: "Edit the serie"
+    owned_series: "Owned series :"
+    series: "Series :"
+    categories: "Categories :"
+    owner: "Owner :"
+    participants: "Participants :"

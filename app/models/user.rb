@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  has_many :playlist_users, :dependent => :destroy
-  has_many :series, through: :playlist_users, source: :serie, :dependent => :destroy
+  has_many :participations, :dependent => :destroy
+  has_many :series, through: :participations, source: :playlist, :dependent => :destroy
+  has_many :owned_series, foreign_key: :user_id, class_name: :Playlist
   has_many :likes, :dependent => :destroy
   has_many :channels, :dependent => :destroy
   has_many :videos, through: :channels, :order => 'created_at DESC'

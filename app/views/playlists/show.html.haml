@@ -15,18 +15,24 @@
   .col-md-12
     = @playlist.description
   .col-md-12
+    - if @playlist.playlist_categories.count > 0
+      %p
+        %h4
+          = t('serie.categories')
+        - @playlist.playlist_categories.each do |playlist_categorie|
+          = link_to playlist_categorie.category.label, playlist_categorie.category, class: 'btn btn-info btn-xs'
     %p
-      %h4 Categories :
-      - @playlist.playlist_categories.each do |playlist_categorie|
-        = link_to playlist_categorie.category.label, playlist_categorie.category, class: 'btn btn-info btn-xs'
-    %p
-      %h4 Participants :
+      %h4
+        = t('serie.owner')
       = link_to @playlist.user.user_name, @playlist.user, class: 'btn btn-info btn-xs'
-      - @playlist.participations.each do |su|
-        = link_to su.user.user_name, su.user, class: 'btn btn-info btn-xs'
-        = su.comment
-        %br
-  .col-md-12
+    - if @playlist.participations.count > 0
+      %p
+        %h4
+          = t('serie.participants')
+        - @playlist.participations.each do |su|
+          = link_to su.user.user_name, su.user, class: 'btn btn-info btn-xs'
+          = su.comment
+    .col-md-12
     - if @playlist.videos.count > 0
       .col-md-12.separator
     - @playlist.videos.each_with_index do |video, i|

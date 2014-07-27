@@ -12,6 +12,20 @@
   .col-md-12
     = @user.description
   .col-md-12
+    - if @user.owned_series.count > 0
+      %p
+        %h4
+          = t('serie.owned_series')
+        - @user.owned_series.each do |serie|
+          = link_to serie.title, playlist_path(serie), class: 'btn btn-info btn-xs'
+    - if @user.series.count > 0
+      %p
+        %h4
+          = t('serie.series')
+        - @user.series.each do |serie|
+          = link_to serie.title, playlist_path(serie), class: 'btn btn-info btn-xs'
+
+  .col-md-12
     - if @user.videos.count > 0
       .col-md-12.separator
     - @user.videos.each_with_index do |video, i|
