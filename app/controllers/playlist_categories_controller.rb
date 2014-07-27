@@ -8,16 +8,15 @@ class PlaylistCategoriesController < ApplicationController
     else
       flash[:alert] = 'Ko'
     end
-    redirect_to playlist_path(@playlist_category.playlist)
+    redirect_to edit_playlist_path(@playlist_category.playlist)
   end
 
   def destroy
     @playlist_category = PlaylistCategory.find(params[:id])
     authorize! :destroy, @playlist_category
-    path = @playlist_category.playlist
     @playlist_category.destroy
     flash[:notice] = 'Ok'
-    redirect_to playlist_path(path)
+    redirect_to edit_playlist_path(@playlist_category.playlist)
   end
 
   def get_params

@@ -24,9 +24,12 @@ en:
     write_message: "Write a message"
     update: "Update"
     back: "Back"
+    send: "Send"
   user:
     delete_account: "Delete your account"
     password_confirm: "Fill your password to save your changes"
     password_change: "Do not fill this field if you do not want to change your password"
     view_profile: "View my profile"
     edit_profile: "Edit my profile"
+  serie:
+    edit_serie: "Edit the serie"

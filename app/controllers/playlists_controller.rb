@@ -7,7 +7,6 @@ class PlaylistsController < ApplicationController
 
   def show
     @playlist = Playlist.friendly.find(params[:id])
-    @new_participation = Participation.new
     @comments = Comment.where('playlist_id = ?', @playlist.id)
     if current_user
       @like = Like.where('playlist_id = ? AND user_id = ?', @playlist.id, current_user.id).first
@@ -26,7 +25,7 @@ class PlaylistsController < ApplicationController
     else
       flash[:alert] = 'Ko'
     end
-    redirect_to playlists_path
+    redirect_to edit_playlist_path(@playlist)
   end
 
   def create

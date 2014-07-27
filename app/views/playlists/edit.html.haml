@@ -3,4 +3,46 @@
     = f.input :title
     = f.input :description
     = f.input :icon, as: :file, required: (@playlist.icon)?false:true
+    %label.col-lg-2
     = f.button :submit, class: 'btn-info'
+
+%hr
+
+- if can? :manage, @playlist
+
+  %p
+    %h4 Participants
+    = link_to @playlist.user.user_name, @playlist.user, class: 'btn btn-info btn-xs'
+    - @playlist.participations.each do |su|
+      = link_to su.user.user_name, su.user, class: 'btn btn-info btn-xs'
+      = su.comment
+      - if can? :manage, @playlist
+        = link_to t('form.delete'), su, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
+
+  = simple_form_for Participation.new do |f|
+    = f.input :user_id, collection: User.where.not(id:@playlist.participations.map(&:user_id)).where.not(current_user.id), prompt: t('form.choose_user'), label: t('form.user'), label_method: :user_name
+    = f.input :comment
+    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
+    %label.col-lg-2
+    = f.button :submit, class: 'btn-info'
+
+%hr
+
+- if can? :manage, @playlist
+
+  %p
+    %h4 Categories
+    - @playlist.playlist_categories.each do |playlist_categorie|
+      = link_to playlist_categorie.category.label, playlist_categorie.category, class: 'btn btn-info btn-xs'
+      - if can? :manage, playlist_categorie
+        = link_to t('form.delete'), playlist_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
+
+  = simple_form_for PlaylistCategory.new do |f|
+    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
+    = f.input :category_id, collection: Category.where.not(id:@playlist.categories.map(&:id)), prompt: t('form.choose_category'), label: t('form.category'), label_method: :label
+    %label.col-lg-2
+    = f.button :submit, class: 'btn-info'
+
+%br
+%label.col-lg-2
+= link_to t('general.back'), playlist_path(@playlist), class: 'btn btn-default'

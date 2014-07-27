@@ -7,16 +7,15 @@ class ParticipationsController < ApplicationController
     else
       flash[:alert] = 'Ko'
     end
-    redirect_to @participation.playlist
+    redirect_to edit_playlist_path(@participation.playlist)
   end
 
   def destroy
     @participation = Participation.find(params[:id])
     authorize! :manage, @participation
-    playlist = @participation.playlist
     @participation.destroy
     flash[:notice] = 'Ok'
-    redirect_to playlist
+    redirect_to edit_playlist_path(@participation.playlist)
   end
 
   def get_params

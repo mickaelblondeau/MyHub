@@ -24,9 +24,12 @@ fr:
     write_message: "Ecrire un message"
     update: "Mettre à jour"
     back: "Retour"
+    send: "Envoyer"
   user:
     delete_account: "Supprimer votre compte"
     password_confirm: "Veuillez entrer votre mot de passe pour enregistrer les modifications"
     password_change: "Ne pas remplir ce champ si vous ne souhaitez pas changer de mot de passe"
     view_profile: "Voir mon profil"
     edit_profile: "Modifier mon profil"
+  serie:
+    edit_serie: "Modifier la série"

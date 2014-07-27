@@ -1,8 +1,5 @@
 en:
   form:
-    name: "Name"
-    channel_api_id: "Channel ID"
-    description: "Description"
     sure: "Are you sure ?"
     subscribe: "Subscribe"
     delete: "Delete"

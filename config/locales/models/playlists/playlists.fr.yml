@@ -1,0 +1,7 @@
+fr:
+  activerecord:
+    attributes:
+      playlist:
+        title: "Titre"
+        description: "Description"
+        icon: "Image"

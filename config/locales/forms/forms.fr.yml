@@ -1,8 +1,5 @@
 fr:
   form:
-    channel_api_id: "ID Chaine"
-    name: "Nom"
-    description: "Description"
     sure: "Etes vous sur ?"
     subscribe: "S'abonner"
     delete: "Supprimer"

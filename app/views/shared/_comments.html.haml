@@ -1,16 +1,24 @@
 %div{id: :comment_block}
-  %h3 Commentaires
-  - comments.each do |comment|
-    = l(comment.created_at)
-    %br
-    #{comment.user.user_name}: #{comment.content}
-    - if can? :destroy, comment
-      = button_to t('general.delete_comment'), comment, method: :delete, remote: true
+  - comments.each_with_index do |comment, i|
+    - if i != 0
+      .col-md-12.separator
+    %article.col-md-12
+      .col-md-12.profile_buttons
+        = l(comment.created_at, format: :short)
+        = link_to comment.user.user_name, comment.user
+        - if can? :destroy, comment
+          .pull-right
+            = button_to t('general.delete_comment'), comment, method: :delete, remote: true, class: 'btn btn-danger btn-xs'
+      .col-md-2
+        = link_to (image_tag comment.user.avatar.url(:thumb), class: 'img-responsive'), comment.user
+      .col-md-8
+        = truncate(comment.content, length: 500)
     %br
 
   - if can? :create, Comment
-    %h3 Poster un commentaire
+    .col-md-12.separator
     = simple_form_for Comment.new, remote: true do |f|
       = f.input param_name, input_html: { value: id }, as: :hidden
-      = f.input :content, label: t('from.comment_content')
-      = f.button :submit, class: 'btn-info'
+      = f.input :content
+      %label.col-lg-2
+      = f.button :submit, class: 'btn-info', value: t('general.send')

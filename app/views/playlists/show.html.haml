@@ -1,71 +1,53 @@
-%h2
-  = @playlist.title
+%article.col-md-12
+  = image_tag @playlist.icon.url(:banner), class: 'img-responsive'
+  %p
+  .col-md-12.profile_buttons
+    %h3
+      = @playlist.title
+    .pull-right
+      = render partial: 'shared/likes', locals: Like::get_params(@playlist, current_user)
+      - if current_user && current_user.id == @playlist.user.id
+        = link_to t('serie.edit_serie'), edit_playlist_path(@playlist), class: 'btn btn-warning'
+  .col-md-12.profile_buttons
+    .pull-right
+      %p
+        = render partial: 'shared/votes', locals: Vote::get_params(@playlist)
+  .col-md-12
+    = @playlist.description
+  .col-md-12
+    %p
+      %h4 Categories :
+      - @playlist.playlist_categories.each do |playlist_categorie|
+        = link_to playlist_categorie.category.label, playlist_categorie.category, class: 'btn btn-info btn-xs'
+    %p
+      %h4 Participants :
+      = link_to @playlist.user.user_name, @playlist.user, class: 'btn btn-info btn-xs'
+      - @playlist.participations.each do |su|
+        = link_to su.user.user_name, su.user, class: 'btn btn-info btn-xs'
+        = su.comment
+        %br
+  .col-md-12
+    - if @playlist.videos.count > 0
+      .col-md-12.separator
+    - @playlist.videos.each_with_index do |video, i|
+      - if i != 0
+        .col-md-12.separator
+      %article.col-md-12
+        %a{href: video_path(video)}
+          .col-md-4
+            = image_tag video.image, class: 'img-responsive'
+        .col-md-8
+          %h2
+            #{link_to truncate(video.name, length: 100), video_path(video)}
+          %p
+            = truncate(video.description, length: 400)
+            %p
+              %time{pubdate: '', datetime: l(video.created_at, format: :short)}
+                = video.diff_time
+              %span.view-counter
+                = t('general.video_views', count: video.impressionist_count)
 
-= @playlist.description
+- if @playlist.videos.count > 0
+  .col-md-12.separator
 
-%h3 Categories
-- @playlist.playlist_categories.each do |playlist_categorie|
-  = link_to playlist_categorie.category.label, playlist_categorie.category
-  - if can? :manage, playlist_categorie
-    = link_to t('form.delete'), playlist_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-
-- if can? :manage, @playlist
-  = simple_form_for PlaylistCategory.new do |f|
-    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
-    = f.input :category_id, collection: Category.where.not(id:@playlist.categories.map(&:id)), prompt: t('form.choose_category'), label: t('form.category'), label_method: :label
-    = f.button :submit, class: 'btn-info'
-
-%h3 Videos
-
-- @playlist.videos.each do |video|
-  = link_to video.name, video
-  %br
-
-%h3 Participants
-= link_to @playlist.user.email, user_path(@playlist.user)
-(Owner)<br>
-- @playlist.participations.each do |su|
-  = link_to su.user.email, user_path(su.user)
-  = su.comment
-  - if can? :manage, @playlist
-    = link_to t('form.delete'), su, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-  %br
-
-- if can? :manage, @playlist
-  %h3 Ajouter un participant
-  = simple_form_for @new_participation do |f|
-    = f.input :user_id, collection: User.where.not(id:@playlist.participations.map(&:user_id)).where.not(current_user.id), prompt: t('form.choose_user'), label: t('form.user'), label_method: :user_name
-    = f.input :comment
-    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
-    = f.button :submit, class: 'btn-info'
-
-%br
-
-%h3 Articles
-- articles = Article.where('playlist_id = ?', @playlist.id)
-- articles.each do |article|
-  Par :
-  = article.user.user_name
-  <br>
-  = article.title
-  <br>
-  = article.content
-  <br>
-  - if can? :delete, article
-    = link_to t('views.delete_article'), article, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-  <hr>
-
-- if can? :manage, @playlist
-  %h3 Poster un article
-  = simple_form_for Article.new do |f|
-    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
-    = f.input :title, label: t('from.article_title')
-    = f.input :content, label: t('from.article_content')
-    = f.button :submit, class: 'btn-info'
-
-= render partial: 'shared/likes', locals: Like::get_params(@playlist, current_user)
-= render partial: 'shared/votes', locals: Vote::get_params(@playlist)
 = render partial: 'shared/comments', locals: Comment::get_params(@playlist)
-
-- if can? :index, Playlist
-  = link_to t('views.return_series'), playlists_path
