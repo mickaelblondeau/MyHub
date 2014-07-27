@@ -11,19 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140726164457) do
-
-  create_table "articles", force: true do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "playlist_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "articles", ["playlist_id"], name: "index_articles_on_playlist_id"
-  add_index "articles", ["user_id"], name: "index_articles_on_user_id"
+ActiveRecord::Schema.define(version: 20140727205326) do
 
   create_table "categories", force: true do |t|
     t.string   "label"
@@ -239,16 +227,6 @@ ActiveRecord::Schema.define(version: 20140726164457) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["slug"], name: "index_users_on_slug"
-
-  create_table "video_categories", force: true do |t|
-    t.integer  "video_id"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "video_categories", ["category_id"], name: "index_video_categories_on_category_id"
-  add_index "video_categories", ["video_id"], name: "index_video_categories_on_video_id"
 
   create_table "videos", force: true do |t|
     t.string   "name"

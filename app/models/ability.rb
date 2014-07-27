@@ -50,10 +50,6 @@ class Ability
           v.user_id == user.id
         end
 
-        can :manage, Article do |a|
-          a.playlist.user.id == user.id
-        end
-
         can :manage, CooperationPermission do |c|
           c.cooperation.channel.user.id == user.id
         end

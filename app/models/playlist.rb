@@ -9,7 +9,6 @@ class Playlist < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
   has_many :likes, :dependent => :destroy
-  has_many :articles, :dependent => :destroy
   has_attached_file :icon,
                     :storage => :ftp,
                     :styles => { :thumb => '138x69#', :banner => '710x280#' },
