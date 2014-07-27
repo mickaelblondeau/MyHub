@@ -1,8 +1,8 @@
 .col-md-2.side-menu
   %nav
     = link_to t('nav.home'), root_path, class: (current_page?(root_path) ? 'active' : '')
-    = link_to t('nav.series'), root_path
-    = link_to t('nav.users'), root_path
+    = link_to t('nav.series'), root_path, class: (controller.controller_name == 'playlists' ? 'active' : '')
+    = link_to t('nav.users'), root_path, class: (controller.controller_name == 'users' && !(current_user && current_page?(user_path(current_user))) ? 'active' : '')
     = link_to t('nav.top'), root_path
     .separator
     - if user_signed_in?

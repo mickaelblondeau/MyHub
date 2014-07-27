@@ -53,7 +53,7 @@
               %span.view-counter
                 = t('general.video_views', count: video.impressionist_count)
 
-- if @playlist.videos.count > 0
+- if @playlist.comments.count > 0
   .col-md-12.separator
 
 = render partial: 'shared/comments', locals: Comment::get_params(@playlist)
