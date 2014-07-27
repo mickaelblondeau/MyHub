@@ -4,13 +4,13 @@ class User < ActiveRecord::Base
   has_many :series, through: :playlist_users, source: :serie, :dependent => :destroy
   has_many :likes, :dependent => :destroy
   has_many :channels, :dependent => :destroy
-  has_many :videos, through: :channels
+  has_many :videos, through: :channels, :order => 'created_at DESC'
   validates :user_name, presence: true
   extend FriendlyId
   friendly_id :user_name, use: :slugged
   has_attached_file :avatar,
                     :storage => :ftp,
-                    :styles => { :thumb => '138x69#' },
+                    :styles => { :thumb => '138x69#', :banner => '710x280#' },
                     :path => 'occuli/public/images/:class/:attachment/:style/:id.:extension',
                     :url => ':class/:attachment/:style/:id.:extension',
                     :ftp_servers => [

@@ -22,3 +22,11 @@ en:
     inbox_message: "Inbox messages"
     outbox_message: "Outbox messages"
     write_message: "Write a message"
+    update: "Update"
+    back: "Back"
+  user:
+    delete_account: "Delete your account"
+    password_confirm: "Fill your password to save your changes"
+    password_change: "Do not fill this field if you do not want to change your password"
+    view_profile: "View my profile"
+    edit_profile: "Edit my profile"

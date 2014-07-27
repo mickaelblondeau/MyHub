@@ -1,10 +1,33 @@
-%h2 User
-
-%h3
-  = @user.user_name
-
-= @user.description
-
-= link_to t('general.write_message'), new_message_id_path(@user.id)
-
-= render partial: 'shared/likes', locals: Like::get_params(@user, current_user)
+%article.col-md-12
+  = image_tag @user.avatar.url(:banner), class: 'img-responsive'
+  %p
+  .col-md-12.profile_buttons
+    %h3
+      = @user.user_name
+    .pull-right
+      = render partial: 'shared/likes', locals: Like::get_params(@user, current_user)
+      = link_to t('general.write_message'), new_message_id_path(@user.id), class: 'btn btn-info'
+      - if current_user && current_user.id == @user.id
+        = link_to t('user.edit_profile'), edit_user_registration_path, class: 'btn btn-warning'
+  .col-md-12
+    = @user.description
+  .col-md-12
+    - if @user.videos.count > 0
+      .col-md-12.separator
+    - @user.videos.each_with_index do |video, i|
+      - if i != 0
+        .col-md-12.separator
+      %article.col-md-12
+        %a{href: video_path(video)}
+          .col-md-4
+            = image_tag video.image, class: 'img-responsive'
+        .col-md-8
+          %h2
+            #{link_to truncate(video.playlist.title, length: 100), playlist_path(video.playlist)} - #{link_to truncate(video.name, length: 100), video_path(video)}
+          %p
+            = truncate(video.description, length: 400)
+            %p
+              %time{pubdate: '', datetime: l(video.created_at, format: :short)}
+                = video.diff_time
+              %span.view-counter
+                = t('general.video_views', count: video.impressionist_count)

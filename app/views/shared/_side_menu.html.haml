@@ -7,7 +7,7 @@
     .separator
     - if user_signed_in?
       = link_to t('nav.subscriptions'), subscription_index_path, class: (controller.controller_name == 'subscription' ? 'active' : '')
-      = link_to t('nav.profile'), edit_user_registration_path, class: (current_page?(edit_user_registration_path) ? 'active' : '')
+      = link_to t('nav.profile'), user_path(current_user), class: (current_page?(edit_user_registration_path) || current_page?(user_path(current_user)) ? 'active' : '')
       = link_to t('nav.my_channel'), channels_path, class: (current_page?(channels_path) ? 'active' : '')
       = link_to t('nav.my_series'), playlists_path, class: (current_page?(playlists_path) ? 'active' : '')
       = link_to t('nav.my_messages'), messages_path, class: (controller.controller_name == 'messages' ? 'active' : '')

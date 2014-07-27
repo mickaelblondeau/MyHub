@@ -1,0 +1,11 @@
+fr:
+  activerecord:
+    attributes:
+      user:
+        user_name: "Nom d'utilisateur"
+        email: "Adresse E-mail"
+        description: "Description"
+        avatar: "Avatar"
+        password: "Mot de passe"
+        password_confirmation: "Confirmation du mot de passe"
+        current_password: "Mot de passe actuel"

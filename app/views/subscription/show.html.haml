@@ -16,9 +16,14 @@
           %span.badge.blue
             = t('general.new_video')
         %h2
-          = link_to video.name, video_path(video)
+          - if @like.user
+            #{link_to video.playlist.title, playlist_path(video.playlist)} - #{link_to video.name, video_path(video)}
+          - else
+            = link_to video.name, video_path(video)
         %p
           = truncate(video.description, length: 400)
           %p
             %time{pubdate: '', datetime: l(video.created_at, format: :short)}
               = video.diff_time
+            %span.view-counter
+              = t('general.video_views', count: video.impressionist_count)
