@@ -46,3 +46,8 @@ en:
     To activate your channel, you have to put this code in your channel's description <b>%{key}</b><br />
     After having this code in your description field, just click there to activate your channel : %{link}</p>"
     validate_channel: "Validate your channel"
+  video:
+    edit_video: "Edit the video"
+  category:
+    new: "Add a new category"
+    edit: "Edit the category"

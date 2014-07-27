@@ -1,8 +1,6 @@
-%article.col-md-12
-  = image_tag @user.avatar.url(:banner), class: 'img-responsive'
-  %p
+.col-md-12
   .col-md-12.profile_buttons
-    %h3
+    %h2
       = @user.user_name
     .pull-right
       %span.glyphicon.glyphicon-user
@@ -12,6 +10,9 @@
         = link_to t('general.write_message'), new_message_id_path(@user.id), class: 'btn btn-info'
         - if current_user.id == @user.id
           = link_to t('user.edit_profile'), edit_user_registration_path, class: 'btn btn-warning'
+  .clear
+  %br
+  = image_tag @user.avatar.url(:banner), class: 'img-responsive'
   .col-md-12
     = @user.description
   .col-md-12

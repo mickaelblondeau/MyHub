@@ -1,8 +1,6 @@
-%article.col-md-12
-  = image_tag @playlist.icon.url(:banner), class: 'img-responsive'
-  %p
+.col-md-12
   .col-md-12.profile_buttons
-    %h3
+    %h2
       = @playlist.title
     .pull-right
       %span.glyphicon.glyphicon-user
@@ -12,6 +10,9 @@
       = render partial: 'shared/votes', locals: Vote::get_params(@playlist)
       - if current_user && current_user.id == @playlist.user.id
         = link_to t('serie.edit_serie'), edit_playlist_path(@playlist), class: 'btn btn-warning'
+  .clear
+  %br
+  = image_tag @playlist.icon.url(:banner), class: 'img-responsive'
   .col-md-12
     = @playlist.description
   .col-md-12

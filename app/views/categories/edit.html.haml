@@ -2,4 +2,6 @@
   = simple_form_for @category, :html => {:multipart => true } do |f|
     = f.input :label
     = f.input :icon, as: :file
-    = f.button :submit, class: 'btn-info'
+    %label.col-lg-2
+    = f.button :submit, class: 'btn-info', value: t('general.send')
+    = link_to t('general.back'), category_path(@category), class: 'btn btn-default'

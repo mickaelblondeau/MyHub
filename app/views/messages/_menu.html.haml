@@ -5,6 +5,6 @@
     = link_to t('general.inbox_message'), messages_path
   %li{class: (current_page?(sent_messages_path) ? 'active' : '')}
     = link_to t('general.outbox_message'), sent_messages_path
-  %li{class: (current_page?(new_message_path) ? 'active' : '')}
+  %li{class: (current_page?(new_message_path) || current_page?(new_message_id_path) ? 'active' : '')}
     = link_to t('general.write_message'), new_message_path
 %br

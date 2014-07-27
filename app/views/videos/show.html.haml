@@ -5,6 +5,8 @@
     %span.glyphicon.glyphicon-eye-open
     = @video.impressionist_count
     = render partial: 'shared/votes', locals: Vote::get_params(@video)
+    - if current_user && current_user.id == @video.channel.user.id
+      = link_to t('video.edit_video'), edit_video_path(@video), class: 'btn btn-warning'
 .clear
 %br
 .col-md-12

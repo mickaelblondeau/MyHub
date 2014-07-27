@@ -46,3 +46,8 @@ fr:
     Afin de pouvoir ajouter de nouvelles vidéos, vous devez placer ce code dans la description de votre chaine <b>%{key}</b><br />
     Une fois ce code présent, vous pouvez cliquer sur ce bouton afin d'activer votre chaine : %{link}</p>"
     validate_channel: "Valider la chaine"
+  video:
+    edit_video: "Modifier la vidéo"
+  category:
+    new: "Ajouter une catégorie"
+    edit: "Editer la catégorie"

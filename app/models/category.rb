@@ -2,8 +2,7 @@ require 'paperclip/storage/ftp'
 
 class Category < ActiveRecord::Base
   validates :label, presence: true
-  has_many :video_categories
-  has_many :videos, through: :video_categories
+  has_many :videos, through: :playlists
   has_many :playlist_categories
   has_many :playlists, through: :playlist_categories
   has_many :category_links
@@ -12,7 +11,7 @@ class Category < ActiveRecord::Base
   has_many :childs, through: :category_links_childs, source: :category
   has_attached_file :icon,
                     :storage => :ftp,
-                    :styles => { :thumb => '143x72#' },
+                    :styles => { :thumb => '143x72#', :banner => '710x280#' },
                     :path => 'occuli/public/images/:class/:attachment/:style/:id.:extension',
                     :url => ':class/:attachment/:style/:id.:extension',
                     :ftp_servers => [

@@ -1,13 +1,19 @@
 - content_for :top do
   = render partial: 'shared/slider'
 
+- if can? :manage, Category
+  .col-md-12
+    = link_to t('category.new'), new_category_path, class: 'btn btn-info'
+    .clear
+    %br
+
 - @categories.each_with_index do |category, i|
   .col-md-12{class: (i != 0) ? 'separator' : ''}
     %article.category.col-md-2
-      = image_tag category.icon.url(:thumb), class: 'img-responsive'
+      = link_to (image_tag category.icon.url(:thumb), class: 'img-responsive'), category_path(category)
       .row
         .col-md-12.category-name
-          = category.label
+          = link_to category.label, category_path(category)
     .col-md-10.category-articles{id: 'videos_' + category.id.to_s}
       .videos-block.col-md-12
         - category.get_featured_videos.each do |video|

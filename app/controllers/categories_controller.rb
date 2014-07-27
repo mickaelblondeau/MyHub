@@ -1,6 +1,10 @@
 class CategoriesController < ApplicationController
   def index
-    @categories = Category.all
+    redirect_to root_path, :status => :moved_permanently
+  end
+
+  def new
+    authorize! :manage, Category
   end
 
   def show
@@ -8,34 +12,35 @@ class CategoriesController < ApplicationController
   end
 
   def edit
+    authorize! :manage, Category
     @category = Category.friendly.find(params[:id])
   end
 
   def update
+    authorize! :manage, Category
     @category = Category.friendly.find(params[:id])
-    authorize! :manage, @category
     if @category.update(get_params)
       flash[:notice] = 'Ok'
     else
       flash[:alert] = 'Ko'
     end
-    redirect_to categories_path
+    redirect_to category_path(@category)
   end
 
   def create
+    authorize! :manage, Category
     @category = Category.new(get_params)
-    authorize! :create, @category
     if @category.save_with_slug
       flash[:notice] = 'Ok'
     else
       flash[:alert] = 'Ko'
     end
-    redirect_to categories_path
+    redirect_to category_path(@category)
   end
 
   def destroy
+    authorize! :manage, Category
     @category = Category.friendly.find(params[:id])
-    authorize! :destroy, @category
     @category.destroy
     flash[:notice] = 'Ok'
     redirect_to categories_path

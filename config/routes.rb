@@ -19,7 +19,7 @@ MyHub::Application.routes.draw do
     resources :cooperation_permissions, :only => [:create, :destroy, :show]
     resources :video_categories, :only => [:create, :destroy]
     resources :playlist_categories, :only => [:create, :destroy]
-    resources :categories, :only => [:index, :show, :create, :destroy, :edit, :update]
+    resources :categories, :only => [:index, :show, :create, :destroy, :edit, :update, :new]
     resources :category_links, :only => [:create, :destroy]
     resources :subscription, :only => [:index, :show], :path  => 'subscriptions'
     resources :messages, :only => [:index, :show, :new, :create, :destroy]

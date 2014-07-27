@@ -1,34 +1,30 @@
-%h2 Category
-
-= @category.label
-
-%h3 Categories parentes
-- @category.category_links.each do |link|
-  = link.parent.label
-  = link_to t('form.delete'), link, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+.col-md-12
+  .col-md-12.profile_buttons
+    %h2
+      = @category.label
+      - if current_user && current_user.is_admin
+        .pull-right
+          = link_to t('category.edit'), edit_category_path(@category), class: 'btn btn-warning'
+  .clear
   %br
-
-%h3 Categories enfant
-- @category.category_links_childs.each do |link|
-  = link.category.label
-  = link_to t('form.delete'), link, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
-  %br
-
-- if can? :manage, @category
-  %h3 Ajouter des categories parentes
-  = simple_form_for CategoryLink.new do |f|
-    = f.input :category_id, input_html: { value: @category.id }, as: :hidden
-    = f.input :parent_id, collection: Category.where('id IS NOT ?', @category.id).where.not(id:@category.parents.map(&:id)), prompt: t('form.choose_category'), label: t('form.parent'), label_method: :label
-    = f.button :submit, class: 'btn-info'
-
-%h3 Series
-
-- @category.playlists.each do |playlist|
-  = link_to playlist.title, playlist
-
-%h3 Videos
-
-- @category.videos.each do |video|
-  = link_to video.name, video
-
-= link_to t('return_categories'), categories_path
+  = image_tag @category.icon.url(:banner), class: 'img-responsive'
+  .col-md-12
+  - if @category.videos.count > 0
+    .col-md-12.separator
+  - @category.videos.each_with_index do |video, i|
+    - if i != 0
+      .col-md-12.separator
+    %article.col-md-12
+      %a{href: video_path(video)}
+        .col-md-4
+          = image_tag video.image, class: 'img-responsive'
+      .col-md-8
+        %h2
+          #{link_to truncate(video.playlist.title, length: 100), playlist_path(video.playlist)} - #{link_to truncate(video.name, length: 100), video_path(video)}
+        %p
+          = truncate(video.description, length: 400)
+          %p
+            %time{pubdate: '', datetime: l(video.created_at, format: :short)}
+              = video.diff_time
+            %span.view-counter
+              = t('general.video_views', count: video.impressionist_count)
