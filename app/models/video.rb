@@ -4,6 +4,7 @@ class Video < ActiveRecord::Base
   belongs_to :playlist
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
+  has_many :user_views, :dependent => :destroy
   is_impressionable :counter_cache => true, :unique => true
   attr_accessor :seen
 

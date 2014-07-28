@@ -1,8 +1,8 @@
 class SubscriptionController < ApplicationController
   def index
-  	authorize! :index, Channel
+    authorize! :index, Channel
     @likes = Like.where('owner_id = ?', current_user.id).includes(:user_videos, :playlist_videos)
-    @likes = Like.sort_likes(@likes, current_user.id)
+    @likes = Like.sort_likes(@likes, current_user.id).paginate(:page => params[:page], :per_page => 10)
   end
 
   def show
@@ -16,6 +16,8 @@ class SubscriptionController < ApplicationController
     end
     if @like == nil
       redirect_to subscription_index_path
+    else
+      @videos = @like.get_unseen_videos(current_user.id).paginate(:page => params[:page], :per_page => 10)
     end
   end
 end

@@ -1,58 +1,64 @@
 - content_for :top do
   = render partial: 'shared/slider'
 
-- @likes.each_with_index do |like, i|
-  - if i != 0
-    .col-md-12.separator
+- if @likes == nil || @likes.count == 0
+  = t('general.no_subscriptions')
+- else
+  - @likes.each_with_index do |like, i|
+    - if i != 0
+      .col-md-12.separator
 
-  - if like.user
-    %article.col-md-12
-      %a{href: subscription_slug_path('u/' + like.user.slug)}
-        .col-md-4
-          = image_tag like.user.avatar.url(:thumb), class: 'img-responsive'
-      .col-md-8
-        .col-md-1
-          %span.badge.blue
-            = like.unseen_videos
-        .col-md-11
-          %h2
-            = link_to like.get_type_name, subscription_slug_path('u/' + like.user.slug)
-          %p
-            = truncate(like.user.description, length: 400)
-          %p
-            %time{pubdate: '', datetime: l(like.last_video, format: :short)}
-              = Video.diff_time(like.last_video)
-          %p
-            = t('general.videos', count: like.user.videos.length)
-            %span.view-counter
-              = t('general.video_views', count: like.get_views)
+    - if like.user
+      %article.col-md-12
+        %a{href: subscription_slug_path('u/' + like.user.slug)}
+          .col-md-4
+            = image_tag like.user.avatar.url(:thumb), class: 'img-responsive'
+        .col-md-8
+          .col-md-1
+            %span.badge.blue
+              = like.unseen_videos
+          .col-md-11
+            %h2
+              = link_to like.get_type_name, subscription_slug_path('u/' + like.user.slug)
+            %p
+              = truncate(like.user.description, length: 400)
+            %p
+              %time{pubdate: '', datetime: l(like.last_video, format: :short)}
+                = Video.diff_time(like.last_video)
+            %p
+              = t('general.videos', count: like.user.videos.length)
+              %span.view-counter
+                = t('general.video_views', count: like.get_views)
 
-  - if like.playlist
-    %article.col-md-12
-      %a{href: subscription_slug_path('s/' + like.playlist.slug)}
-        .col-md-4
-          = image_tag like.playlist.icon.url(:thumb), class: 'img-responsive'
-      .col-md-8
-        .col-md-1
-          %span.badge.blue
-            = like.unseen_videos
-        .col-md-11
-          %h2
-            = link_to like.get_type_name, subscription_slug_path('s/' + like.playlist.slug)
-          %p
-            = truncate(like.playlist.description, length: 400)
-          %p
-            %time{pubdate: '', datetime: l(like.last_video, format: :short)}
-              = Video.diff_time(like.last_video)
-          %p
-            = t('general.videos', count: like.playlist.videos.length)
-            %span.view-counter
-              = t('general.video_views', count: like.get_views)
-      .col-md-12
-        &nbsp;
-        %p
+    - if like.playlist
+      %article.col-md-12
+        %a{href: subscription_slug_path('s/' + like.playlist.slug)}
+          .col-md-4
+            = image_tag like.playlist.icon.url(:thumb), class: 'img-responsive'
+        .col-md-8
+          .col-md-1
+            %span.badge.blue
+              = like.unseen_videos
+          .col-md-11
+            %h2
+              = link_to like.get_type_name, subscription_slug_path('s/' + like.playlist.slug)
+            %p
+              = truncate(like.playlist.description, length: 400)
+            %p
+              %time{pubdate: '', datetime: l(like.last_video, format: :short)}
+                = Video.diff_time(like.last_video)
+            %p
+              = t('general.videos', count: like.playlist.videos.length)
+              %span.view-counter
+                = t('general.video_views', count: like.get_views)
+        .col-md-12
           &nbsp;
-          #{t('general.featuring')} :
-          = link_to like.playlist.user.user_name, like.playlist.user, class: 'btn btn-info btn-xs'
-          - like.playlist.participations.each do |participation|
-            = link_to participation.user.user_name, participation.user, class: 'btn btn-info btn-xs'
+          %p
+            &nbsp;
+            #{t('general.featuring')} :
+            = link_to like.playlist.user.user_name, like.playlist.user, class: 'btn btn-info btn-xs'
+            - like.playlist.participations.each do |participation|
+              = link_to participation.user.user_name, participation.user, class: 'btn btn-info btn-xs'
+
+  .text-center
+    = will_paginate @likes, renderer: BootstrapPagination::Rails
