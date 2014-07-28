@@ -9,6 +9,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.friendly.find(params[:id])
+    @videos = @category.videos.paginate(:page => params[:page], :per_page => 10)
   end
 
   def edit

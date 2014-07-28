@@ -21,3 +21,6 @@
             %time{pubdate: '', datetime: l(message.created_at, format: :short)}
             = Video.diff_time(message.created_at)
           = link_to t('form.delete'), message, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+          
+.text-center
+  = will_paginate @categories, renderer: BootstrapPagination::Rails

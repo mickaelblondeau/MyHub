@@ -7,6 +7,7 @@ class PlaylistsController < ApplicationController
 
   def show
     @playlist = Playlist.friendly.find(params[:id])
+    @videos = @playlist.videos.paginate(:page => params[:page], :per_page => 10)
     @comments = Comment.where('playlist_id = ?', @playlist.id)
     if current_user
       @like = Like.where('playlist_id = ? AND user_id = ?', @playlist.id, current_user.id).first

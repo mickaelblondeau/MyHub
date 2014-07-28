@@ -9,9 +9,9 @@
   %br
   = image_tag @category.icon.url(:banner), class: 'img-responsive'
   .col-md-12
-  - if @category.videos.count > 0
+  - if @videos.count > 0
     .col-md-12.separator
-  - @category.videos.each_with_index do |video, i|
+  - @videos.each_with_index do |video, i|
     - if i != 0
       .col-md-12.separator
     %article.col-md-12
@@ -28,3 +28,6 @@
               = video.diff_time
             %span.view-counter
               = t('general.video_views', count: video.impressionist_count)
+
+.text-center
+  = will_paginate @videos, renderer: BootstrapPagination::Rails
