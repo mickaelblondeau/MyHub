@@ -31,6 +31,10 @@ fr:
     password_change: "Ne pas remplir ce champ si vous ne souhaitez pas changer de mot de passe"
     view_profile: "Voir mon profil"
     edit_profile: "Modifier mon profil"
+    login: "Se connecter"
+    signup: "S'inscrire"
+    new_password: "Mot de passe oublié"
+    new_password_instruction: "Envoyer les instructions"
   serie:
     edit_serie: "Modifier la série"
     owned_series: "Series de l'utilisateur :"

@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'simple_form'
 
 # Pagination
-gem 'kaminari'
+gem 'will_paginate'
 
 # Search
 gem 'ransack'

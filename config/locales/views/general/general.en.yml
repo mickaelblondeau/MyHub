@@ -31,6 +31,10 @@ en:
     password_change: "Do not fill this field if you do not want to change your password"
     view_profile: "View my profile"
     edit_profile: "Edit my profile"
+    login: "Login"
+    signup: "Sign In"
+    new_password: "Forgot password"
+    new_password_instruction: "Send reset instructions"
   serie:
     edit_serie: "Edit the serie"
     owned_series: "Owned series :"
