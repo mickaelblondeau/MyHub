@@ -26,6 +26,8 @@ en:
     back: "Back"
     send: "Send"
     no_subscriptions: "No subscriptions"
+    from: "From"
+    to: "To"
   user:
     delete_account: "Delete your account"
     password_confirm: "Fill your password to save your changes"

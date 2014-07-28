@@ -9,10 +9,10 @@
     %article.col-md-12
       %a{href: message_path(message)}
         .col-md-4
-          = image_tag message.owner.avatar.url('thumb'), class: 'img-responsive'
+          = image_tag message.user.avatar.url('thumb'), class: 'img-responsive'
       .col-md-8
         %h3
-          #{t('general.from')} #{link_to truncate(message.owner.user_name, length: 200), message.owner} -
+          #{t('general.to')} #{link_to truncate(message.user.user_name, length: 200), message.user} -
         %h2
           = link_to message.title, message
         %p
