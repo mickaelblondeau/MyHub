@@ -29,3 +29,6 @@
               %time{pubdate: '', datetime: l(video.created_at, format: :short)}
                 = video.diff_time
             .clear
+
+.text-center
+  = will_paginate @categories, renderer: BootstrapPagination::Rails

@@ -55,3 +55,7 @@ fr:
   category:
     new: "Ajouter une catégorie"
     edit: "Editer la catégorie"
+  will_paginate:
+    previous_label: "&#8592; Précedent"
+    next_label: "Suivant &#8594;"
+    page_gap: "&hellip;"

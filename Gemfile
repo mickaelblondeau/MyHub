@@ -26,6 +26,7 @@ gem 'simple_form'
 
 # Pagination
 gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 # Search
 gem 'ransack'
