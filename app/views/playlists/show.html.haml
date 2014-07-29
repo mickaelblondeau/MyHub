@@ -57,7 +57,4 @@
 .text-center
   = will_paginate @videos, renderer: BootstrapPagination::Rails
 
-- if @playlist.comments.count > 0
-  .col-md-12.separator
-
 = render partial: 'shared/comments', locals: Comment::get_params(@playlist)

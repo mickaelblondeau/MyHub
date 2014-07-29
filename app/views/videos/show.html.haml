@@ -12,6 +12,4 @@
 .col-md-12
   = @video.get_player
 .col-md-12
-  - if @video.comments.count > 0
-    .col-md-12.separator
   = render partial: 'shared/comments', locals: Comment::get_params(@video)

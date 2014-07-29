@@ -25,6 +25,7 @@ MyHub::Application.routes.draw do
     resources :messages, :only => [:index, :show, :new, :create, :destroy]
     get '/search/(:q)' => 'search#index', as: :query_search
     get '/subscriptions/(:type)/(:slug)' => 'subscription#show', as: :subscription_slug
+    get '/comments/:type/:id/(:page)' => 'comments#show', as: :show_comments
     root 'welcome#index'
   end
 

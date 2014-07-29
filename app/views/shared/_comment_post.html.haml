@@ -1,0 +1,12 @@
+%article.col-md-12{id: 'comment-' + comment.id.to_s}
+  .col-md-12.separator
+  .col-md-12.profile_buttons
+    = l(comment.created_at, format: :short)
+    = link_to comment.user.user_name, comment.user
+    - if can? :destroy, comment
+      .pull-right.delete_comment
+        = button_to t('general.delete_comment'), comment, method: :delete, remote: true, class: 'btn btn-danger btn-xs'
+  .col-md-2
+    = link_to (image_tag comment.user.avatar.url(:thumb), class: 'img-responsive'), comment.user
+  .col-md-8
+    = truncate(comment.content, length: 500)
