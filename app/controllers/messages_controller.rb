@@ -1,17 +1,17 @@
 class MessagesController < ApplicationController
   def index
     authorize! :index, Channel
-    @messages = Message.where('user_id = ? AND user_deleted != ?', current_user.id, true).paginate(:page => params[:page], :per_page => 10)
+    @messages = Message.where('user_id = ? AND user_deleted IS NOT TRUE', current_user.id).paginate(:page => params[:page], :per_page => 10)
   end
 
   def sent
     authorize! :index, Channel
-    @messages = Message.where('owner_id = ? AND user_deleted != ?', current_user.id, true).paginate(:page => params[:page], :per_page => 10)
+    @messages = Message.where('owner_id = ? AND user_deleted IS NOT TRUE', current_user.id).paginate(:page => params[:page], :per_page => 10)
   end
 
   def recents
     authorize! :index, Channel
-    @messages = Message.where('user_id = ? AND user_deleted != ? AND seen != ?', current_user.id, true, true).paginate(:page => params[:page], :per_page => 10)
+    @messages = Message.where('user_id = ? AND user_deleted IS NOT TRUE AND seen IS NOT TRUE', current_user.id).paginate(:page => params[:page], :per_page => 10)
     render :index
   end
 

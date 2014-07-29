@@ -50,18 +50,18 @@ gem 'impressionist'
 gem 'paperclip', '~> 4.1'
 gem 'paperclip-storage-ftp'
 
+gem 'mysql2'
+gem 'therubyracer'
+
 group :doc do
   gem 'sdoc', require: false
 end
 
 group :development do
 	gem 'better_errors'
-	gem 'sqlite3'
 	gem 'binding_of_caller'
 	gem 'brakeman', :require => false
 end
 
 group :production do
-	gem 'mysql2'
-  gem 'therubyracer'
 end

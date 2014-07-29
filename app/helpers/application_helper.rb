@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def get_new_messages(user_id)
-    Message.where('user_id = ? AND user_deleted != ? AND seen != ?', current_user.id, true, true).length
+    Message.where('user_id = ? AND user_deleted IS NOT TRUE AND seen IS NOT TRUE', current_user.id).length
   end
 end
