@@ -48,6 +48,6 @@ class CategoriesController < ApplicationController
   end
 
   def get_params
-    params[:category].permit(:label, :icon)
+    params[:category].permit(:label, :icon, :slug_label)
   end
 end
