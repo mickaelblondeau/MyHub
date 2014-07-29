@@ -1,6 +1,7 @@
 - if can? :manage, Category
   = simple_form_for Category.new, :html => {:multipart => true } do |f|
     = f.input :label
+    = f.input :slug_label
     = f.input :icon, as: :file
     %label.col-lg-2
     = f.button :submit, class: 'btn-info', value: t('general.send')

@@ -1,7 +1,7 @@
 require 'paperclip/storage/ftp'
 
 class Category < ActiveRecord::Base
-  validates :label, presence: true
+  validates :label, :slug_label, presence: true
   has_many :videos, through: :playlists
   has_many :playlist_categories
   has_many :playlists, through: :playlist_categories
@@ -36,8 +36,8 @@ class Category < ActiveRecord::Base
 
   def slug_candidates
     [
-        :label,
-        [:label, :id]
+        :slug_label,
+        [:slug_label, :id]
     ]
   end
 
@@ -53,5 +53,9 @@ class Category < ActiveRecord::Base
 
   def get_featured_videos
     Video.joins(:playlist => :categories).where(categories: { id: id }).limit(Rails.configuration.videos_per_page)
+  end
+
+  def trans_label
+    I18n.t('categories.' + label)
   end
 end

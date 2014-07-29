@@ -1,7 +1,7 @@
 .col-md-12
   .col-md-12.profile_buttons
     %h2
-      = @category.label
+      = @category.trans_label
       - if current_user && current_user.is_admin
         .pull-right
           = link_to t('category.edit'), edit_category_path(@category), class: 'btn btn-warning'

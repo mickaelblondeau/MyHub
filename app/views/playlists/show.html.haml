@@ -21,7 +21,7 @@
         %h4
           = t('serie.categories')
         - @playlist.playlist_categories.each do |playlist_categorie|
-          = link_to playlist_categorie.category.label, playlist_categorie.category, class: 'btn btn-info btn-xs'
+          = link_to playlist_categorie.category.trans_label, playlist_categorie.category, class: 'btn btn-info btn-xs'
     %p
       %h4
         = t('serie.owner')

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727205326) do
+ActiveRecord::Schema.define(version: 20140729110812) do
 
   create_table "categories", force: true do |t|
     t.string   "label"
@@ -22,9 +22,37 @@ ActiveRecord::Schema.define(version: 20140727205326) do
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
     t.string   "slug"
+    t.string   "slug_label"
   end
 
   add_index "categories", ["slug"], name: "index_categories_on_slug"
+
+  create_table "category_lang", force: true do |t|
+    t.integer "category_id"
+    t.integer "language_id"
+    t.string  "label"
+  end
+
+  add_index "category_lang", ["category_id"], name: "index_category_lang_on_category_id"
+  add_index "category_lang", ["language_id"], name: "index_category_lang_on_language_id"
+
+  create_table "category_lang_tables", force: true do |t|
+    t.integer "category_id"
+    t.integer "language_id"
+    t.string  "label"
+  end
+
+  add_index "category_lang_tables", ["category_id"], name: "index_category_lang_tables_on_category_id"
+  add_index "category_lang_tables", ["language_id"], name: "index_category_lang_tables_on_language_id"
+
+  create_table "category_langs", force: true do |t|
+    t.integer "category_id"
+    t.integer "language_id"
+    t.string  "label"
+  end
+
+  add_index "category_langs", ["category_id"], name: "index_category_langs_on_category_id"
+  add_index "category_langs", ["language_id"], name: "index_category_langs_on_language_id"
 
   create_table "category_links", force: true do |t|
     t.integer  "category_id"
@@ -118,6 +146,16 @@ ActiveRecord::Schema.define(version: 20140727205326) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
+
+  create_table "languages", force: true do |t|
+    t.string "label"
+    t.string "code"
+  end
+
+  create_table "languages_tables", force: true do |t|
+    t.string "label"
+    t.string "code"
+  end
 
   create_table "likes", force: true do |t|
     t.integer  "owner_id"

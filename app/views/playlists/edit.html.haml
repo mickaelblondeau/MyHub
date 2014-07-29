@@ -33,7 +33,7 @@
   %p
     %h4 Categories
     - @playlist.playlist_categories.each do |playlist_categorie|
-      = link_to playlist_categorie.category.label, playlist_categorie.category, class: 'btn btn-info btn-xs'
+      = link_to playlist_categorie.category.trans_label, playlist_categorie.category, class: 'btn btn-info btn-xs'
       - if can? :manage, playlist_categorie
         = link_to t('form.delete'), playlist_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
 

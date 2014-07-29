@@ -13,7 +13,7 @@
       = link_to (image_tag category.icon.url(:thumb), class: 'img-responsive'), category_path(category)
       .row
         .col-md-12.category-name
-          = link_to category.label, category_path(category)
+          = link_to category.trans_label, category_path(category)
     .col-md-10.category-articles{id: 'videos_' + category.id.to_s}
       .videos-block.col-md-12
         - category.get_featured_videos.each do |video|

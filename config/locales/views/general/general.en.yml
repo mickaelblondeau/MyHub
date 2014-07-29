@@ -58,3 +58,5 @@ en:
   category:
     new: "Add a new category"
     edit: "Edit the category"
+  categories:
+    video_games: "Video Games"

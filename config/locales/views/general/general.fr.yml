@@ -62,3 +62,5 @@ fr:
     previous_label: "&#8592; Précedent"
     next_label: "Suivant &#8594;"
     page_gap: "&hellip;"
+  categories:
+    video_games: "Jeux Vidéos"
