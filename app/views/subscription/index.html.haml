@@ -22,9 +22,10 @@
               = link_to like.get_type_name, subscription_slug_path('u/' + like.user.slug)
             %p
               = truncate(like.user.description, length: 400)
-            %p
-              %time{pubdate: '', datetime: l(like.last_video, format: :short)}
-                = Video.diff_time(like.last_video)
+            - if like.last_video
+              %p
+                %time{pubdate: '', datetime: l(like.last_video, format: :short)}
+                  = Video.diff_time(like.last_video)
             %p
               = t('general.videos', count: like.user.videos.length)
               %span.view-counter
@@ -44,9 +45,10 @@
               = link_to like.get_type_name, subscription_slug_path('s/' + like.playlist.slug)
             %p
               = truncate(like.playlist.description, length: 400)
-            %p
-              %time{pubdate: '', datetime: l(like.last_video, format: :short)}
-                = Video.diff_time(like.last_video)
+            - if like.last_video
+              %p
+                %time{pubdate: '', datetime: l(like.last_video, format: :short)}
+                  = Video.diff_time(like.last_video)
             %p
               = t('general.videos', count: like.playlist.videos.length)
               %span.view-counter
