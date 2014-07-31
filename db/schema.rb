@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729110812) do
+ActiveRecord::Schema.define(version: 20140731094930) do
 
   create_table "categories", force: true do |t|
     t.string   "label"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.string   "slug_label"
   end
 
-  add_index "categories", ["slug"], name: "index_categories_on_slug"
+  add_index "categories", ["slug"], name: "index_categories_on_slug", using: :btree
 
   create_table "category_lang", force: true do |t|
     t.integer "category_id"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.string  "label"
   end
 
-  add_index "category_lang", ["category_id"], name: "index_category_lang_on_category_id"
-  add_index "category_lang", ["language_id"], name: "index_category_lang_on_language_id"
+  add_index "category_lang", ["category_id"], name: "index_category_lang_on_category_id", using: :btree
+  add_index "category_lang", ["language_id"], name: "index_category_lang_on_language_id", using: :btree
 
   create_table "category_lang_tables", force: true do |t|
     t.integer "category_id"
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.string  "label"
   end
 
-  add_index "category_lang_tables", ["category_id"], name: "index_category_lang_tables_on_category_id"
-  add_index "category_lang_tables", ["language_id"], name: "index_category_lang_tables_on_language_id"
+  add_index "category_lang_tables", ["category_id"], name: "index_category_lang_tables_on_category_id", using: :btree
+  add_index "category_lang_tables", ["language_id"], name: "index_category_lang_tables_on_language_id", using: :btree
 
   create_table "category_langs", force: true do |t|
     t.integer "category_id"
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.string  "label"
   end
 
-  add_index "category_langs", ["category_id"], name: "index_category_langs_on_category_id"
-  add_index "category_langs", ["language_id"], name: "index_category_langs_on_language_id"
+  add_index "category_langs", ["category_id"], name: "index_category_langs_on_category_id", using: :btree
+  add_index "category_langs", ["language_id"], name: "index_category_langs_on_language_id", using: :btree
 
   create_table "category_links", force: true do |t|
     t.integer  "category_id"
@@ -61,12 +61,11 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.datetime "updated_at"
   end
 
-  add_index "category_links", ["category_id"], name: "index_category_links_on_category_id"
-  add_index "category_links", ["parent_id"], name: "index_category_links_on_parent_id"
+  add_index "category_links", ["category_id"], name: "index_category_links_on_category_id", using: :btree
+  add_index "category_links", ["parent_id"], name: "index_category_links_on_parent_id", using: :btree
 
   create_table "channels", force: true do |t|
     t.string   "name"
-    t.text     "description"
     t.string   "api_id"
     t.boolean  "validated"
     t.string   "validation_key"
@@ -78,9 +77,9 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.string   "video_type"
   end
 
-  add_index "channels", ["api_id"], name: "index_channels_on_api_id"
-  add_index "channels", ["slug"], name: "index_channels_on_slug"
-  add_index "channels", ["user_id"], name: "index_channels_on_user_id"
+  add_index "channels", ["api_id"], name: "index_channels_on_api_id", using: :btree
+  add_index "channels", ["slug"], name: "index_channels_on_slug", using: :btree
+  add_index "channels", ["user_id"], name: "index_channels_on_user_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -91,9 +90,9 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["playlist_id"], name: "index_comments_on_playlist_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
-  add_index "comments", ["video_id"], name: "index_comments_on_video_id"
+  add_index "comments", ["playlist_id"], name: "index_comments_on_playlist_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+  add_index "comments", ["video_id"], name: "index_comments_on_video_id", using: :btree
 
   create_table "cooperation_permissions", force: true do |t|
     t.integer  "permission_id"
@@ -104,10 +103,10 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.integer  "channel_id"
   end
 
-  add_index "cooperation_permissions", ["channel_id"], name: "index_cooperation_permissions_on_channel_id"
-  add_index "cooperation_permissions", ["cooperation_id"], name: "index_cooperation_permissions_on_cooperation_id"
-  add_index "cooperation_permissions", ["permission_id"], name: "index_cooperation_permissions_on_permission_id"
-  add_index "cooperation_permissions", ["user_id"], name: "index_cooperation_permissions_on_user_id"
+  add_index "cooperation_permissions", ["channel_id"], name: "index_cooperation_permissions_on_channel_id", using: :btree
+  add_index "cooperation_permissions", ["cooperation_id"], name: "index_cooperation_permissions_on_cooperation_id", using: :btree
+  add_index "cooperation_permissions", ["permission_id"], name: "index_cooperation_permissions_on_permission_id", using: :btree
+  add_index "cooperation_permissions", ["user_id"], name: "index_cooperation_permissions_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
     t.string   "slug",                      null: false
@@ -117,10 +116,10 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "impressions", force: true do |t|
     t.string   "impressionable_type"
@@ -138,13 +137,13 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.datetime "updated_at"
   end
 
-  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
-  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
-  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
-  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
+  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
+  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
   create_table "languages", force: true do |t|
     t.string "label"
@@ -164,9 +163,9 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.datetime "updated_at"
   end
 
-  add_index "likes", ["owner_id"], name: "index_likes_on_owner_id"
-  add_index "likes", ["playlist_id"], name: "index_likes_on_playlist_id"
-  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
+  add_index "likes", ["owner_id"], name: "index_likes_on_owner_id", using: :btree
+  add_index "likes", ["playlist_id"], name: "index_likes_on_playlist_id", using: :btree
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
   create_table "messages", force: true do |t|
     t.integer  "owner_id"
@@ -180,8 +179,8 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.boolean  "user_deleted"
   end
 
-  add_index "messages", ["owner_id"], name: "index_messages_on_owner_id"
-  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+  add_index "messages", ["owner_id"], name: "index_messages_on_owner_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "participations", force: true do |t|
     t.integer  "user_id"
@@ -192,9 +191,9 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.integer  "video_id"
   end
 
-  add_index "participations", ["playlist_id"], name: "index_participations_on_playlist_id"
-  add_index "participations", ["user_id"], name: "index_participations_on_user_id"
-  add_index "participations", ["video_id"], name: "index_participations_on_video_id"
+  add_index "participations", ["playlist_id"], name: "index_participations_on_playlist_id", using: :btree
+  add_index "participations", ["user_id"], name: "index_participations_on_user_id", using: :btree
+  add_index "participations", ["video_id"], name: "index_participations_on_video_id", using: :btree
 
   create_table "permissions", force: true do |t|
     t.string   "label"
@@ -209,8 +208,8 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.datetime "updated_at"
   end
 
-  add_index "playlist_categories", ["category_id"], name: "index_playlist_categories_on_category_id"
-  add_index "playlist_categories", ["playlist_id"], name: "index_playlist_categories_on_playlist_id"
+  add_index "playlist_categories", ["category_id"], name: "index_playlist_categories_on_category_id", using: :btree
+  add_index "playlist_categories", ["playlist_id"], name: "index_playlist_categories_on_playlist_id", using: :btree
 
   create_table "playlists", force: true do |t|
     t.string   "title"
@@ -225,8 +224,8 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.string   "slug"
   end
 
-  add_index "playlists", ["slug"], name: "index_playlists_on_slug"
-  add_index "playlists", ["user_id"], name: "index_playlists_on_user_id"
+  add_index "playlists", ["slug"], name: "index_playlists_on_slug", using: :btree
+  add_index "playlists", ["user_id"], name: "index_playlists_on_user_id", using: :btree
 
   create_table "user_views", force: true do |t|
     t.integer  "user_id"
@@ -235,8 +234,8 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.datetime "updated_at"
   end
 
-  add_index "user_views", ["user_id"], name: "index_user_views_on_user_id"
-  add_index "user_views", ["video_id"], name: "index_user_views_on_video_id"
+  add_index "user_views", ["user_id"], name: "index_user_views_on_user_id", using: :btree
+  add_index "user_views", ["video_id"], name: "index_user_views_on_video_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -261,9 +260,9 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.datetime "avatar_updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["slug"], name: "index_users_on_slug"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
 
   create_table "videos", force: true do |t|
     t.string   "name"
@@ -288,8 +287,8 @@ ActiveRecord::Schema.define(version: 20140729110812) do
     t.boolean  "weekly"
   end
 
-  add_index "votes", ["playlist_id"], name: "index_votes_on_playlist_id"
-  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
-  add_index "votes", ["video_id"], name: "index_votes_on_video_id"
+  add_index "votes", ["playlist_id"], name: "index_votes_on_playlist_id", using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+  add_index "votes", ["video_id"], name: "index_votes_on_video_id", using: :btree
 
 end
