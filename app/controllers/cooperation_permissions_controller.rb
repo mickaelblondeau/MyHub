@@ -1,10 +1,10 @@
 class CooperationPermissionsController < ApplicationController
 
   def show
-    @channel = Channel.friendly.find(params[:id])
-    authorize! :manage, @channel
+    @playlist = Playlist.friendly.find(params[:id])
+    authorize! :manage, @playlist
     @new_cooperation_permission = CooperationPermission.new
-    @cooperation_permissions = CooperationPermission.where('channel_id = ?', @channel.id)
+    @cooperation_permissions = CooperationPermission.where('playlist_id = ?', @playlist.id)
   end
 
   def create
@@ -15,20 +15,19 @@ class CooperationPermissionsController < ApplicationController
     else
       flash[:alert] = 'Ko'
     end
-    redirect_to cooperation_permission_path(@cooperation_permission.channel_id)
+    redirect_to playlist_path(@cooperation_permission.playlist)
   end
 
   def destroy
     @cooperation_permission = CooperationPermission.find(params[:id])
     authorize! :destroy, @cooperation_permission
-    channel_id = @cooperation_permission.channel_id
     @cooperation_permission.destroy
     flash[:notice] = 'Ok'
-    redirect_to cooperation_permission_path(channel_id)
+    redirect_to playlist_path(@cooperation_permission.playlist)
   end
 
   def get_params
-    params[:cooperation_permission].permit(:user_id, :channel_id, :permission_id)
+    params[:cooperation_permission].permit(:user_id, :playlist_id, :permission_id)
   end
 
 end

@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
 
   def sent
     authorize! :index, Channel
-    @messages = Message.where('owner_id = ? AND user_deleted IS NOT TRUE', current_user.id).paginate(:page => params[:page], :per_page => 10)
+    @messages = Message.where('owner_id = ? AND owner_deleted IS NOT TRUE', current_user.id).paginate(:page => params[:page], :per_page => 10)
   end
 
   def recents

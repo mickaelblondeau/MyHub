@@ -37,6 +37,6 @@ class PlaylistTest < ActiveSupport::TestCase
     playlist.title = 'title'
     playlist.description = 'desc'
     playlist.icon = File.new('test/fixtures/test.gif')
-    assert_not playlist.save
+    assert playlist.save
   end
 end

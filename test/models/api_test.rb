@@ -12,7 +12,6 @@ class ApiTest < ActiveSupport::TestCase
   def check_channel_data(channel)
     assert channel
     assert channel[:name]
-    assert channel[:description]
     assert channel[:image]
     assert channel[:api_id]
   end

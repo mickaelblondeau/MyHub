@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731094930) do
+ActiveRecord::Schema.define(version: 20140731095207) do
 
   create_table "categories", force: true do |t|
     t.string   "label"
@@ -96,16 +96,14 @@ ActiveRecord::Schema.define(version: 20140731094930) do
 
   create_table "cooperation_permissions", force: true do |t|
     t.integer  "permission_id"
-    t.integer  "cooperation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "channel_id"
+    t.integer  "playlist_id"
   end
 
-  add_index "cooperation_permissions", ["channel_id"], name: "index_cooperation_permissions_on_channel_id", using: :btree
-  add_index "cooperation_permissions", ["cooperation_id"], name: "index_cooperation_permissions_on_cooperation_id", using: :btree
   add_index "cooperation_permissions", ["permission_id"], name: "index_cooperation_permissions_on_permission_id", using: :btree
+  add_index "cooperation_permissions", ["playlist_id"], name: "index_cooperation_permissions_on_playlist_id", using: :btree
   add_index "cooperation_permissions", ["user_id"], name: "index_cooperation_permissions_on_user_id", using: :btree
 
   create_table "friendly_id_slugs", force: true do |t|
