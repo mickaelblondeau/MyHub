@@ -28,4 +28,6 @@ MyHub::Application.configure do
   config.assets.debug = true
 
   Paperclip.options[:command_path] = 'C:\Program Files\ImageMagick-6.8.9-Q16'
+
+  BetterErrors::Middleware.allow_ip! '10.0.2.2' if defined?(BetterErrors)
 end

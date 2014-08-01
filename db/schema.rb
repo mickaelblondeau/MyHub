@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140731095207) do
+ActiveRecord::Schema.define(version: 20140801194451) do
 
   create_table "categories", force: true do |t|
     t.string   "label"
@@ -95,14 +95,14 @@ ActiveRecord::Schema.define(version: 20140731095207) do
   add_index "comments", ["video_id"], name: "index_comments_on_video_id", using: :btree
 
   create_table "cooperation_permissions", force: true do |t|
-    t.integer  "permission_id"
+    t.integer  "permission"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "playlist_id"
   end
 
-  add_index "cooperation_permissions", ["permission_id"], name: "index_cooperation_permissions_on_permission_id", using: :btree
+  add_index "cooperation_permissions", ["permission"], name: "index_cooperation_permissions_on_permission", using: :btree
   add_index "cooperation_permissions", ["playlist_id"], name: "index_cooperation_permissions_on_playlist_id", using: :btree
   add_index "cooperation_permissions", ["user_id"], name: "index_cooperation_permissions_on_user_id", using: :btree
 
@@ -193,12 +193,6 @@ ActiveRecord::Schema.define(version: 20140731095207) do
   add_index "participations", ["user_id"], name: "index_participations_on_user_id", using: :btree
   add_index "participations", ["video_id"], name: "index_participations_on_video_id", using: :btree
 
-  create_table "permissions", force: true do |t|
-    t.string   "label"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "playlist_categories", force: true do |t|
     t.integer  "playlist_id"
     t.integer  "category_id"
@@ -261,6 +255,7 @@ ActiveRecord::Schema.define(version: 20140731095207) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
+  add_index "users", ["user_name"], name: "index_users_on_user_name", unique: true, using: :btree
 
   create_table "videos", force: true do |t|
     t.string   "name"

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :likes, :dependent => :destroy
   has_many :channels, :dependent => :destroy
   has_many :videos, through: :channels, :order => 'created_at DESC'
-  validates :user_name, presence: true
+  validates :user_name, presence: true, :uniqueness => true
   extend FriendlyId
   friendly_id :user_name, use: :slugged
   has_attached_file :avatar,

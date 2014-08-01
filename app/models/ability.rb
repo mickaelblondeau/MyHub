@@ -51,7 +51,7 @@ class Ability
         end
 
         can :manage, CooperationPermission do |c|
-          c.cooperation.channel.user.id == user.id
+          c.playlist.user.id == user.id
         end
 
         can :manage, PlaylistCategory do |pc|
