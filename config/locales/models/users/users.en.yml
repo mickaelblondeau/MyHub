@@ -1,8 +1,8 @@
-fr:
+en:
   activerecord:
     attributes:
       user:
-        user_name: "Useer name"
+        user_name: "User name"
         email: "E-mail address"
         description: "Description"
         avatar: "Avatar"

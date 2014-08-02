@@ -1,0 +1,5 @@
+en:
+  activerecord:
+    attributes:
+      playlist_category:
+        category_id: "Category"
