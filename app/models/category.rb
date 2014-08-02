@@ -33,6 +33,7 @@ class Category < ActiveRecord::Base
                        :size => { :in => 0..100.kilobytes }
   extend FriendlyId
   friendly_id :slug_candidates, :use => :slugged
+  attr_accessor :last_video
 
   def slug_candidates
     [
@@ -57,5 +58,20 @@ class Category < ActiveRecord::Base
 
   def trans_label
     I18n.t('categories.' + label)
+  end
+
+  def get_category_last_video
+    v = videos.first
+    if v
+      self.last_video = v.created_at
+    end
+  end
+
+  def self.sort_categories
+    categories = Category.all
+    categories.each do |category|
+      category.get_category_last_video()
+    end
+    categories.sort_by {|l| -l.last_video.to_i}
   end
 end
