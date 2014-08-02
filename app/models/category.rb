@@ -2,7 +2,7 @@ require 'paperclip/storage/ftp'
 
 class Category < ActiveRecord::Base
   validates :label, :slug_label, presence: true
-  has_many :videos, through: :playlists
+  has_many :videos, -> { order 'created_at DESC' }, through: :playlists
   has_many :playlist_categories
   has_many :playlists, through: :playlist_categories
   has_many :category_links
@@ -52,7 +52,7 @@ class Category < ActiveRecord::Base
   end
 
   def get_featured_videos
-    Video.joins(:playlist => :categories).where(categories: { id: id }).limit(Rails.configuration.videos_per_page)
+    Video.joins(:playlist => :categories).where(categories: { id: id }).limit(Rails.configuration.videos_per_page).order('videos.created_at DESC')
   end
 
   def trans_label

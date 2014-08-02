@@ -3,7 +3,7 @@ class Channel < ActiveRecord::Base
   friendly_id :slug
   belongs_to :user
   validates :api_id, :video_type, presence: true
-  has_many :videos, :dependent => :destroy
+  has_many :videos, -> { order 'created_at DESC' }, :dependent => :destroy
 
   SRC_HOST = { 'yt' => :Youtube, 'dm' => :Dailymotion, 'vi' => :Vimeo }
 
