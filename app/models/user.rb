@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
   has_many :owned_series, foreign_key: :user_id, class_name: :Playlist
   has_many :likes, :dependent => :destroy
   has_many :channels, :dependent => :destroy
-  has_many :videos, through: :channels, :order => 'created_at DESC'
+  has_many :videos, -> { order 'created_at DESC' }, through: :owned_series
+  has_many :other_videos, -> { order 'created_at DESC' }, through: :series, source: :videos
   validates :user_name, presence: true, :uniqueness => true
   extend FriendlyId
   friendly_id :user_name, use: :slugged
@@ -35,5 +36,9 @@ class User < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     new_record?
+  end
+
+  def get_videos
+    videos | other_videos
   end
 end

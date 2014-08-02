@@ -27,7 +27,7 @@
                 %time{pubdate: '', datetime: l(like.last_video, format: :short)}
                   = Video.diff_time(like.last_video)
             %p
-              = t('general.videos', count: like.user.videos.length)
+              = t('general.videos', count: like.user.get_videos.length)
               %span.view-counter
                 = t('general.video_views', count: like.get_views)
 

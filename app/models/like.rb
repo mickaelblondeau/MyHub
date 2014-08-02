@@ -36,7 +36,7 @@ class Like < ActiveRecord::Base
     if playlist
       playlist_videos
     else
-      user_videos
+      user.get_videos
     end
   end
 
