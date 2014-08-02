@@ -32,13 +32,20 @@ class MessagesController < ApplicationController
   def create
     authorize! :create, Channel
     message = Message.new(params[:message].permit(:user_id, :title, :message))
-    message.owner_id = current_user.id
-    if message.save
-      flash[:notice] = 'Ok'
+    user = User.find_by_user_name(params[:message][:user_id])
+    if user
+      message.owner_id = current_user.id
+      message.user_id = user.id
+      if message.save
+        flash[:notice] = 'Ok'
+      else
+        flash[:alert] = 'Ko'
+      end
+      redirect_to sent_messages_path
     else
-      flash[:alert] = 'Ko'
+      flash[:alert] = 'Ko - wrong user'
+      redirect_to new_message_path
     end
-    redirect_to sent_messages_path
   end
 
   def destroy

@@ -7,7 +7,7 @@
       = @user.likes.count
       - if current_user
         = render partial: 'shared/likes', locals: Like::get_params(@user, current_user)
-        = link_to t('general.write_message'), new_message_id_path(@user.id), class: 'btn btn-info'
+        = link_to t('general.write_message'), new_message_id_path(@user.user_name), class: 'btn btn-info'
         - if current_user.id == @user.id
           = link_to t('user.edit_profile'), edit_user_registration_path, class: 'btn btn-warning'
   .clear

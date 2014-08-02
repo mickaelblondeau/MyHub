@@ -18,7 +18,7 @@
         = link_to t('form.delete'), su, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
 
   = simple_form_for Participation.new do |f|
-    = f.input :user_id, collection: User.where.not(id:@playlist.participations.map(&:user_id)).where.not(current_user.id), prompt: t('form.choose_user'), label: t('form.user'), label_method: :user_name
+    = f.input :user_id, as: :string
     = f.input :comment
     = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
     %label.col-lg-2
@@ -39,7 +39,22 @@
     %label.col-lg-2
     = f.button :submit, class: 'btn-info', value: t('general.send')
 
+  %hr
+
+  %p
+    %h4 Permissions
+    - @cooperation_permissions.each do |coop|
+      = link_to coop.user.user_name, coop.user
+      = CooperationPermission::PERMISSIONS[coop.permission]
+      = link_to t('views.delete_permission'), coop, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+
+    = simple_form_for CooperationPermission.new do |f|
+      = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
+      = f.input :user_id, as: :string
+      = f.input :permission, collection: CooperationPermission::PERMISSIONS.map { |key, value| [value, key] }, prompt: t('form.choose_permission')
+      %label.col-lg-2
+      = f.button :submit, class: 'btn-info', value: t('general.send')
+
 %br
 %label.col-lg-2
-= link_to 'Permissions', cooperation_permission_path(@playlist), class: 'btn btn-default'
 = link_to t('general.back'), playlist_path(@playlist), class: 'btn btn-default'

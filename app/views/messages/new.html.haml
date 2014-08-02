@@ -4,7 +4,7 @@
   - if @user_id
     = f.input :user_id, as: :hidden, input_html: { value: @user_id }
   - else
-    = f.input :user_id
+    = f.input :user_id, as: :string
   = f.input :title
   = f.input :message
   %label.col-lg-2

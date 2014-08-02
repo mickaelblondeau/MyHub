@@ -1,12 +1,5 @@
 class CooperationPermissionsController < ApplicationController
 
-  def show
-    @playlist = Playlist.friendly.find(params[:id])
-    authorize! :manage, @playlist
-    @new_cooperation_permission = CooperationPermission.new
-    @cooperation_permissions = CooperationPermission.where('playlist_id = ?', @playlist.id)
-  end
-
   def create
     @cooperation_permission = CooperationPermission.new(get_params)
     authorize! :create, @cooperation_permission
@@ -21,7 +14,7 @@ class CooperationPermissionsController < ApplicationController
     else
       flash[:alert] = 'Ko - wrong user'
     end
-    redirect_to cooperation_permission_path(@cooperation_permission.playlist)
+    redirect_to edit_playlist_path(@cooperation_permission.playlist)
   end
 
   def destroy
@@ -29,7 +22,7 @@ class CooperationPermissionsController < ApplicationController
     authorize! :destroy, @cooperation_permission
     @cooperation_permission.destroy
     flash[:notice] = 'Ok'
-    redirect_to cooperation_permission_path(@cooperation_permission.playlist)
+    redirect_to edit_playlist_path(@cooperation_permission.playlist)
   end
 
   def get_params

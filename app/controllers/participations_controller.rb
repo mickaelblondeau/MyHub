@@ -2,10 +2,16 @@ class ParticipationsController < ApplicationController
   def create
     @participation = Participation.new(get_params)
     authorize! :manage, @participation
-    if @participation.save
-      flash[:notice] = 'Ok'
+    user = User.find_by_user_name(get_params[:user_id])
+    if user
+      @participation.user_id = user.id
+      if @participation.save
+        flash[:notice] = 'Ok'
+      else
+        flash[:alert] = 'Ko'
+      end
     else
-      flash[:alert] = 'Ko'
+      flash[:alert] = 'Ko - wrong user'
     end
     redirect_to edit_playlist_path(@participation.playlist)
   end

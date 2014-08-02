@@ -16,7 +16,7 @@ MyHub::Application.routes.draw do
     resources :likes, :only => [:create, :destroy]
     resources :votes, :only => [:create, :destroy]
     resources :articles, :only => [:create, :destroy]
-    resources :cooperation_permissions, :only => [:create, :destroy, :show]
+    resources :cooperation_permissions, :only => [:create, :destroy]
     resources :video_categories, :only => [:create, :destroy]
     resources :playlist_categories, :only => [:create, :destroy]
     resources :categories, :only => [:index, :show, :create, :destroy, :edit, :update, :new]
