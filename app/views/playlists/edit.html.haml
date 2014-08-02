@@ -18,13 +18,22 @@
     %h4
       = t('serie.participants')
   .panel-body
-    %p
-      = link_to @playlist.user.user_name, @playlist.user, class: 'btn btn-info btn-xs'
+    %table.table.table-striped
+      %tr
+        %th #{t('activerecord.attributes.participation.user_id')}
+        %th #{t('activerecord.attributes.participation.comment')}
+        %th #{t('form.action')}
+      %tr
+        %td{colspan: 3}
+          = link_to @playlist.user.user_name, @playlist.user
       - @playlist.participations.each do |su|
-        = link_to su.user.user_name, su.user, class: 'btn btn-info btn-xs'
-        = su.comment
-        - if can? :manage, @playlist
-          = link_to t('form.delete'), su, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
+        %tr
+          %td
+            = link_to su.user.user_name, su.user
+          %td
+            = su.comment
+          %td
+            = link_to t('form.delete'), su, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
 
     = simple_form_for Participation.new do |f|
       = f.input :user_id, as: :string
@@ -38,11 +47,16 @@
     %h4
       = t('serie.categories')
   .panel-body
-    %p
+    %table.table.table-striped
+      %tr
+        %th #{t('activerecord.attributes.playlist_category.category_id')}
+        %th #{t('form.action')}
       - @playlist.playlist_categories.each do |playlist_categorie|
-        = link_to playlist_categorie.category.trans_label, playlist_categorie.category, class: 'btn btn-info btn-xs'
-        - if can? :manage, playlist_categorie
-          = link_to t('form.delete'), playlist_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
+        %tr
+          %td
+            = link_to playlist_categorie.category.trans_label, playlist_categorie.category
+          %td
+            = link_to t('form.delete'), playlist_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
 
     = simple_form_for PlaylistCategory.new do |f|
       = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
@@ -55,11 +69,19 @@
     %h4
       = t('serie.permissions')
   .panel-body
-    %p
+    %table.table.table-striped
+      %tr
+        %th #{t('activerecord.attributes.cooperation_permission.user_id')}
+        %th #{t('activerecord.attributes.cooperation_permission.permission')}
+        %th #{t('form.action')}
       - @cooperation_permissions.each do |coop|
-        = link_to coop.user.user_name, coop.user
-        = CooperationPermission::PERMISSIONS[coop.permission]
-        = link_to t('form.delete'), coop, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
+        %tr
+          %td
+            = link_to coop.user.user_name, coop.user
+          %td
+            = CooperationPermission::PERMISSIONS[coop.permission]
+          %td
+            = link_to t('form.delete'), coop, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
 
     = simple_form_for CooperationPermission.new do |f|
       = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
