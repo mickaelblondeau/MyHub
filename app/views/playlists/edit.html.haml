@@ -1,60 +1,72 @@
-- if can? :manage, @playlist
-  = simple_form_for @playlist, :html => {:multipart => true } do |f|
-    = f.input :title
-    = f.input :description
-    = f.input :icon, as: :file, required: (@playlist.icon)?false:true
-    %label.col-lg-2
-    = f.button :submit, class: 'btn-info', value: t('general.send')
+%p
+  = link_to t('general.back'), playlist_path(@playlist), class: 'btn btn-default'
 
-  %hr
+.panel.panel-info
+  .panel-heading
+    %h4
+      = t('serie.edit_serie')
+  .panel-body
+    = simple_form_for @playlist, :html => {:multipart => true } do |f|
+      = f.input :title
+      = f.input :description
+      = f.input :icon, as: :file, required: (@playlist.icon)?false:true
+      %label.col-lg-2
+      = f.button :submit, class: 'btn-info', value: t('general.send')
 
-  %p
-    %h4 Participants
-    = link_to @playlist.user.user_name, @playlist.user, class: 'btn btn-info btn-xs'
-    - @playlist.participations.each do |su|
-      = link_to su.user.user_name, su.user, class: 'btn btn-info btn-xs'
-      = su.comment
-      - if can? :manage, @playlist
-        = link_to t('form.delete'), su, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
+.panel.panel-info
+  .panel-heading
+    %h4
+      = t('serie.participants')
+  .panel-body
+    %p
+      = link_to @playlist.user.user_name, @playlist.user, class: 'btn btn-info btn-xs'
+      - @playlist.participations.each do |su|
+        = link_to su.user.user_name, su.user, class: 'btn btn-info btn-xs'
+        = su.comment
+        - if can? :manage, @playlist
+          = link_to t('form.delete'), su, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
 
-  = simple_form_for Participation.new do |f|
-    = f.input :user_id, as: :string
-    = f.input :comment
-    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
-    %label.col-lg-2
-    = f.button :submit, class: 'btn-info', value: t('general.send')
+    = simple_form_for Participation.new do |f|
+      = f.input :user_id, as: :string
+      = f.input :comment
+      = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
+      %label.col-lg-2
+      = f.button :submit, class: 'btn-info', value: t('general.send')
 
-  %hr
+.panel.panel-info
+  .panel-heading
+    %h4
+      = t('serie.categories')
+  .panel-body
+    %p
+      - @playlist.playlist_categories.each do |playlist_categorie|
+        = link_to playlist_categorie.category.trans_label, playlist_categorie.category, class: 'btn btn-info btn-xs'
+        - if can? :manage, playlist_categorie
+          = link_to t('form.delete'), playlist_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
 
-  %p
-    %h4 Categories
-    - @playlist.playlist_categories.each do |playlist_categorie|
-      = link_to playlist_categorie.category.trans_label, playlist_categorie.category, class: 'btn btn-info btn-xs'
-      - if can? :manage, playlist_categorie
-        = link_to t('form.delete'), playlist_categorie, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
+    = simple_form_for PlaylistCategory.new do |f|
+      = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
+      = f.input :category_id, collection: Category.where.not(id:@playlist.categories.map(&:id)), prompt: t('serie.choose_category'), label_method: :label
+      %label.col-lg-2
+      = f.button :submit, class: 'btn-info', value: t('general.send')
 
-  = simple_form_for PlaylistCategory.new do |f|
-    = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
-    = f.input :category_id, collection: Category.where.not(id:@playlist.categories.map(&:id)), prompt: t('form.choose_category'), label: t('form.category'), label_method: :label
-    %label.col-lg-2
-    = f.button :submit, class: 'btn-info', value: t('general.send')
-
-  %hr
-
-  %p
-    %h4 Permissions
-    - @cooperation_permissions.each do |coop|
-      = link_to coop.user.user_name, coop.user
-      = CooperationPermission::PERMISSIONS[coop.permission]
-      = link_to t('views.delete_permission'), coop, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }
+.panel.panel-info
+  .panel-heading
+    %h4
+      = t('serie.permissions')
+  .panel-body
+    %p
+      - @cooperation_permissions.each do |coop|
+        = link_to coop.user.user_name, coop.user
+        = CooperationPermission::PERMISSIONS[coop.permission]
+        = link_to t('form.delete'), coop, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
 
     = simple_form_for CooperationPermission.new do |f|
       = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
       = f.input :user_id, as: :string
-      = f.input :permission, collection: CooperationPermission::PERMISSIONS.map { |key, value| [value, key] }, prompt: t('form.choose_permission')
+      = f.input :permission, collection: CooperationPermission::PERMISSIONS.map { |key, value| [value, key] }, prompt: t('serie.choose_permission')
       %label.col-lg-2
       = f.button :submit, class: 'btn-info', value: t('general.send')
 
-%br
-%label.col-lg-2
-= link_to t('general.back'), playlist_path(@playlist), class: 'btn btn-default'
+%p
+  = link_to t('general.back'), playlist_path(@playlist), class: 'btn btn-default'

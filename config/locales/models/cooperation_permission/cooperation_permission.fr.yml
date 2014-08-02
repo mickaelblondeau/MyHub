@@ -1,0 +1,6 @@
+fr:
+  activerecord:
+    attributes:
+      cooperation_permission:
+        user_id: "Utilisateur"
+        permission: "Permission"

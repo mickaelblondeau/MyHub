@@ -16,6 +16,7 @@ class PlaylistsController < ApplicationController
 
   def edit
     @playlist = Playlist.friendly.find(params[:id])
+    authorize! :manage, @playlist
     @cooperation_permissions = CooperationPermission.where('playlist_id = ?', @playlist.id)
   end
 

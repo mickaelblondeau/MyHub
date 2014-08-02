@@ -45,6 +45,9 @@ fr:
     categories: "Catégories :"
     owner: "Propriétaire :"
     participants: "Participants :"
+    permissions: "Permissions :"
+    choose_category: "Choisir une catégorie"
+    choose_permission: "Choisir une permission"
   channel:
     choose_channel_type: "Choisir le type de chaine"
     choose_serie: "Choisir une série"

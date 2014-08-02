@@ -1,0 +1,6 @@
+fr:
+  activerecord:
+    attributes:
+      participation:
+        user_id: "Utilisateur"
+        comment: "Commentaire"
