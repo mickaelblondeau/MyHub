@@ -13,6 +13,7 @@ class VideosController < ApplicationController
 
   def edit
     @video = Video.find(Encoder::decode_id(params[:id]))
+    authorize! :edit, @video
   end
 
   def update

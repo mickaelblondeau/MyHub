@@ -12,4 +12,14 @@
 .col-md-12
   = @video.get_player
 .col-md-12
+  %p
+    %h4
+      = t('serie.participants')
+    - @video.playlist.participations.each do |su|
+      = link_to su.user.user_name, su.user, class: 'btn btn-info btn-xs'
+      = su.comment
+    - @video.participations.each do |su|
+      = link_to su.user.user_name, su.user, class: 'btn btn-info btn-xs'
+      = su.comment
+.col-md-12
   = render partial: 'shared/comments', locals: Comment::get_params(@video)

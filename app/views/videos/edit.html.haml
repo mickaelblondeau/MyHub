@@ -1,8 +1,53 @@
-- if can? :edit, @video
-  = simple_form_for @video do |f|
-    = f.input :playlist_id, collection: Playlist.where('user_id = ?', current_user.id), prompt: t('form.choose_serie'), label: t('form.serie')
-    = f.input :name
-    = f.input :description
-    %label.col-lg-2
-    = f.button :submit, class: 'btn-info', value: t('general.send')
-    = link_to t('general.back'), channel_path(@video.channel), class: 'btn btn-default'
+%p
+  = link_to t('general.back'), @video, class: 'btn btn-default'
+
+.panel.panel-info
+  .panel-heading
+    %h4
+      = t('video.edit_video')
+  .panel-body
+    = simple_form_for @video do |f|
+      = f.input :playlist_id, collection: Playlist.where('user_id = ?', current_user.id), prompt: t('form.choose_serie'), label: t('form.serie')
+      = f.input :name
+      = f.input :description
+      %label.col-lg-2
+      = f.button :submit, class: 'btn-info', value: t('general.send')
+      = link_to t('general.back'), channel_path(@video.channel), class: 'btn btn-default'
+
+.panel.panel-info
+  .panel-heading
+    %h4
+      = t('serie.participants')
+  .panel-body
+    %table.table.table-striped
+      %tr
+        %th #{t('activerecord.attributes.participation.user_id')}
+        %th #{t('activerecord.attributes.participation.comment')}
+        %th #{t('form.action')}
+      %tr
+        %td{colspan: 3}
+          = link_to @video.channel.user.user_name, @video.channel.user
+      - @video.playlist.participations.each do |su|
+        %tr
+          %td
+            = link_to su.user.user_name, su.user
+          %td{colspan: 2}
+            = su.comment
+      - @video.participations.each do |su|
+        %tr
+          %td
+            = link_to su.user.user_name, su.user
+          %td
+            = su.comment
+          %td
+            = link_to t('form.delete'), su, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
+
+    = simple_form_for Participation.new do |f|
+      = f.input :user_id, as: :string
+      = f.input :comment
+      = f.input :video_id, input_html: { value: @video.id }, as: :hidden
+      %label.col-lg-2
+      = f.button :submit, class: 'btn-info', value: t('general.send')
+
+%p
+  = link_to t('general.back'), @video, class: 'btn btn-default'

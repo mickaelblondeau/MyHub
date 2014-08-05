@@ -28,7 +28,13 @@ class Ability
         end
 
         can :manage, Participation do |p|
-          p.playlist.user_id == user.id || CooperationPermission::user_can(2, user.id, p.playlist.id)
+          if p.playlist
+            p.playlist.user_id == user.id || CooperationPermission::user_can(2, user.id, p.playlist.id)
+          elsif p.video
+            p.video.channel.user_id == user.id
+          else
+            false
+          end
         end
 
         can :manage, CooperationPermission do |c|

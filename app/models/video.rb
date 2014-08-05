@@ -2,6 +2,7 @@ class Video < ActiveRecord::Base
   validates :api_id, :playlist_id, :channel_id, presence: true
   belongs_to :channel
   belongs_to :playlist
+  has_many :participations, :dependent => :destroy
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
   has_many :user_views, :dependent => :destroy

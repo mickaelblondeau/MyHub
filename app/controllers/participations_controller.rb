@@ -13,7 +13,7 @@ class ParticipationsController < ApplicationController
     else
       flash[:alert] = 'Ko - wrong user'
     end
-    redirect_to edit_playlist_path(@participation.playlist)
+    redirect_to redirect
   end
 
   def destroy
@@ -21,10 +21,18 @@ class ParticipationsController < ApplicationController
     authorize! :manage, @participation
     @participation.destroy
     flash[:notice] = 'Ok'
-    redirect_to edit_playlist_path(@participation.playlist)
+    redirect_to redirect
   end
 
   def get_params
-    params[:participation].permit(:user_id, :playlist_id, :comment)
+    params[:participation].permit(:user_id, :playlist_id, :video_id, :comment)
+  end
+
+  def redirect
+    if @participation.playlist
+      edit_playlist_path(@participation.playlist)
+    else
+      edit_video_path(@participation.video)
+    end
   end
 end
