@@ -7,8 +7,10 @@
         .col-md-2
           = image_tag video.image, class: 'img-responsive'
       .col-md-10
-        %h2
-          = link_to video.name, video_path(video)
+        - if video.playlist
+          %h2 #{link_to video.playlist.title, video.playlist} - #{link_to video.name, video_path(video)}
+        - else
+          %h2 ??? - #{link_to video.name, video_path(video)}
         %p
           %time{pubdate: '', datetime: l(video.created_at, format: :short)}
             = video.diff_time
