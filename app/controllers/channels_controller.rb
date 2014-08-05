@@ -6,6 +6,10 @@ class ChannelsController < ApplicationController
 
   def show
     @channel = Channel.friendly.find(params[:id])
+    if !@channel.validated? and @channel.find_existing
+      flash[:alert] = 'Ko'
+      redirect_to channels_path
+    end
     authorize! :manage, @channel
   end
 
@@ -24,7 +28,7 @@ class ChannelsController < ApplicationController
     authorize! :create, Channel
     @channel = Channel.new(get_params)
     @channel.user_id = current_user.id
-    if @channel.save
+    if @channel.save_with_slug
       flash[:notice] = 'Ok'
     else
       flash[:alert] = 'Ko'

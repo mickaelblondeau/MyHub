@@ -1,20 +1,31 @@
 class Channel < ActiveRecord::Base
   extend FriendlyId
-  friendly_id :slug
+  friendly_id :slug_candidates, :use => :slugged
   belongs_to :user
   validates :api_id, :video_type, presence: true
   has_many :videos, -> { order 'created_at DESC' }, :dependent => :destroy
 
   SRC_HOST = { 'yt' => :Youtube, 'dm' => :Dailymotion, 'vi' => :Vimeo }
 
-  def should_generate_new_friendly_id?
-    new_record?
+  def slug_candidates
+    [
+        :name,
+        [:id, :name]
+    ]
+  end
+
+  def save_with_slug
+    if save
+      self.slug = nil
+      save
+    else
+      false
+    end
   end
 
   before_create do
-    exist = Channel.where('api_id = ? AND video_type = ?', api_id, video_type).first
-    if exist
-      return false
+    if find_existing
+      false
     end
 
     data = Api.channel_info(api_id, video_type)
@@ -24,10 +35,14 @@ class Channel < ActiveRecord::Base
       self.name = data[:name]
       self.image = data[:image]
       self.slug = data[:name]
-      return true
+      true
     else
-      return false
+      false
     end
+  end
+
+  def find_existing
+    Channel.where('api_id = ? AND video_type = ? AND validated IS TRUE', api_id, video_type).first
   end
 
   def owner_validated
