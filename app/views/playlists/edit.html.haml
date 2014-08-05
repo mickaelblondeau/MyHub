@@ -79,14 +79,14 @@
           %td
             = link_to coop.user.user_name, coop.user
           %td
-            = CooperationPermission::PERMISSIONS[coop.permission]
+            = t(CooperationPermission::PERMISSIONS[coop.permission])
           %td
             = link_to t('form.delete'), coop, method: 'DELETE', data: { confirm: "#{t('form.sure')}" }, class: 'btn btn-danger btn-xs'
 
     = simple_form_for CooperationPermission.new do |f|
       = f.input :playlist_id, input_html: { value: @playlist.id }, as: :hidden
       = f.input :user_id, as: :string
-      = f.input :permission, collection: CooperationPermission::PERMISSIONS.map { |key, value| [value, key] }, prompt: t('serie.choose_permission')
+      = f.input :permission, collection: CooperationPermission::PERMISSIONS.map { |key, value| [t(value), key] }, prompt: t('serie.choose_permission')
       %label.col-lg-2
       = f.button :submit, class: 'btn-info', value: t('general.send')
 

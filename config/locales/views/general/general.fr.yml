@@ -73,3 +73,7 @@ fr:
     science: "Science"
     humour: "Humour"
     cinema: "Cinéma"
+  permissions:
+    post_serie: "Ajouter des vidéos à la serie"
+    manage_comment: "Gérer les commentaires"
+    edit_serie: "Gérer la série"

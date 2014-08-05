@@ -9,6 +9,7 @@ class Playlist < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   has_many :votes, :dependent => :destroy
   has_many :likes, :dependent => :destroy
+  has_many :cooperation_permissions
   has_attached_file :icon,
                     :storage => :ftp,
                     :styles => { :thumb => '138x69#', :banner => '710x280#' },
@@ -48,5 +49,9 @@ class Playlist < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def self.get_user_playlists(user)
+    (Playlist.where('playlists.user_id = ?', user.id) + Playlist.includes('cooperation_permissions').where('cooperation_permissions.user_id = ? AND cooperation_permissions.permission = ?', user.id, 0)).uniq
   end
 end

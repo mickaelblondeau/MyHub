@@ -39,6 +39,6 @@ class User < ActiveRecord::Base
   end
 
   def get_videos
-    videos | other_videos
+    (videos + other_videos).uniq
   end
 end

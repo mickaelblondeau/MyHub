@@ -69,3 +69,7 @@ en:
     science: "Science"
     humour: "Humor"
     cinema: "Cinema"
+  permissions:
+    post_serie: "Add videos to the serie"
+    manage_comment: "Manage the comments"
+    edit_serie: "Manage the serie"
