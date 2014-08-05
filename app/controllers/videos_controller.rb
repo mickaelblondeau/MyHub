@@ -17,8 +17,11 @@ class VideosController < ApplicationController
 
   def update
     @video = Video.find(Encoder::decode_id(params[:id]))
+    @video.playlist_id = params[:video][:playlist_id]
+    @video.name = params[:video][:name]
+    @video.description = params[:video][:description]
     authorize! :manage, @video
-    if @video.update(params[:video].permit(:playlist_id, :name, :description))
+    if @video.save
       flash[:notice] = 'Ok'
     else
       flash[:alert] = 'Ko'

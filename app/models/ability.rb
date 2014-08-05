@@ -17,6 +17,10 @@ class Ability
           v.channel.user_id == user.id && (v.playlist.user_id == user.id || CooperationPermission::user_can(0, user.id, v.playlist.id))
         end
 
+        can :edit, Video do |v|
+          v.channel.user_id == user.id
+        end
+
         can :create, Playlist
         can :index, Playlist
         can :manage, Playlist do |p|
